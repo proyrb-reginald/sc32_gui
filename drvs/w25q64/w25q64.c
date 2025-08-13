@@ -12,7 +12,7 @@ BaseType_t w25q64_init(void) {
     if (dma_done == NULL) {
         dma_done = xSemaphoreCreateBinary();
         if (dma_done == NULL) {
-            OS_PRTF(ERRO_LOG, "create dma_done fail!\n");
+            PRTF_OS_LOG(ERRO_LOG, "create dma_done fail!\n");
             return pdFAIL;
         }
     }
@@ -29,21 +29,21 @@ BaseType_t w25q64_init(void) {
     arg.size = sizeof(data);
     w25q64_ctl(ReadUniqueID, &arg);
     if (*(uint64_t *)data == W25Q64_Unique_ID) {
-        OS_PRTF(INFO_LOG, "id match: 0x%llX", *(uint64_t *)data);
+        PRTF_OS_LOG(INFO_LOG, "id match: 0x%llX", *(uint64_t *)data);
     } else {
-        OS_PRTF(INFO_LOG, "id unmatch: 0x%llX", *(uint64_t *)data);
+        PRTF_OS_LOG(INFO_LOG, "id unmatch: 0x%llX", *(uint64_t *)data);
     }
 
     w25q64_ctl(WriteDisable, NULL);
-    OS_PRTF(INFO_LOG, "Write Disable!");
+    PRTF_OS_LOG(INFO_LOG, "Write Disable!");
 
     arg.size = 1;
     w25q64_ctl(ReadSR1, &arg);
-    OS_PRTF(INFO_LOG, "SR1: 0x%X!", data[0]);
+    PRTF_OS_LOG(INFO_LOG, "SR1: 0x%X!", data[0]);
     w25q64_ctl(ReadSR2, &arg);
-    OS_PRTF(INFO_LOG, "SR2: 0x%X!", data[0]);
+    PRTF_OS_LOG(INFO_LOG, "SR2: 0x%X!", data[0]);
     w25q64_ctl(ReadSR3, &arg);
-    OS_PRTF(INFO_LOG, "SR3: 0x%X!", data[0]);
+    PRTF_OS_LOG(INFO_LOG, "SR3: 0x%X!", data[0]);
 
     /********** 进行整片擦除 **********/
 
@@ -63,7 +63,7 @@ BaseType_t w25q64_init(void) {
     } while (SR1 & 0x1);
 #endif  // CHIP_ERASE
 
-    OS_PRTF(NEWS_LOG, "Initialize Finish!");
+    PRTF_OS_LOG(NEWS_LOG, "Initialize Finish!");
 
     return pdPASS;
 }

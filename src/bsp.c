@@ -2,25 +2,6 @@
 #include <sc32_conf.h>
 #include <rtthread.h>
 
-__attribute__((interrupt)) void SysTick_Handler(void) {
-    rt_interrupt_enter();
-    rt_tick_increase();
-
-#ifdef USE_LVGL
-    lv_tick_inc(1);
-#endif
-
-    rt_interrupt_leave();
-}
-
-__attribute__((interrupt)) void UART1_3_5_IRQHandler(void) {
-    rt_interrupt_enter();
-    if (UART_GetFlagStatus(printf_uart, UART_Flag_RX)) {
-        UART_ClearFlag(printf_uart, UART_Flag_RX);
-    }
-    rt_interrupt_leave();
-}
-
 void rcc_init(void) {
     if (RCC_Unlock(0xFF) != SUCCESS)
         while (1) {}
@@ -44,17 +25,29 @@ void rcc_init(void) {
 }
 
 void uart1_init(void) {
-    RCC_APB0Config(RCC_HCLK_Div1);
-    RCC_APB0Cmd(ENABLE);
-    RCC_APB0PeriphClockCmd(RCC_APB0Periph_UART1, ENABLE);
-
     UART_InitTypeDef uart_struct = {.UART_ClockFrequency = 64000000,
                                     .UART_BaudRate       = 115200,
                                     .UART_Mode           = UART_Mode_10B};
 
+    RCC_APB0Config(RCC_HCLK_Div1);
+    RCC_APB0Cmd(ENABLE);
+    RCC_APB0PeriphClockCmd(RCC_APB0Periph_UART1, ENABLE);
     UART_Init(UART1, &uart_struct);
     UART_TXCmd(UART1, ENABLE);
     Printf_UartInit(UART1);
+}
+
+void qspi1_init(void) {
+    QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
+                                    .QSPI_Prescaler = QSPI_Prescaler_8,
+                                    .QSPI_Mode      = QSPI_Mode_QSPI,
+                                    .QSPI_CPMode    = QSPI_CPMode_Low};
+
+    RCC_APB1Config(RCC_HCLK_Div1);
+    RCC_APB1Cmd(ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_QTWI1, ENABLE);
+    QSPI_Init(QSPI1, &qspi_struct);
+    QSPI_Cmd(QSPI1, ENABLE);
 }
 
 void spi2_init(void) {
@@ -71,24 +64,6 @@ void spi2_init(void) {
     SPI_DMACmd(SPI2, SPI_DMAReq_TX, DISABLE);   // 关闭发送DMA请求
     SPI_DMACmd(SPI2, SPI_DMAReq_RX, DISABLE);   // 关闭发送DMA请求
     SPI_Cmd(SPI2, ENABLE);                      // 使能
-}
-
-void qspi0_init(void) {
-    RCC_APB0PeriphClockCmd(RCC_APB0Periph_QTWI0, ENABLE);  // 使能时钟
-    QSPI_InitTypeDef QSPI_InitStruct;                      // 初始化结构体
-    QSPI_InitStruct.QSPI_SShift    = QSPI_SShift_OFF;      // 禁止延迟采样
-    QSPI_InitStruct.QSPI_Prescaler = QSPI_Prescaler_4;     // 设置预分频
-    QSPI_InitStruct.QSPI_DWidth    = QSPI_DWidth_8bit;     // 设置数据宽度
-    QSPI_InitStruct.QSP_LMode      = QSPI_LMode_1Line;     // 设置单线模式
-    QSPI_InitStruct.QSPI_Mode      = QSPI_Mode_QSPI;       // 设置半双工
-    QSPI_InitStruct.QSPI_CPMode    = QSPI_CPMode_Low;      // 设置时钟极性为低
-    QSPI_InitStruct.QSPI_RW        = QSPI_RW_Write;        // 设置为写模式
-    QSPI_InitStruct.QSPI_CLKONLY   = QSPI_CLKONLY_OFF;     // 禁止只输出时钟
-    QSPI_Init(QSPI0, &QSPI_InitStruct);                    // 初始化
-    QSPI_ITConfig(QSPI0, QSPI_IT_INTEN, DISABLE);          // 禁用总中断
-    QSPI_DMACmd(QSPI0, QSPI_DMAReq_TX, DISABLE);           // 关闭DMA发送请求
-    QSPI_DMACmd(QSPI0, QSPI_DMAReq_RX, DISABLE);           // 关闭DMA接收请求
-    QSPI_Cmd(QSPI0, ENABLE);                               // 使能
 }
 
 void dma0_init(void) {
@@ -164,4 +139,23 @@ void dma2_init(void) {
     __NVIC_SetPriority(DMA2_IRQn, 1);            // 设置中断优先级为1
     __NVIC_EnableIRQ(DMA2_IRQn);                 // 使能中断
     DMA_Cmd(DMA2, DISABLE);                      // 先关闭使能
+}
+
+__attribute__((interrupt("IRQ"))) void SysTick_Handler(void) {
+    rt_interrupt_enter();
+    rt_tick_increase();
+
+#ifdef USE_LVGL
+    lv_tick_inc(1);
+#endif
+
+    rt_interrupt_leave();
+}
+
+__attribute__((interrupt("IRQ"))) void UART1_3_5_IRQHandler(void) {
+    rt_interrupt_enter();
+    if (UART_GetFlagStatus(printf_uart, UART_Flag_RX)) {
+        UART_ClearFlag(printf_uart, UART_Flag_RX);
+    }
+    rt_interrupt_leave();
 }

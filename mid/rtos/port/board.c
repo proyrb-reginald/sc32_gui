@@ -1,10 +1,12 @@
 #include <rtthread.h>
 #include <bsp.h>
 #include <sc32_conf.h>
+#include <ep15301t_if.h>
 
 void rt_hw_board_init(void) {
     rcc_init();
     uart1_init();
+    qspi1_init();
 
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
@@ -16,6 +18,8 @@ void rt_hw_board_init(void) {
                         (void *)(0x20000000 + 32 * 1024));
 #endif
 }
+
+// INIT_PREV_EXPORT(ep15301t_init);
 
 #ifdef RT_USING_CONSOLE
 void rt_hw_console_output(const char * str) {

@@ -5,7 +5,8 @@
   "srcDirs": [
     "hal",
     "src",
-    "mid"
+    "mid",
+    "drvs"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -23,7 +24,9 @@
       "excludeList": [
         "<virtual_root>/Source Group 1",
         "mid/littlefs",
-        "mid/lvgl"
+        "mid/lvgl",
+        "drvs/st7789v",
+        "drvs/w25q64"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -166,7 +169,8 @@
           "hal/sc32f1/inc",
           "inc",
           "mid/rtos/inc",
-          "mid/rtos/port"
+          "mid/rtos/port",
+          "drvs/ep15301t"
         ],
         "libList": [],
         "defineList": [
@@ -187,10 +191,10 @@
             "optimization": "level-0",
             "language-c": "gnu11",
             "language-cpp": "gnu++11",
-            "link-time-optimization": true,
             "one-elf-section-per-function": true,
             "warnings": "misra-compatible",
-            "short-enums#wchar": true
+            "short-enums#wchar": true,
+            "link-time-optimization": true
           },
           "asm-compiler": {
             "$use": "asm-auto"
