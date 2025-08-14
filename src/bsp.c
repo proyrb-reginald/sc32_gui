@@ -39,7 +39,7 @@ void uart1_init(void) {
 
 void qspi1_init(void) {
     QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
-                                    .QSPI_Prescaler = QSPI_Prescaler_8,
+                                    .QSPI_Prescaler = QSPI_Prescaler_4,
                                     .QSPI_Mode      = QSPI_Mode_QSPI,
                                     .QSPI_CPMode    = QSPI_CPMode_Low};
 

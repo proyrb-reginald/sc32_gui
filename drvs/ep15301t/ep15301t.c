@@ -1,5 +1,5 @@
-#include <ep15301t_cfg.h>
-#include <ep15301t_if.h>
+#include "ep15301t_cfg.h"
+#include "ep15301t_if.h"
 #include <sc32_conf.h>
 #include INC_LOG
 #include INC_RTOS
@@ -75,7 +75,7 @@ int ep15301t_init(void) {
     RTOS_DELAY_IF(120);
     GPIO_WriteBit(CHIP_GPIO_GRP, CHIP_GPIO_PIN, 1);
 
-    /********** 厂商初始化指令 **********/
+    /********** 生产商初始化指令 **********/
 
     uint8_t        data[14];
     ep15301t_cmd_t cmd = {.data = data};
@@ -94,7 +94,7 @@ int ep15301t_init(void) {
         cmd.ins  = x;                                                                    \
         cmd.size = 0;                                                                    \
         ep15301t_ctl(&cmd);
-#    include <ep15301t.init>
+#    include "ep15301t.init"
 #else
     //
 #endif
@@ -108,29 +108,29 @@ int ep15301t_init(void) {
 void ep15301t_fill(const ep15301t_area_t * const area,
                    const void * const            buf,
                    const uint8_t                 unit_size) {
-    // uint8_t        data[4];
-    // ep15301t_arg_t arg = {.data = data};
+    uint8_t        data[4];
+    ep15301t_cmd_t cmd = {.data = data};
 
-    // /* 设置列地址 */
-    // data[0]  = area->x1 >> 8;
-    // data[1]  = area->x1;
-    // data[2]  = area->x2 >> 8;
-    // data[3]  = area->x2;
-    // arg.size = 4;
-    // ep15301t_ctl(SetColumn, &arg);
+    data[0]  = area->x1 >> 8;
+    data[1]  = area->x1;
+    data[2]  = area->x2 >> 8;
+    data[3]  = area->x2;
+    cmd.ins  = Set_X_RAG;
+    cmd.size = 4;
+    ep15301t_ctl(&cmd);
 
-    // /* 设置行地址 */
-    // data[0]  = area->y1 >> 8;
-    // data[1]  = area->y1;
-    // data[2]  = area->y2 >> 8;
-    // data[3]  = area->y2;
-    // arg.size = 4;
-    // ep15301t_ctl(SetRow, &arg);
+    data[0]  = area->y1 >> 8;
+    data[1]  = area->y1;
+    data[2]  = area->y2 >> 8;
+    data[3]  = area->y2;
+    cmd.ins  = Set_Y_RAG;
+    cmd.size = 4;
+    ep15301t_ctl(&cmd);
 
-    // /* 设置开始传输 */
-    // arg.data = (const uint8_t *)buf;
-    // arg.size = lv_area_get_size((const lv_area_t *)area) * unit_size;
-    // ep15301t_ctl(Write, &arg);
+    cmd.ins  = Write_RAM;
+    cmd.data = (uint8_t *)buf;
+    cmd.size = ((area->x2 - area->x1) * (area->y2 - area->y1)) * unit_size;
+    ep15301t_ctl(&cmd);
 }
 
 #ifdef USE_TEST

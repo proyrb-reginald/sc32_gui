@@ -23,10 +23,10 @@
     "Target_1": {
       "excludeList": [
         "<virtual_root>/Source Group 1",
-        "mid/littlefs",
         "mid/lvgl",
         "drvs/st7789v",
-        "drvs/w25q64"
+        "drvs/w25q64",
+        "src/fs/etn"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -170,7 +170,9 @@
           "inc",
           "mid/rtos/inc",
           "mid/rtos/port",
-          "drvs/ep15301t"
+          "drvs",
+          "mid/littlefs",
+          "src/fs"
         ],
         "libList": [],
         "defineList": [

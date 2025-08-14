@@ -1,14 +1,15 @@
-#ifndef __RTTHREAD_CFG_H__
-#define __RTTHREAD_CFG_H__
-
 /**
- * @brief RT-Thread的配置头文件。
- * @details 开启或关闭特定功能；支持选配不同功能。
  * @file rtconfig.h
- * @author proyrb
- * @date 2025/8/12
+ * @author proyrb (proyrb@yeah.net)
+ * @brief RTThread配置头文件
+ * @version 0.1
+ * @date 2025-08-14
+ * @copyright Copyright (c) 2025
  * @note
  */
+
+#ifndef __RTTHREAD_CFG_H__
+#define __RTTHREAD_CFG_H__
 
 /**
  * @brief 配置线程优先级取值范围。
@@ -57,7 +58,7 @@
  * @warning 以字节为单位，不能太小。
  * @note 取值范围为：1-4086
  */
-#define RT_MAIN_THREAD_STACK_SIZE (10 * 64)
+#define RT_MAIN_THREAD_STACK_SIZE (36 * 64)
 
 /**
  * @brief 配置main线程的优先级。

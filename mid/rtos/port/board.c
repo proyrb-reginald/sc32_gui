@@ -1,7 +1,7 @@
 #include <rtthread.h>
 #include <bsp.h>
 #include <sc32_conf.h>
-#include <ep15301t_if.h>
+#include <drvs_if.h>
 
 void rt_hw_board_init(void) {
     rcc_init();

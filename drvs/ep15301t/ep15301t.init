@@ -1,3 +1,13 @@
+/**
+ * @file ep15301t.init
+ * @author proyrb (proyrb@yeah.net)
+ * @brief 屏幕生产商初始化指令。
+ * @version 0.1
+ * @date 2025-08-14
+ * @copyright Copyright (c) 2025
+ * @note
+ */
+
 SET_CMD(0xF0)
 SET_ARG(0x28)
 

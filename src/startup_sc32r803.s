@@ -19,11 +19,9 @@
 ; </h>
 
 Stack_Size      EQU     0x00000200
-
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
 Stack_Mem       SPACE   Stack_Size
 __initial_sp
-
 
 ; <h> Heap Configuration
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
@@ -37,7 +35,6 @@ __heap_limit
 
                 PRESERVE8
                 THUMB
-
 
 ; Vector Table Mapped to Address 0 at Reset
                 AREA    RESET, DATA, READONLY
@@ -112,7 +109,7 @@ Reset_Handler    PROC
 				 LDR 	 R1,[R0]
 				 LDR 	 R2,=0x00000001
 				 ORRS 	 R1,R1,R2
-				 STR 	 R1,[R0]              ;AHB_CFG  开启DMA时钟
+				 STR 	 R1,[R0]              ;AHB_CFG
 				
 				 LDR 	 R0,=0x4001083C
 				 LDR 	 R1,=0xA05F0100
@@ -134,7 +131,7 @@ Reset_Handler    PROC
 				 LDR 	 R1,[R0]
 				 LDR 	 R2,=0xFFFFFFFE
 				 ANDS 	 R1,R1,R2
-				 STR 	 R1,[R0]              ;AHB_CFG  关闭DMA时钟
+				 STR 	 R1,[R0]              ;AHB_CFG
 			
 				 LDR	 R0,=0x40003010
 				 LDR     R1,=0xA05FF010
@@ -146,7 +143,7 @@ Reset_Handler    PROC
 				 
 				 LDR	 R0,=0x40021000
 				 LDR     R1,=0x00800020
-				 STR     R1,[R0]              ;APB1_CFG      APB1ʱ   SPI1_TWI1ʱ  
+				 STR     R1,[R0]              ;APB1_CFG
 				 
 				 LDR	 R0,=0x4002105C
 				 LDR     R1,=0xA05F0080
@@ -154,19 +151,19 @@ Reset_Handler    PROC
 				 				 
 				 LDR	 R0,=0x40021000
 				 LDR     R1,=0x00000000
-				 STR     R1,[R0]              ;APB1_CFG  ر APB1ʱ  	
+				 STR     R1,[R0]              ;APB1_CFG
 				 
 				 LDR	 R0,=0x40022000
 				 LDR     R1,=0x00800040
-				 STR     R1,[R0]              ;APB2_CFG      APB2ʱ   ADCʱ  				 
+				 STR     R1,[R0]              ;APB2_CFG
 
 				 LDR	 R0,=0x4002213C
 				 LDR     R1,=0xA05F0F00
-				 STR     R1,[R0]              ;ADC_REV  
+				 STR     R1,[R0]              ;ADC_REV
 				 
 				 LDR	 R0,=0x40022000
 				 LDR     R1,=0x00000000
-				 STR     R1,[R0]              ;APB2_CFG   ر APB2ʱ  	
+				 STR     R1,[R0]              ;APB2_CFG
 				 
                  LDR     R0, =SystemInit
                  BLX     R0
@@ -220,10 +217,10 @@ SysTick_Handler PROC
 
 Default_Handler PROC
 
-                EXPORT  INT0_IRQHandler                [WEAK]
-                EXPORT  INT1_7_IRQHandler              [WEAK]
-                EXPORT  INT8_11_IRQHandler             [WEAK]
-				EXPORT	INT12_15_IRQHandler			[WEAK]
+                EXPORT  INT0_IRQHandler                 [WEAK]
+                EXPORT  INT1_7_IRQHandler               [WEAK]
+                EXPORT  INT8_11_IRQHandler              [WEAK]
+				EXPORT	INT12_15_IRQHandler			    [WEAK]
                 EXPORT  RCC_IRQHandler               	[WEAK]
                 EXPORT  BTM_IRQHandler             		[WEAK]
                 EXPORT  UART0_2_4_IRQHandler            [WEAK]
