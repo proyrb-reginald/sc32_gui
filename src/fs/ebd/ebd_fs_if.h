@@ -98,4 +98,13 @@ int ebd_fs_write(const lfs_cfg * cfg,
  */
 int ebd_fs_sync(const lfs_cfg * cfg);
 
+/**
+ * @brief 测试片上文件系统功能。
+ * @param thread_args 任务参数，暂时未使用。
+ * @retval
+ * @warning 此函数不返回！
+ * @note 请在`ebd_fs_cfg.h`中添加`USE_TEST`宏。
+ */
+void ebd_fs_test(void * thread_args);
+
 #endif

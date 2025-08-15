@@ -2,9 +2,6 @@
 #include "fs_if.h"
 #include INC_LOG
 #include INC_RTOS
-#ifdef USE_EBD_FS
-#    include "ebd/ebd_fs_if.h"
-#endif
 
 lfs_error fs_get_boot_cnt(lfs_t * const lfs) {
     if (lfs == NULL) {

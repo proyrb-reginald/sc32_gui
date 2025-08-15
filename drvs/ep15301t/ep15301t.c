@@ -22,7 +22,6 @@ __attribute__((optnone)) void ep15301t_ctl(const ep15301t_cmd_t * const cmd) {
 
     QSPI_Write_ComSet(QSPI_DEV, QSPI_LMode_1Line, QSPI_DWidth_8bit, QSPI_CLKONLY_OFF);
     QSPI_SendData8(QSPI_DEV, 0x38);
-    while (QSPI_GetFlagStatus(QSPI_DEV, QSPI_Flag_BUSY)) {}
 
     /********** 发送指令 **********/
 
@@ -65,6 +64,7 @@ __attribute__((optnone)) void ep15301t_ctl(const ep15301t_cmd_t * const cmd) {
 int ep15301t_init(void) {
     gpio_init();
 
+    GPIO_WriteBit(BACK_GPIO_GRP, BACK_GPIO_PIN, 0);
     GPIO_WriteBit(BACK_GPIO_GRP, BACK_GPIO_PIN, 1);
     GPIO_WriteBit(CHIP_GPIO_GRP, CHIP_GPIO_PIN, 1);
     GPIO_WriteBit(RESET_GPIO_GRP, RESET_GPIO_PIN, 1);

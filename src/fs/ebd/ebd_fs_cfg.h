@@ -18,7 +18,7 @@
 
 /* 启用日志 */
 #define INC_LOG <log.h>
-#define LOG_LEV NEWS_LOG
+#define LOG_LEV TRAC_LOG
 #define LOG_IF_PRTF rt_kprintf
 #define LOG_IF_GET_TICK rt_tick_get
 
@@ -50,6 +50,6 @@
 #define FS_BLK_CNT ((FLASH_SIZE - FS_OST_ADR) / BLK_SIZE)
 
 /* 配置片上文件系统的缓存区大小（读写各一个缓冲区） */
-#define FS_CACHE_SIZE 64
+#define FS_CACHE_SIZE 256
 
 #endif

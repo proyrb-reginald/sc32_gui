@@ -23,12 +23,14 @@ void rt_hw_board_init(void) {
 
 #ifdef RT_USING_CONSOLE
 void rt_hw_console_output(const char * str) {
+    rt_enter_critical();  // 进入临界区（关闭调度器）
     const uint32_t len = rt_strlen(str);
     for (uint32_t i = 0; i < len; ++i) {
         printf_uart->UART_DATA = (str[i] & (uint16_t)0x01FF);
         while (!(printf_uart->UART_STS & UART_Flag_TX)) {}
         printf_uart->UART_STS = UART_Flag_TX;
     }
+    rt_exit_critical();  // 退出临界区（恢复调度器）
 }
 #endif
 

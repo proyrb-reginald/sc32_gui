@@ -37,7 +37,7 @@
  * @warning 包括终止符。
  * @note 默认最大为8个字节。
  */
-#define RT_NAME_MAX 8
+#define RT_NAME_MAX 16
 
 /**
  * @brief 启用组件初始化操作。
@@ -211,11 +211,11 @@
 #define RT_USING_CONSOLE
 
 /**
- * @brief 配置控制台线程栈大小。
+ * @brief 配置控制台缓冲区大小。
  * @warning 一般不变
  * @note 默认256字节。
  */
-#define RT_CONSOLEBUF_SIZE (4 * 64)
+#define RT_CONSOLEBUF_SIZE (8 * 64)
 
 /**
  * @brief 启用设备驱动框架。

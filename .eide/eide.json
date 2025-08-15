@@ -26,7 +26,9 @@
         "mid/lvgl",
         "drvs/st7789v",
         "drvs/w25q64",
-        "src/fs/etn"
+        "src/fs/etn",
+        "mid/littlefs",
+        "src/fs"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -172,7 +174,8 @@
           "mid/rtos/port",
           "drvs",
           "mid/littlefs",
-          "src/fs"
+          "src/fs",
+          "mid/fatfs"
         ],
         "libList": [],
         "defineList": [

@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>SC32R803, PrintfEnable</Define>
               <Undefine></Undefine>
-              <IncludePath>..\hal\sc32f1\inc;..\inc;..\inc\cmsis;..\mid\rtos\inc;..\mid\rtos\port;..\drvs</IncludePath>
+              <IncludePath>..\hal\sc32f1\inc;..\drvs;..\inc;..\inc\cmsis;..\mid\littlefs;..\mid\rtos\inc;..\mid\rtos\port;..\src\fs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -537,6 +537,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>mid/littlefs/</GroupName>
+          <Files>
+            <File>
+              <FileName>lfs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mid\littlefs\lfs.c</FilePath>
+            </File>
+            <File>
+              <FileName>lfs_util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mid\littlefs\lfs_util.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>mid/rtos/libcpu/arm/m0/</GroupName>
           <Files>
             <File>
@@ -668,6 +683,26 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src/fs/</GroupName>
+          <Files>
+            <File>
+              <FileName>fs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\fs\fs.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src/fs/ebd/</GroupName>
+          <Files>
+            <File>
+              <FileName>ebd_fs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\fs\ebd\ebd_fs.c</FilePath>
             </File>
           </Files>
         </Group>

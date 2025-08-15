@@ -1,21 +1,21 @@
 #include <main.h>
 #include INC_RTOS
 #include INC_LOG
-#include <drvs_if.h>
 #include <fs_if.h>
 
 int main(void) {
+    /* rt_thread_t tid =
+        rt_thread_create("ebd_fs_test", ebd_fs_test, RT_NULL, (12 * 64), 2, 10);
+
+    if (tid != RT_NULL)
+        rt_thread_startup(tid); */
+
     ebd_fs_init();
-    fs_reset_boot_cnt(ebd_fs_hdl());
-
+    fs_ls_dir(ebd_fs_hdl(), "/");
     while (1) {
-        // fs_update_boot_cnt(ebd_fs_hdl());
-        // PRTF_OS_LOG(NEWS_LOG, "boot_cnt: %u\n", fs_get_boot_cnt(ebd_fs_hdl()));
-
         rt_uint32_t total, used, max_used;
         rt_memory_info(&total, &used, &max_used);
         PRTF_OS_LOG(NEWS_LOG, "heap: %u(%u)/%u\n", used, max_used, total);
-
-        RTOS_DELAY_IF(1000);
+        RTOS_DELAY_IF(5000);
     }
 }
