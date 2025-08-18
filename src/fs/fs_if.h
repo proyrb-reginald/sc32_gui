@@ -15,6 +15,11 @@
 
 #include <ff.h>
 
+/****************************** 宏定义 ******************************/
+
+#define STR(x) #x
+#define STR_VALUE(x) STR(x)
+
 /****************************** 类型定义 ******************************/
 
 typedef enum {
@@ -52,5 +57,14 @@ FRESULT fs_rcd_boot_cnt(void);
  * @note
  */
 uint32_t fs_get_boot_cnt(void);
+
+/**
+ * @brief 输出指定目录内容及其属性。
+ * @param path
+ * @retval
+ * @warning
+ * @note
+ */
+void fs_ls(const char * const path);
 
 #endif

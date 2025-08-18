@@ -7,6 +7,8 @@ int main(void) {
     fs_mnt(FS_ROM);
     fs_rcd_boot_cnt();
     PRTF_OS_LOG(NEWS_LOG, "boot cnt: %u\n", fs_get_boot_cnt());
+    fs_ls("/");
+    fs_ls("/sys");
     while (1) {
         rt_uint32_t total, used, max_used;
         rt_memory_info(&total, &used, &max_used);

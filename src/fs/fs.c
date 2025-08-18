@@ -3,9 +3,6 @@
 #include INC_LOG
 #include INC_RTOS
 
-#define STR(x) #x
-#define STR_VALUE(x) STR(x)
-
 static FATFS    fs;
 static uint32_t g_boot_cnt = 0;
 
@@ -65,18 +62,14 @@ FRESULT fs_rcd_boot_cnt(void) {
     uint32_t cnt;
 
     /* 1. 确保 /sys 目录存在，不存在就创建 */
-    res = f_mkdir(STR_VALUE(DEV_ROM) ":"
-                                     "/sys");
+    res = f_mkdir(ROOT_SYS_D);
     if (res != FR_OK && res != FR_EXIST) {
         PRTF_OS_LOG(ERRO_LOG, "mkdir fail with %u!\n", res);
         return res;
     }
 
     /* 2. 尝试打开文件 */
-    res = f_open(&fil,
-                 STR_VALUE(DEV_ROM) ":"
-                                    "/sys/boot.dat",
-                 FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
+    res = f_open(&fil, BOOT_FILE_P, FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
     if (res != FR_OK) {
         PRTF_OS_LOG(ERRO_LOG, "open fail with %u!\n", res);
         return res;
@@ -93,8 +86,11 @@ FRESULT fs_rcd_boot_cnt(void) {
         }
     } else {
         /* 新建文件，初始化为 1 */
-        cnt = 1;
+        cnt = 0;
     }
+
+    /* 4. 更新启动次数 */
+    cnt++;
 
     /* 5. 写回文件，覆盖原内容 */
     res = f_lseek(&fil, 0);
@@ -128,4 +124,21 @@ FRESULT fs_rcd_boot_cnt(void) {
 
 uint32_t fs_get_boot_cnt(void) {
     return g_boot_cnt;
+}
+
+void fs_ls(const char * const path) {
+    DIR     dir;
+    FILINFO fno;
+    PRTF_OS_LOG(NEWS_LOG, "list %s\n", path);
+    if (f_opendir(&dir, path) == FR_OK) {
+        while (f_readdir(&dir, &fno) == FR_OK && fno.fname[0]) {
+            PRTF_LOG(NEWS_LOG, "%-16s ", fno.fname);
+            if (fno.fattrib & AM_DIR) {
+                PRTF_LOG(NEWS_LOG, "[DIR]\n");
+            } else {
+                PRTF_LOG(NEWS_LOG, "%lu bytes\n", fno.fsize);
+            }
+        }
+        f_closedir(&dir);
+    }
 }
