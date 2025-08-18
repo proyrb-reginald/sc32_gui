@@ -2,6 +2,7 @@
 #include INC_RTOS
 #include INC_LOG
 #include <fs_if.h>
+#include <drvs_if.h>
 
 int main(void) {
     fs_mnt(FS_ROM);
@@ -9,7 +10,11 @@ int main(void) {
     PRTF_OS_LOG(NEWS_LOG, "boot cnt: %u\n", fs_get_boot_cnt());
     fs_ls("/");
     fs_ls("/sys");
+    fs_unmnt(FS_ROM);
+
     while (1) {
+        w25q_init();
+
         rt_uint32_t total, used, max_used;
         rt_memory_info(&total, &used, &max_used);
         PRTF_OS_LOG(NEWS_LOG, "heap: %u(%u)/%u\n", used, max_used, total);

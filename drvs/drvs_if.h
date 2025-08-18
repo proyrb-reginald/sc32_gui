@@ -3,7 +3,7 @@
  * @author proyrb (proyrb@yeah.net)
  * @brief 驱动程序接口。
  * @version 0.1
- * @date 2025-08-15
+ * @date 2025-08-18
  * @copyright Copyright (c) 2025
  * @note
  */
@@ -27,8 +27,8 @@
 #    include "sd/sd_if.h"
 #endif
 
-#ifdef USE_W25Q64
-#    include "w25q64/w25q64_if.h"
+#ifdef USE_W25Q
+#    include "w25q/w25q_if.h"
 #endif
 
 #endif

@@ -14,7 +14,7 @@
 /****************************** 驱动配置 ******************************/
 
 /* 添加ep15301t */
-#define USE_EP15301T
+// #define USE_EP15301T
 
 /* 添加rom */
 #define USE_ROM
@@ -22,7 +22,7 @@
 /* 添加sd */
 // #define USE_SD
 
-/* 添加w25q64 */
-// #define USE_W25Q64
+/* 添加w25q */
+#define USE_W25Q
 
 #endif

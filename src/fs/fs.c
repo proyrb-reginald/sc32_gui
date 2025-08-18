@@ -55,6 +55,24 @@ FRESULT fs_mnt(const fs_dev_t drv) {
     return res;
 }
 
+FRESULT fs_unmnt(const fs_dev_t drv) {
+    FRESULT res = FR_INVALID_PARAMETER;
+    switch (drv) {
+        case FS_ROM:
+            res = f_mount(RT_NULL, STR_VALUE(DEV_ROM) ":", 0);
+            if (res == FR_OK) {
+                PRTF_OS_LOG(NEWS_LOG, "unmnt ok!\n");
+            } else {
+                PRTF_OS_LOG(ERRO_LOG, "unmnt fail with %u!\n", res);
+            }
+            break;
+        case FS_FLASH: break;
+        case FS_SD: break;
+        default: break;
+    }
+    return res;
+}
+
 FRESULT fs_rcd_boot_cnt(void) {
     FRESULT  res;
     FIL      fil;

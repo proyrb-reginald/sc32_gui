@@ -37,6 +37,19 @@ void uart1_init(void) {
     Printf_UartInit(UART1);
 }
 
+void qspi0_init(void) {
+    QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
+                                    .QSPI_Prescaler = QSPI_Prescaler_8,
+                                    .QSPI_Mode      = QSPI_Mode_QSPI,
+                                    .QSPI_CPMode    = QSPI_CPMode_Low};
+
+    RCC_APB0Config(RCC_HCLK_Div1);
+    RCC_APB0Cmd(ENABLE);
+    RCC_APB0PeriphClockCmd(RCC_APB0Periph_QTWI0, ENABLE);
+    QSPI_Init(QSPI0, &qspi_struct);
+    QSPI_Cmd(QSPI0, ENABLE);
+}
+
 void qspi1_init(void) {
     QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
                                     .QSPI_Prescaler = QSPI_Prescaler_4,

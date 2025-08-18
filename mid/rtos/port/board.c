@@ -6,6 +6,7 @@
 void rt_hw_board_init(void) {
     rcc_init();
     uart1_init();
+    qspi0_init();
     qspi1_init();
 
 #ifdef RT_USING_COMPONENTS_INIT

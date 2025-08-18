@@ -28,7 +28,9 @@
         "drvs/w25q64",
         "src/fs/etn",
         "mid/littlefs",
-        "src/fs/ebd"
+        "src/fs/ebd",
+        "drvs/sd",
+        "drvs/ep15301t"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -171,10 +173,10 @@
           "hal/sc32f1/inc",
           "inc",
           "mid/rtos/inc",
-          "mid/rtos/port",
           "drvs",
           "src/fs",
-          "mid/fatfs"
+          "mid/fatfs",
+          "mid/rtos/port"
         ],
         "libList": [],
         "defineList": [

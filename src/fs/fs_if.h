@@ -41,6 +41,16 @@ typedef enum {
 FRESULT fs_mnt(const fs_dev_t drv);
 
 /**
+ * @brief 卸载指定文件系统。
+ * @param drv
+ * @return FRESULT
+ * @retval 参考FRESULT枚举。
+ * @warning
+ * @note
+ */
+FRESULT fs_unmnt(const fs_dev_t drv);
+
+/**
  * @brief 记录系统启动次数。
  * @return FRESULT
  * @retval 参考FRESULT枚举。
