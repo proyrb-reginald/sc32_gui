@@ -3,7 +3,7 @@
  * @author proyrb (proyrb@yeah.net)
  * @brief 驱动程序接口。
  * @version 0.1
- * @date 2025-08-14
+ * @date 2025-08-15
  * @copyright Copyright (c) 2025
  * @note
  */
@@ -17,6 +17,14 @@
 
 #ifdef USE_EP15301T
 #    include "ep15301t/ep15301t_if.h"
+#endif
+
+#ifdef USE_ROM
+#    include "rom/rom_cfg.h"
+#endif
+
+#ifdef USE_SD
+#    include "sd/sd_if.h"
 #endif
 
 #ifdef USE_W25Q64

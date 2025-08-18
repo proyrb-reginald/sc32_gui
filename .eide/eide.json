@@ -28,7 +28,7 @@
         "drvs/w25q64",
         "src/fs/etn",
         "mid/littlefs",
-        "src/fs"
+        "src/fs/ebd"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -173,7 +173,6 @@
           "mid/rtos/inc",
           "mid/rtos/port",
           "drvs",
-          "mid/littlefs",
           "src/fs",
           "mid/fatfs"
         ],

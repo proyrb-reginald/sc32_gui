@@ -100,7 +100,7 @@ int ep15301t_init(void) {
 #endif
 
     RTOS_DELAY_IF(50);
-    PRTF_OS_LOG(NEWS_LOG, "init done!\n");
+    PRTF_OS_LOG(NEWS_LOG, "init ok!\n");
 
     return RT_EOK;
 }

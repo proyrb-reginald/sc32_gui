@@ -537,6 +537,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>drvs/ep15301t/</GroupName>
+          <Files>
+            <File>
+              <FileName>ep15301t.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\drvs\ep15301t\ep15301t.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>mid/littlefs/</GroupName>
           <Files>
             <File>

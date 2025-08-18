@@ -3,7 +3,7 @@
  * @author proyrb (proyrb@yeah.net)
  * @brief 顶层文件系统配置。
  * @version 0.1
- * @date 2025-08-14
+ * @date 2025-08-18
  * @copyright Copyright (c) 2025
  * @note
  */
@@ -13,11 +13,17 @@
 
 /****************************** 配置功能 ******************************/
 
-/* 启用片上文件系统 */
-#define USE_EBD_FS
-
 /* 启用测试接口 */
 #define USE_TEST
+
+/* 启用片上文件系统 */
+#define USE_FS_ROM
+
+/* 启用外部Flash文件系统 */
+// #define USE_FS_FLASH
+
+/* 启用SD卡文件系统 */
+// #define USE_FS_SD
 
 /* 启用日志 */
 #define INC_LOG <log.h>

@@ -27,7 +27,7 @@
 /* This option switches filtered directory read functions, f_findfirst() and
 /  f_findnext(). (0:Disable, 1:Enable 2:Enable with matching altname[] too) */
 
-#define FF_USE_MKFS 0
+#define FF_USE_MKFS 1
 /* This option switches f_mkfs(). (0:Disable or 1:Enable) */
 
 #define FF_USE_FASTSEEK 0
@@ -74,7 +74,7 @@
 / Locale and Namespace Configurations
 /---------------------------------------------------------------------------*/
 
-#define FF_CODE_PAGE 932
+#define FF_CODE_PAGE 437
 /* This option specifies the OEM code page to be used on the target system.
 /  Incorrect code page setting can cause a file open failure.
 /
@@ -161,11 +161,11 @@
 / Drive/Volume Configurations
 /---------------------------------------------------------------------------*/
 
-#define FF_VOLUMES 1
+#define FF_VOLUMES 3
 /* Number of volumes (logical drives) to be used. (1-10) */
 
 #define FF_STR_VOLUME_ID 0
-#define FF_VOLUME_STRS "RAM", "NAND", "CF", "SD", "SD2", "USB", "USB2", "USB3"
+#define FF_VOLUME_STRS "ROM", "NAND", "CF", "SD", "SD2", "USB", "USB2", "USB3"
 /* FF_STR_VOLUME_ID switches support for volume ID in arbitrary strings.
 /  When FF_STR_VOLUME_ID is set to 1 or 2, arbitrary strings can be used as drive
 /  number in the path name. FF_VOLUME_STRS defines the volume ID strings for each
@@ -223,8 +223,8 @@
 /  Note that enabling exFAT discards ANSI C (C89) compatibility. */
 
 #define FF_FS_NORTC 0
-#define FF_NORTC_MON 1
-#define FF_NORTC_MDAY 1
+#define FF_NORTC_MON 8
+#define FF_NORTC_MDAY 18
 #define FF_NORTC_YEAR 2025
 /* The option FF_FS_NORTC switches timestamp feature. If the system does not have
 /  an RTC or valid timestamp is not needed, set FF_FS_NORTC = 1 to disable the
