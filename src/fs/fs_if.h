@@ -28,14 +28,29 @@ typedef enum {
 /**
  * @brief 挂载指定文件系统。
  * @param drv 设备类型。
- * @return uint8_t
- * @retval 0 挂载成功。
- * @retval 1 内存分配失败。
- * @retval 2 初始化磁盘失败。
- * @retval 3 挂载失败
+ * @return FRESULT
+ * @retval 参考FRESULT枚举。
  * @warning
  * @note
  */
-uint8_t fs_mnt(const fs_dev_t drv);
+FRESULT fs_mnt(const fs_dev_t drv);
+
+/**
+ * @brief 记录系统启动次数。
+ * @return FRESULT
+ * @retval 参考FRESULT枚举。
+ * @warning
+ * @note
+ */
+FRESULT fs_rcd_boot_cnt(void);
+
+/**
+ * @brief 返回当前系统启动次数。
+ * @retval uint32_t
+ * @retval 当前系统启动次数。
+ * @warning
+ * @note
+ */
+uint32_t fs_get_boot_cnt(void);
 
 #endif

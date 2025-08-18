@@ -22,11 +22,18 @@
 #include <build_time.h>
 #include <time.h>
 #include <drvs_if.h>
+#include <fs_cfg.h>
 
 /* Mapping of physical drive number for each drive */
-#define DEV_ROM 0   /* Map FTL to physical drive 0 */
-#define DEV_FLASH 1 /* Map FTL to physical drive 1 */
-#define DEV_SD 2    /* Map MMC/SD card to physical drive 2 */
+#ifndef DEV_ROM
+#    define DEV_ROM 0 /* Map FTL to physical drive 0 */
+#endif
+#ifndef DEV_FLASH
+#    define DEV_FLASH 1 /* Map FTL to physical drive 1 */
+#endif
+#ifndef DEV_SD
+#    define DEV_SD 2 /* Map MMC/SD card to physical drive 2 */
+#endif
 
 /*-----------------------------------------------------------------------*/
 /* Get current time                                                      */
@@ -52,12 +59,18 @@ DWORD get_fattime(void) {
 DSTATUS disk_initialize(BYTE pdrv) {
     DSTATUS status = STA_NOINIT;
     switch (pdrv) {
+#ifdef USE_FS_ROM
         case DEV_ROM:
             status = 0;
             PRTF_OS_LOG(NEWS_LOG, "flash disk init!\n");
             break;
+#endif
+#ifdef USE_FS_FLASH
         case DEV_FLASH: break;
+#endif
+#ifdef USE_FS_SD
         case DEV_SD: break;
+#endif
         default: break;
     }
     return status;
@@ -70,9 +83,15 @@ DSTATUS disk_initialize(BYTE pdrv) {
 DSTATUS disk_status(BYTE pdrv) {
     DSTATUS status = STA_NOINIT;
     switch (pdrv) {
+#ifdef USE_FS_ROM
         case DEV_ROM: status = 0; break;
+#endif
+#ifdef USE_FS_FLASH
         case DEV_FLASH: break;
+#endif
+#ifdef USE_FS_SD
         case DEV_SD: break;
+#endif
     }
     return status;
 }
@@ -88,8 +107,8 @@ DRESULT disk_read(BYTE   pdrv,   /* Physical drive nmuber to identify the drive 
 ) {
     DRESULT  res = RES_PARERR;
     uint32_t adr = ROM_FS_START_ADR + sector * SECTOR_SIZE;
-    PRTF_OS_LOG(NEWS_LOG, "read sct: %u cnt: %u adr: 0x%x\n", sector, count, adr);
     switch (pdrv) {
+#ifdef USE_FS_ROM
         case DEV_ROM:
             for (UINT i = 0; i < count; i++) {
                 if (IAP_ReadByteArray(adr, buff, SECTOR_SIZE) < SECTOR_SIZE) {
@@ -102,8 +121,13 @@ DRESULT disk_read(BYTE   pdrv,   /* Physical drive nmuber to identify the drive 
             }
             res = RES_OK;
             break;
+#endif
+#ifdef USE_FS_FLASH
         case DEV_FLASH: break;
+#endif
+#ifdef USE_FS_SD
         case DEV_SD: break;
+#endif
         default: break;
     }
     return res;
@@ -117,8 +141,8 @@ DRESULT disk_read(BYTE   pdrv,   /* Physical drive nmuber to identify the drive 
 DRESULT disk_write(BYTE pdrv, const BYTE * buff, LBA_t sector, UINT count) {
     DRESULT  res;
     uint32_t adr = ROM_FS_START_ADR + sector * ROM_SCT_SIZE;
-    PRTF_OS_LOG(NEWS_LOG, "write sct: %u cnt: %u adr: 0x%x\n", sector, count, adr);
     switch (pdrv) {
+#    ifdef USE_FS_ROM
         case DEV_ROM:
             IAP_Unlock();
             IAP_EraseSector(adr / ROM_SCT_SIZE);
@@ -137,8 +161,13 @@ DRESULT disk_write(BYTE pdrv, const BYTE * buff, LBA_t sector, UINT count) {
             IAP_Lock();
             res = RES_OK;
             break;
+#    endif
+#    ifdef USE_FS_FLASH
         case DEV_FLASH: break;
+#    endif
+#    ifdef USE_FS_SD
         case DEV_SD: break;
+#    endif
         default: break;
     }
     return res;
@@ -152,6 +181,7 @@ DRESULT disk_write(BYTE pdrv, const BYTE * buff, LBA_t sector, UINT count) {
 DRESULT disk_ioctl(BYTE pdrv, BYTE cmd, void * buff) {
     DRESULT res = RES_PARERR;
     switch (pdrv) {
+#ifdef USE_FS_ROM
         case DEV_ROM:
             switch (cmd) {
                 case CTRL_SYNC: res = RES_OK; break;
@@ -169,8 +199,13 @@ DRESULT disk_ioctl(BYTE pdrv, BYTE cmd, void * buff) {
                     break;
                 default: break;
             }
+#endif
+#ifdef USE_FS_FLASH
         case DEV_FLASH: break;
+#endif
+#ifdef USE_FS_SD
         case DEV_SD: break;
+#endif
     }
     return res;
 }

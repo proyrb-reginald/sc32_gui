@@ -3,13 +3,17 @@
 #include INC_LOG
 #include INC_RTOS
 
-static FATFS fs;
+#define STR(x) #x
+#define STR_VALUE(x) STR(x)
 
-uint8_t fs_mnt(const fs_dev_t drv) {
-    uint8_t res = 0;
+static FATFS    fs;
+static uint32_t g_boot_cnt = 0;
+
+FRESULT fs_mnt(const fs_dev_t drv) {
+    FRESULT res = 0;
     switch (drv) {
         case FS_ROM:
-            res = f_mount(&fs, "0:", 1);
+            res = f_mount(&fs, STR_VALUE(DEV_ROM) ":", 1);
             if (res != FR_OK) {
                 PRTF_OS_LOG(ERRO_LOG, "mnt fail with %d!\n", res);
 
@@ -26,7 +30,7 @@ uint8_t fs_mnt(const fs_dev_t drv) {
                         .au_size = 512,
                     };
 
-                    res = f_mkfs("0:", &opt, work, FF_MAX_SS);
+                    res = f_mkfs(STR_VALUE(DEV_ROM) ":", &opt, work, FF_MAX_SS);
                     if (res == FR_OK) {
                         PRTF_OS_LOG(NEWS_LOG, "f_mkfs ok\n");
                     } else {
@@ -34,7 +38,7 @@ uint8_t fs_mnt(const fs_dev_t drv) {
                         res = 2;
                     }
 
-                    res = f_mount(&fs, "0:", 1);
+                    res = f_mount(&fs, STR_VALUE(DEV_ROM) ":", 1);
                     if (res != FR_OK) {
                         PRTF_OS_LOG(ERRO_LOG, "mnt fail with %d!\n", res);
                         res = 3;
@@ -52,4 +56,76 @@ uint8_t fs_mnt(const fs_dev_t drv) {
         default: break;
     }
     return res;
+}
+
+FRESULT fs_rcd_boot_cnt(void) {
+    FRESULT  res;
+    FIL      fil;
+    UINT     bw;
+    uint32_t cnt;
+
+    /* 1. 确保 /sys 目录存在，不存在就创建 */
+    res = f_mkdir(STR_VALUE(DEV_ROM) ":"
+                                     "/sys");
+    if (res != FR_OK && res != FR_EXIST) {
+        PRTF_OS_LOG(ERRO_LOG, "mkdir fail with %u!\n", res);
+        return res;
+    }
+
+    /* 2. 尝试打开文件 */
+    res = f_open(&fil,
+                 STR_VALUE(DEV_ROM) ":"
+                                    "/sys/boot.dat",
+                 FA_READ | FA_WRITE | FA_OPEN_ALWAYS);
+    if (res != FR_OK) {
+        PRTF_OS_LOG(ERRO_LOG, "open fail with %u!\n", res);
+        return res;
+    }
+
+    /* 3. 读已有值或新建文件 */
+    if (f_size(&fil) >= sizeof(uint32_t)) {
+        /* 文件已存在并且有数据，读出旧值 */
+        res = f_read(&fil, &cnt, sizeof(cnt), &bw);
+        if (res != FR_OK || bw != sizeof(cnt)) {
+            f_close(&fil);
+            PRTF_OS_LOG(ERRO_LOG, "read fail with %u!\n", res);
+            return res;
+        }
+    } else {
+        /* 新建文件，初始化为 1 */
+        cnt = 1;
+    }
+
+    /* 5. 写回文件，覆盖原内容 */
+    res = f_lseek(&fil, 0);
+    if (res != FR_OK) {
+        PRTF_OS_LOG(ERRO_LOG, "seek fail with %u!\n", res);
+        return res;
+    }
+    res = f_write(&fil, &cnt, sizeof(cnt), &bw);
+    if (res != FR_OK) {
+        PRTF_OS_LOG(ERRO_LOG, "write fail with %u!\n", res);
+        return res;
+    }
+
+    /* 6. 截断文件长度，防止旧数据残留（可选） */
+    res = f_truncate(&fil);
+    if (res != FR_OK) {
+        PRTF_OS_LOG(ERRO_LOG, "truncate fail with %u!\n", res);
+        return res;
+    }
+
+    /* 7. 更新全局变量 */
+    res = f_close(&fil);
+    if (res != FR_OK) {
+        PRTF_OS_LOG(ERRO_LOG, "truncate fail with %u!\n", res);
+        return res;
+    }
+    g_boot_cnt = cnt;
+
+    return res;
+}
+
+uint32_t fs_get_boot_cnt(void) {
+    return g_boot_cnt;
 }
