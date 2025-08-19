@@ -65,7 +65,7 @@
  * @warning
  * @note
  */
-#define RT_MAIN_THREAD_PRIORITY 1
+#define RT_MAIN_THREAD_PRIORITY (RT_THREAD_PRIORITY_MAX / 2)
 
 /**
  * @brief 启用内核调试。
@@ -117,14 +117,14 @@
  * @warning 请根据定时精确性与实际线程个数进行调整。
  * @note 默认为4。
  */
-#define RT_TIMER_THREAD_PRIO (RT_THREAD_PRIORITY_MAX - 3)
+#define RT_TIMER_THREAD_PRIO 1
 
 /**
  * @brief 配置用户定时器的线程栈大小。
  * @warning 一般不变。
  * @note 默认为256。
  */
-#define RT_TIMER_THREAD_STACK_SIZE (2 * 64)
+#define RT_TIMER_THREAD_STACK_SIZE (4 * 64)
 
 /**
  * @brief 启用信号量。
@@ -250,7 +250,7 @@
  * @warning
  * @note
  */
-#define FINSH_THREAD_PRIORITY (RT_THREAD_PRIORITY_MAX - 2)
+#define FINSH_THREAD_PRIORITY 2
 
 /**
  * @brief 配置FinSH的栈大小。

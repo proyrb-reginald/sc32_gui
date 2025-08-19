@@ -20,27 +20,25 @@
 /* 主要常用指令 */
 typedef enum {
     Reset        = 0x6699,
-    ReadUniqueID = 0x4B,
+    ReadUniqueID = 0x4b,
     ReadSR1      = 0x05,
     ReadSR2      = 0x35,
     ReadSR3      = 0x15,
-    ReadDataSPI  = 0x03,
-    ReadDataQSPI = 0xEB,
+    ReadDataSPI  = 0x03,  // 未实现
+    ReadDataQSPI = 0xeB,
     WriteDisable = 0x04,
     WriteEnable  = 0x06,
     Erase4KB     = 0x20,
     Erase32KB    = 0x52,
-    Erase64KB    = 0xD8,
-    EraseChip    = 0xC7,
-    ProgramSPI   = 0x02,
+    Erase64KB    = 0xd8,
+    EraseChip    = 0xc7,
+    ProgramSPI   = 0x02,  // 未实现
     ProgramQSPI  = 0x32,
 } w25q_ins_t;
 
 /* 地址结构 */
 typedef struct __attribute__((packed)) {
-    uint8_t byte3;
-    uint8_t byte2;
-    uint8_t byte1;
+    uint8_t byte[3];
 } w25q_adr_t;
 
 /* 指令结构 */
@@ -62,5 +60,39 @@ typedef struct __attribute__((packed)) {
  * @note
  */
 uint8_t w25q_init(void);
+
+/**
+ * @brief 发送指令。
+ * @param cmd 具体指令与参数。
+ * @retval
+ * @warning
+ * @note
+ */
+void w25q_ctl(const w25q_cmd_t * const cmd);
+
+/**
+ * @brief 测试驱动程序功能。
+ * @param thread_args 任务参数，暂时未使用。
+ * @retval
+ * @warning 此函数不返回！
+ * @note 请在`w25q_cfg.h`中添加`USE_TEST`宏。
+ */
+void w25q_test(void * thread_args);
+
+/**
+ * @brief DMA发送通道中断处理。
+ * @retval
+ * @warning
+ * @note
+ */
+void w25q_dma_tx_irq(void);
+
+/**
+ * @brief DMA接收通道中断处理。
+ * @retval
+ * @warning
+ * @note
+ */
+void w25q_dma_rx_irq(void);
 
 #endif

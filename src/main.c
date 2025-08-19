@@ -12,12 +12,18 @@ int main(void) {
     fs_ls("/sys");
     fs_unmnt(FS_ROM);
 
-    while (1) {
-        w25q_init();
+    rt_thread_t tid = rt_thread_create("test", w25q_test, RT_NULL, 1024,
+                                       RT_THREAD_PRIORITY_MAX - 1, 10);
+    if (tid != RT_NULL) {
+        rt_thread_startup(tid);
+    } else {
+        PRTF_OS_LOG(ERRO_LOG, "thread create fail!\n");
+    }
 
+    while (1) {
         rt_uint32_t total, used, max_used;
         rt_memory_info(&total, &used, &max_used);
         PRTF_OS_LOG(NEWS_LOG, "heap: %u(%u)/%u\n", used, max_used, total);
-        RTOS_DELAY_IF(2000);
+        RTOS_DELAY_IF(3000);
     }
 }

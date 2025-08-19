@@ -301,7 +301,7 @@ void QSPI_SendData32(QSPI_TypeDef * QSPIx, uint32_t Data) {
  * @retval None
  */
 void QSPI_SendDataFIFO(QSPI_TypeDef * QSPIx, uint32_t * Data, uint16_t length) {
-    uint8_t tmpNum;
+    uint32_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(QSPIx));
     /* Transmit 24Bit Data */
@@ -332,15 +332,15 @@ void QSPI_SendDataFIFO(QSPI_TypeDef * QSPIx, uint32_t * Data, uint16_t length) {
  * @param  len[in]: the data length to tramsmit.
  * @retval None
  */
-void QSPI_SendMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t length) {
-    uint8_t tmpNum;
+void QSPI_SendMultipleData(QSPI_TypeDef * QSPIx, void * buf, uint32_t length) {
+    uint32_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(QSPIx));
-    /* Transmit 16Bit Data */
+    /* Transmit 32Bit Data */
     if ((QSPIx->QSPI_CON & TWI_QSPIx_CON_DWIDTH) >= QSPI_DWidth_24bit) {
         for (tmpNum = 0; tmpNum < length; tmpNum++) {
-            QSPIx->QSPI_DATA = (uint32_t)buf[tmpNum];
-            while (QSPI_GetFlagStatus(QSPI0, QSPI_Flag_BUSY) == 0)
+            QSPIx->QSPI_DATA = (uint32_t)(*((uint32_t *)buf + tmpNum));
+            while (QSPI_GetFlagStatus(QSPIx, QSPI_Flag_BUSY) == 0)
                 ;  // ȴ BUSY
         }
     }
@@ -348,7 +348,7 @@ void QSPI_SendMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t length
     else if ((QSPIx->QSPI_CON & TWI_QSPIx_CON_DWIDTH) == QSPI_DWidth_16bit) {
         for (tmpNum = 0; tmpNum < length; tmpNum++) {
             QSPIx->QSPI_DATA = (uint32_t)(*((uint16_t *)buf + tmpNum));
-            while (QSPI_GetFlagStatus(QSPI0, QSPI_Flag_BUSY))
+            while (QSPI_GetFlagStatus(QSPIx, QSPI_Flag_BUSY))
                 ;  // ȴ BUSY
         }
     }
@@ -356,7 +356,7 @@ void QSPI_SendMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t length
     else if ((QSPIx->QSPI_CON & TWI_QSPIx_CON_DWIDTH) == QSPI_DWidth_8bit) {
         for (tmpNum = 0; tmpNum < length; tmpNum++) {
             QSPIx->QSPI_DATA = (uint32_t)(*((uint8_t *)buf + tmpNum));
-            while (QSPI_GetFlagStatus(QSPI0, QSPI_Flag_BUSY))
+            while (QSPI_GetFlagStatus(QSPIx, QSPI_Flag_BUSY))
                 ;  // ȴ BUSY
         }
     }
@@ -486,19 +486,19 @@ void QSPI_Receivelen(QSPI_TypeDef * QSPIx, uint32_t datalen) {
  * @param  length[in]: the data length to tramsmit.
  * @retval None
  **/
-void QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t length) {
-    uint8_t tmpNum;
+void QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, void * buf, uint32_t length) {
+    uint32_t tmpNum;
 
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(QSPIx));
-    /* Transmit 16Bit Data */
+    /* Transmit 32Bit Data */
     if ((QSPIx->QSPI_CON & TWI_QSPIx_CON_DWIDTH) >= QSPI_DWidth_24bit) {
         for (tmpNum = 0; tmpNum < length; tmpNum++) {
             QSPIx->QSPI_DL = 1;
             QSPIx->QSPI_CON |= TWI_QSPIx_CON_CLKONLY;
-            while (QSPI_GetFlagStatus(QSPI0, QSPI_Flag_BUSY) == 0)
+            while (QSPI_GetFlagStatus(QSPIx, QSPI_Flag_BUSY) == 0)
                 ;  // ȴ BUSY
-            buf[tmpNum] = QSPIx->QSPI_DATA;
+            (*((uint32_t *)buf + tmpNum)) = QSPIx->QSPI_DATA;
         }
     }
     /* Transmit 24 Bit Data */
@@ -506,7 +506,7 @@ void QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t len
         for (tmpNum = 0; tmpNum < length; tmpNum++) {
             QSPIx->QSPI_DL = 1;
             QSPIx->QSPI_CON |= TWI_QSPIx_CON_CLKONLY;
-            while (QSPI_GetFlagStatus(QSPI0, QSPI_Flag_BUSY))
+            while (QSPI_GetFlagStatus(QSPIx, QSPI_Flag_BUSY))
                 ;  // ȴ BUSY
             (*((uint16_t *)buf + tmpNum)) = QSPIx->QSPI_DATA;
         }
@@ -516,7 +516,7 @@ void QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t len
         for (tmpNum = 0; tmpNum < length; tmpNum++) {
             QSPIx->QSPI_DL = 1;
             QSPIx->QSPI_CON |= TWI_QSPIx_CON_CLKONLY;
-            while (QSPI_GetFlagStatus(QSPI0, QSPI_Flag_BUSY))
+            while (QSPI_GetFlagStatus(QSPIx, QSPI_Flag_BUSY))
                 ;  // ȴ BUSY
             (*((uint8_t *)buf + tmpNum)) = QSPIx->QSPI_DATA;
         }
@@ -532,7 +532,7 @@ void QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t len
  * @retval The received data.
  */
 void QSPI_ReceiveDataFIFO(QSPI_TypeDef * QSPIx, uint32_t * Data, uint16_t length) {
-    uint8_t tmpNum;
+    uint32_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(QSPIx));
     /* Transmit 24Bit Data */

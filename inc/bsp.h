@@ -17,5 +17,8 @@ void rcc_init(void);
 void uart1_init(void);
 void qspi0_init(void);
 void qspi1_init(void);
+void dma0_init(void);
+void dma1_init(void);
+void dma2_init(void);
 
 #endif

@@ -325,7 +325,7 @@ void     QSPI_SendData8(QSPI_TypeDef * QSPIx, uint8_t Data);
 void     QSPI_SendData16(QSPI_TypeDef * QSPIx, uint16_t Data);
 void     QSPI_SendData32(QSPI_TypeDef * QSPIx, uint32_t Data);
 void     QSPI_SendDataFIFO(QSPI_TypeDef * QSPIx, uint32_t * Data, uint16_t length);
-void     QSPI_SendMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t length);
+void     QSPI_SendMultipleData(QSPI_TypeDef * QSPIx, void * buf, uint32_t length);
 void     QSPI_Read_ComSet(QSPI_TypeDef * QSPIx,
                           int32_t        LMODE,
                           uint32_t       DWIDTH,
@@ -336,7 +336,7 @@ uint16_t QSPI_ReceiveData16(QSPI_TypeDef * QSPIx);
 uint32_t QSPI_ReceiveData32(QSPI_TypeDef * QSPIx);
 void     QSPI_Receivelen(QSPI_TypeDef * QSPIx, uint32_t datalen);
 void     QSPI_ReceiveDataFIFO(QSPI_TypeDef * QSPIx, uint32_t * Data, uint16_t length);
-void     QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, uint32_t * buf, uint32_t length);
+void     QSPI_ReceiveMultipleData(QSPI_TypeDef * QSPIx, void * buf, uint32_t length);
 /* Interrupts and flags management functions
  * **********************************************/
 void QSPI_ITConfig(QSPI_TypeDef * QSPIx, uint32_t QSPI_IT, FunctionalState NewState);

@@ -20,7 +20,7 @@
 #define USE_TEST
 
 /* 启用DMA */
-// #define USE_DMA
+#define USE_DMA
 
 /* 启用日志 */
 #define INC_LOG <log.h>
@@ -47,7 +47,7 @@
 #    define DMA_RX_DEV DMA2
 #endif
 
-// 以MSB方式接收后再以小端格式存储的设备唯一ID
+// 设备唯一ID
 #define W25Q64_Unique_ID 0xe464b4b293303836
 
 #endif
