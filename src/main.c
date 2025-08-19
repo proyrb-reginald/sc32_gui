@@ -5,19 +5,21 @@
 #include <drvs_if.h>
 
 int main(void) {
-    fs_mnt(FS_ROM);
-    fs_rcd_boot_cnt();
-    PRTF_OS_LOG(NEWS_LOG, "boot cnt: %u\n", fs_get_boot_cnt());
-    fs_ls("/");
-    fs_ls("/sys");
-    fs_unmnt(FS_ROM);
-
-    rt_thread_t tid = rt_thread_create("test", w25q_test, RT_NULL, 1024,
-                                       RT_THREAD_PRIORITY_MAX - 1, 10);
-    if (tid != RT_NULL) {
-        rt_thread_startup(tid);
-    } else {
-        PRTF_OS_LOG(ERRO_LOG, "thread create fail!\n");
+    {
+        fs_mnt(FS_ROM);
+        fs_rcd_boot_cnt();
+        PRTF_OS_LOG(NEWS_LOG, "rom boot cnt: %u\n", fs_get_boot_cnt());
+        fs_ls("0:/");
+        fs_ls("0:/sys");
+        fs_unmnt();
+    }
+    {
+        fs_mnt(FS_FLASH);
+        fs_rcd_boot_cnt();
+        PRTF_OS_LOG(NEWS_LOG, "flash boot cnt: %u\n", fs_get_boot_cnt());
+        fs_ls("1:/");
+        fs_ls("1:/sys");
+        fs_unmnt();
     }
 
     while (1) {

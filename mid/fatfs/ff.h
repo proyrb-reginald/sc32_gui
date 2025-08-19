@@ -27,6 +27,7 @@ extern "C" {
 
 #if !defined(FFCONF_DEF)
 #    include "ffconf.h" /* FatFs configuration options */
+
 #endif
 #if FF_DEFINED != FFCONF_DEF
 #    error Wrong configuration file (ffconf.h).
@@ -136,7 +137,7 @@ typedef struct {
 typedef struct {
     UINT depth; /* Current directory depth (0:root dir) */
     FFXCWDL
-        tbl[FF_PATH_DEPTH + 1]; /* Directory chain of current working directory path */
+    tbl[FF_PATH_DEPTH + 1]; /* Directory chain of current working directory path */
 } FFXCWDS;
 #endif
 
@@ -243,7 +244,7 @@ typedef struct {
     BYTE   fn[12]; /* SFN (in/out) {body[0-7],ext[8-10],status[11]} */
 #if FF_USE_LFN
     DWORD
-        blk_ofs; /* Offset of current entry block being processed (0xFFFFFFFF:invalid) */
+    blk_ofs; /* Offset of current entry block being processed (0xFFFFFFFF:invalid) */
 #endif
 #if FF_USE_FIND
     const TCHAR * pat; /* Pointer to the name matching pattern */

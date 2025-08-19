@@ -24,7 +24,7 @@
 
 /* 启用日志 */
 #define INC_LOG <log.h>
-#define LOG_LEV INFO_LOG
+#define LOG_LEV NEWS_LOG
 #define LOG_IF_PRTF rt_kprintf
 #define LOG_IF_GET_TICK rt_tick_get
 

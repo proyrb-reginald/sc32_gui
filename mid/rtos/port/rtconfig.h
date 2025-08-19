@@ -58,7 +58,7 @@
  * @warning 以字节为单位，不能太小。
  * @note 取值范围为：1-4086
  */
-#define RT_MAIN_THREAD_STACK_SIZE (40 * 64)
+#define RT_MAIN_THREAD_STACK_SIZE (80 * 64)
 
 /**
  * @brief 配置main线程的优先级。

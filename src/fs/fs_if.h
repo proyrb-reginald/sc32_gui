@@ -23,6 +23,7 @@
 /****************************** 类型定义 ******************************/
 
 typedef enum {
+    FS_NONE = -1,
     FS_ROM,
     FS_FLASH,
     FS_SD,
@@ -32,23 +33,23 @@ typedef enum {
 
 /**
  * @brief 挂载指定文件系统。
- * @param drv 设备类型。
+ * @param dev 设备类型。
  * @return FRESULT
  * @retval 参考FRESULT枚举。
  * @warning
  * @note
  */
-FRESULT fs_mnt(const fs_dev_t drv);
+FRESULT fs_mnt(const fs_dev_t dev);
 
 /**
  * @brief 卸载指定文件系统。
- * @param drv
+ * @param dev
  * @return FRESULT
  * @retval 参考FRESULT枚举。
  * @warning
  * @note
  */
-FRESULT fs_unmnt(const fs_dev_t drv);
+FRESULT fs_unmnt(void);
 
 /**
  * @brief 记录系统启动次数。
@@ -71,10 +72,11 @@ uint32_t fs_get_boot_cnt(void);
 /**
  * @brief 输出指定目录内容及其属性。
  * @param path
- * @retval
+ * @return FRESULT
+ * @retval 参考FRESULT枚举。
  * @warning
  * @note
  */
-void fs_ls(const char * const path);
+FRESULT fs_ls(const char * const path);
 
 #endif

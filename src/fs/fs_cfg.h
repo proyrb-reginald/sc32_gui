@@ -14,13 +14,13 @@
 /****************************** 配置功能 ******************************/
 
 /* 启用测试接口 */
-#define USE_TEST
+// #define USE_TEST
 
 /* 启用片上文件系统 */
 #define USE_FS_ROM
 
 /* 启用外部Flash文件系统 */
-// #define USE_FS_FLASH
+#define USE_FS_FLASH
 
 /* 启用SD卡文件系统 */
 // #define USE_FS_SD
@@ -30,14 +30,18 @@
 #define DEV_SD 2
 
 /* 启用日志 */
-#define INC_LOG <log.h>
-#define LOG_LEV NEWS_LOG
-#define LOG_IF_PRTF rt_kprintf
-#define LOG_IF_GET_TICK rt_tick_get
+#ifdef __FS_C__
+#    define INC_LOG <log.h>
+#    define LOG_LEV INFO_LOG
+#    define LOG_IF_PRTF rt_kprintf
+#    define LOG_IF_GET_TICK rt_tick_get
+#endif
 
 /* 启用操作系统 */
-#define INC_RTOS <rtthread.h>
-#define RTOS_DELAY_IF rt_thread_delay
+#ifdef __FS_C__
+#    define INC_RTOS <rtthread.h>
+#    define RTOS_DELAY_IF rt_thread_delay
+#endif
 
 /****************************** 目录配置 ******************************/
 

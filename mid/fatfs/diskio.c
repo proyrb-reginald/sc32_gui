@@ -14,15 +14,16 @@
 #define LOG_LEV NEWS_LOG
 #define LOG_IF_PRTF rt_kprintf
 #define LOG_IF_GET_TICK rt_tick_get
+#define RTOS_DELAY_IF rt_thread_delay
 
 /* Declarations of the platform and disk functions in the project */
 #include <sc32_conf.h>
 #include <rtthread.h>
+#include <fs_cfg.h>
 #include <log.h>
 #include <build_time.h>
 #include <time.h>
 #include <drvs_if.h>
-#include <fs_cfg.h>
 
 /* Mapping of physical drive number for each drive */
 #ifndef DEV_ROM
@@ -62,11 +63,14 @@ DSTATUS disk_initialize(BYTE pdrv) {
 #ifdef USE_FS_ROM
         case DEV_ROM:
             status = 0;
-            PRTF_OS_LOG(NEWS_LOG, "flash disk init!\n");
+            PRTF_OS_LOG(NEWS_LOG, "rom disk init!\n");
             break;
 #endif
 #ifdef USE_FS_FLASH
-        case DEV_FLASH: break;
+        case DEV_FLASH:
+            status = w25q_init();
+            PRTF_OS_LOG(NEWS_LOG, "flash disk init with %u!\n", status);
+            break;
 #endif
 #ifdef USE_FS_SD
         case DEV_SD: break;
@@ -82,17 +86,19 @@ DSTATUS disk_initialize(BYTE pdrv) {
 
 DSTATUS disk_status(BYTE pdrv) {
     DSTATUS status = STA_NOINIT;
+
     switch (pdrv) {
 #ifdef USE_FS_ROM
         case DEV_ROM: status = 0; break;
 #endif
 #ifdef USE_FS_FLASH
-        case DEV_FLASH: break;
+        case DEV_FLASH: status = 0; break;
 #endif
 #ifdef USE_FS_SD
         case DEV_SD: break;
 #endif
     }
+
     return status;
 }
 
@@ -100,36 +106,72 @@ DSTATUS disk_status(BYTE pdrv) {
 /* Read Sector(s)                                                        */
 /*-----------------------------------------------------------------------*/
 
-DRESULT disk_read(BYTE   pdrv,   /* Physical drive nmuber to identify the drive */
-                  BYTE * buff,   /* Data buffer to store read data */
-                  LBA_t  sector, /* Start sector in LBA */
-                  UINT   count   /* Number of sectors to read */
-) {
-    DRESULT  res = RES_PARERR;
-    uint32_t adr = ROM_FS_START_ADR + sector * SECTOR_SIZE;
+DRESULT disk_read(BYTE pdrv, BYTE * buf, LBA_t sector, UINT count) {
+    DRESULT res = RES_PARERR;
+
     switch (pdrv) {
 #ifdef USE_FS_ROM
-        case DEV_ROM:
+#    define SCT_SIZE ROM_SCT_SIZE
+        case DEV_ROM: {
+            uint32_t adr = ROM_FS_START_ADR + sector * SCT_SIZE;
+
             for (UINT i = 0; i < count; i++) {
-                if (IAP_ReadByteArray(adr, buff, SECTOR_SIZE) < SECTOR_SIZE) {
-                    PRTF_OS_LOG(ERRO_LOG, "read sct: %u cnt: %u adr: 0x%x fail!\n",
+                if (IAP_ReadByteArray(adr, buf, SCT_SIZE) < SCT_SIZE) {
+                    PRTF_OS_LOG(ERRO_LOG, "read sct: %u cnt: %u adr: 0x%08x fail!\n",
                                 sector, count, adr);
                     return RES_ERROR;
                 }
-                adr += SECTOR_SIZE;
-                buff += SECTOR_SIZE;
+                adr += SCT_SIZE;
+                buf += SCT_SIZE;
             }
+
             res = RES_OK;
             break;
+        }
+#    undef SCT_SIZE
 #endif
+
 #ifdef USE_FS_FLASH
-        case DEV_FLASH: break;
+#    define SCT_SIZE (4 * 1024)
+        case DEV_FLASH: {
+            uint32_t adr = sector * SCT_SIZE;
+
+            PRTF_OS_LOG(INFO_LOG, "read sct: %u cnt: %u adr: 0x%08x\n", sector, count,
+                        adr);
+
+            uint8_t * const raw_buf = buf;
+
+            for (UINT i = 0; i < count; i++) {
+                w25q_cmd_t cmd = {.ins  = ReadDataQSPI,
+                                  .adr  = {.byte = {adr >> 16, adr >> 8, adr >> 0}},
+                                  .data = buf,
+                                  .size = SCT_SIZE};
+                w25q_ctl(&cmd);
+
+                adr += SCT_SIZE;
+                buf += SCT_SIZE;
+            }
+
+            PRTF_OS_LOG(INFO_LOG, "data:\n");
+            for (uint16_t i = 0; i < 64; i++) {
+                PRTF_LOG(INFO_LOG, "0x%02x ", raw_buf[i]);
+            }
+            PRTF_LOG(INFO_LOG, "\n");
+
+            res = RES_OK;
+            break;
+        }
+#    undef SCT_SIZE
 #endif
+
 #ifdef USE_FS_SD
+#    define SCT_SIZE
         case DEV_SD: break;
+#    undef SCT_SIZE
 #endif
         default: break;
     }
+
     return res;
 }
 
@@ -138,35 +180,112 @@ DRESULT disk_read(BYTE   pdrv,   /* Physical drive nmuber to identify the drive 
 /*-----------------------------------------------------------------------*/
 
 #if FF_FS_READONLY == 0
-DRESULT disk_write(BYTE pdrv, const BYTE * buff, LBA_t sector, UINT count) {
-    DRESULT  res;
-    uint32_t adr = ROM_FS_START_ADR + sector * ROM_SCT_SIZE;
+DRESULT disk_write(BYTE pdrv, const BYTE * buf, LBA_t sector, UINT count) {
+    DRESULT res;
+
     switch (pdrv) {
 #    ifdef USE_FS_ROM
-        case DEV_ROM:
+#        define SCT_SIZE ROM_SCT_SIZE
+        case DEV_ROM: {
+            uint32_t adr = ROM_FS_START_ADR + sector * SCT_SIZE;
+
             IAP_Unlock();
-            IAP_EraseSector(adr / ROM_SCT_SIZE);
+            IAP_EraseSector(adr / SCT_SIZE);
             IAP_WriteCmd(ENABLE);
+
             for (UINT i = 0; i < count; i++) {
-                if (IAP_ProgramByteArray(adr, (uint8_t *)buff, ROM_SCT_SIZE) <
-                    ROM_SCT_SIZE) {
+                if (IAP_ProgramByteArray(adr, (uint8_t *)buf, SCT_SIZE) < SCT_SIZE) {
                     IAP_Lock();
                     PRTF_OS_LOG(ERRO_LOG, "write sct: %u cnt: %u adr: 0x%x fail!\n",
                                 sector, count, adr);
                     return RES_ERROR;
                 }
-                adr += ROM_SCT_SIZE;
-                buff += ROM_SCT_SIZE;
+                adr += SCT_SIZE;
+                buf += SCT_SIZE;
             }
+
             IAP_Lock();
             res = RES_OK;
+
             break;
+        }
+#        undef SCT_SIZE
 #    endif
+
 #    ifdef USE_FS_FLASH
-        case DEV_FLASH: break;
+#        define SCT_SIZE (4 * 1024)
+        case DEV_FLASH: {
+            uint32_t adr = sector * SCT_SIZE;
+
+            PRTF_OS_LOG(INFO_LOG, "write sct: %u cnt: %u adr: 0x%08x\n", sector, count,
+                        adr);
+
+            PRTF_OS_LOG(INFO_LOG, "data:\n");
+            for (uint16_t i = 0; i < 64; i++) {
+                PRTF_LOG(INFO_LOG, "0x%02x ", buf[i]);
+            }
+            PRTF_LOG(INFO_LOG, "\n");
+
+            for (UINT i = 0; i < count; i++) {
+                // 擦除扇区（4KB）
+                w25q_cmd_t cmd = {.ins = WriteEnable, .size = 0};
+                w25q_ctl(&cmd);
+
+                cmd.ins         = Erase4KB;
+                cmd.adr.byte[0] = adr >> 16;
+                cmd.adr.byte[1] = adr >> 8;
+                cmd.adr.byte[2] = adr >> 0;
+                cmd.size        = 0;
+                w25q_ctl(&cmd);
+
+                // 等待擦除完成
+                uint8_t sr1 = 0;
+                cmd.ins     = ReadSR1;
+                cmd.data    = &sr1;
+                cmd.size    = 1;
+                do {
+                    RTOS_DELAY_IF(3);
+                    w25q_ctl(&cmd);
+                } while (sr1 & 0x01);
+
+                // 写入扇区：拆分为 16 页 × 256 字节
+                for (int page = 0; page < 16; page++) {
+                    cmd.ins  = WriteEnable;
+                    cmd.size = 0;
+                    w25q_ctl(&cmd);
+
+                    cmd.ins         = ProgramQSPI;
+                    cmd.adr.byte[0] = (adr + page * 256) >> 16;
+                    cmd.adr.byte[1] = (adr + page * 256) >> 8;
+                    cmd.adr.byte[2] = (adr + page * 256) >> 0;
+                    cmd.data        = (uint8_t *)buf + page * 256;
+                    cmd.size        = 256;
+                    w25q_ctl(&cmd);
+
+                    // 等待写入完成
+                    cmd.ins  = ReadSR1;
+                    cmd.data = &sr1;
+                    cmd.size = 1;
+                    do {
+                        RTOS_DELAY_IF(2);
+                        w25q_ctl(&cmd);
+                    } while (sr1 & 0x01);
+                }
+
+                adr += SCT_SIZE;
+                buf += SCT_SIZE;
+            }
+
+            res = RES_OK;
+            break;
+        }
+#        undef SCT_SIZE
 #    endif
+
 #    ifdef USE_FS_SD
+#        define SCT_SIZE
         case DEV_SD: break;
+#        undef SCT_SIZE
 #    endif
         default: break;
     }
@@ -178,34 +297,56 @@ DRESULT disk_write(BYTE pdrv, const BYTE * buff, LBA_t sector, UINT count) {
 /* Miscellaneous Functions                                               */
 /*-----------------------------------------------------------------------*/
 
-DRESULT disk_ioctl(BYTE pdrv, BYTE cmd, void * buff) {
+DRESULT disk_ioctl(BYTE pdrv, BYTE cmd, void * buf) {
     DRESULT res = RES_PARERR;
+
     switch (pdrv) {
 #ifdef USE_FS_ROM
-        case DEV_ROM:
+        case DEV_ROM: {
             switch (cmd) {
                 case CTRL_SYNC: res = RES_OK; break;
                 case GET_SECTOR_COUNT:
-                    *(LBA_t *)buff = ROM_FS_SCT_CNT;
-                    res            = RES_OK;
-                    break;
-                case GET_SECTOR_SIZE:
-                    *(WORD *)buff = ROM_SCT_SIZE;
+                    *(LBA_t *)buf = ROM_FS_SCT_CNT;
                     res           = RES_OK;
                     break;
+                case GET_SECTOR_SIZE:
+                    *(WORD *)buf = ROM_SCT_SIZE;
+                    res          = RES_OK;
+                    break;
                 case GET_BLOCK_SIZE:
-                    *(DWORD *)buff = 1;
-                    res            = RES_OK;
+                    *(DWORD *)buf = ROM_SCT_SIZE;
+                    res           = RES_OK;
                     break;
                 default: break;
             }
+            break;
+        }
 #endif
 #ifdef USE_FS_FLASH
-        case DEV_FLASH: break;
+        case DEV_FLASH: {
+            switch (cmd) {
+                case CTRL_SYNC: res = RES_OK; break;
+                case GET_SECTOR_COUNT:
+                    *(LBA_t *)buf = (16 * 255);
+                    res           = RES_OK;
+                    break;
+                case GET_SECTOR_SIZE:
+                    *(WORD *)buf = (4 * 1024);
+                    res          = RES_OK;
+                    break;
+                case GET_BLOCK_SIZE:
+                    *(DWORD *)buf = (4 * 1024);
+                    res           = RES_OK;
+                    break;
+                default: break;
+            }
+            break;
+        }
 #endif
 #ifdef USE_FS_SD
         case DEV_SD: break;
 #endif
     }
+
     return res;
 }
