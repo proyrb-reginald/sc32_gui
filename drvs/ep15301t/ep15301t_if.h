@@ -3,13 +3,17 @@
  * @author proyrb (proyrb@yeah.net)
  * @brief 屏幕驱动程序接口。
  * @version 0.1
- * @date 2025-08-14
+ * @date 2025-08-20
  * @copyright Copyright (c) 2025
  * @note
  */
 
 #ifndef __EP15301T_IF_H__
 #define __EP15301T_IF_H__
+
+/****************************** 导入头文件 ******************************/
+
+#include <sc32_conf.h>
 
 /****************************** 类型定义 ******************************/
 

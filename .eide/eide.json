@@ -29,8 +29,7 @@
         "src/fs/etn",
         "mid/littlefs",
         "src/fs/ebd",
-        "drvs/sd",
-        "drvs/ep15301t"
+        "drvs/sd"
       ],
       "toolchain": "AC6",
       "compileConfig": {
