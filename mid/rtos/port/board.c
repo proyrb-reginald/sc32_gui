@@ -7,8 +7,8 @@ void rt_hw_board_init(void) {
     rcc_init();
     uart1_init();
     // qspi0_init();
-    qspi1_init();
-    dma0_init();
+    // qspi1_init();
+    // dma0_init();
     // dma1_init();
     // dma2_init();
 

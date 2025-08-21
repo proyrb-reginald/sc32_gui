@@ -9,7 +9,7 @@
  * copied and modified for each project.
  *
  * \note Most of the configuration options in the uipopt.h should not
- * be changed, but rather the per-project uip-conf.h file.
+ * be changed, but rather the per-project uip_conf.h file.
  */
 
 /**

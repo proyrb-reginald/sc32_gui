@@ -29,7 +29,8 @@
         "mid/littlefs",
         "src/fs/ebd",
         "drvs/sd",
-        "mid/lvgl"
+        "mid/lvgl",
+        "mid/uip"
       ],
       "toolchain": "AC6",
       "compileConfig": {
