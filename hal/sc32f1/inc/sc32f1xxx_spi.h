@@ -35,7 +35,7 @@ extern "C" {
 #include "sc32f1xxx.h"
 #include "sc32.h"
 #include "sc32f1xxx_rcc.h"
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 /** @addtogroup sc32f1xxx_StdPeriph_Driver
  * @{
  */
@@ -154,7 +154,7 @@ typedef enum {
 /** @brief SPI_PinRemap TIM Pin Remap
  * @{
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 typedef enum {
     SPI_PinRemap_Default =
         (uint32_t)(0x00 << SPI_CON_SPOS_Pos), /*!< TIM Pin Remap: Disable */
@@ -170,7 +170,7 @@ typedef enum {
 
 #        define IS_SPI_LIST2_PINREMAP(REMAP)                                             \
             (((REMAP) == SPI_PinRemap_Default) || ((REMAP) == SPI_PinRemap_A))
-#    elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     SPI_PinRemap_Default =
         (uint32_t)(0x00 << SPI_CON_SPOS_Pos), /*!< TIM Pin Remap: Disable */
@@ -270,13 +270,13 @@ typedef enum {
 /** @brief SPI_Constants SPI Constants
  * @{
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 #        define IS_SPI_ALL_PERIPH(PERIPH) (((PERIPH) == SPI0) || ((PERIPH) == SPI1))
-#    elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 #        define IS_SPI_ALL_PERIPH(PERIPH)                                                \
             (((PERIPH) == SPI0) || ((PERIPH) == SPI1) || ((PERIPH) == SPI2))
 #    endif
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 /** @defgroup SPI_Mode SPI Mode
  * @{
  */

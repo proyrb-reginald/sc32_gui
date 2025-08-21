@@ -45,7 +45,7 @@ functions
  * @retval None
  */
 void ADC_DeInit(ADC_TypeDef * ADCx) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
     defined(SC32R806) || defined(SC32R803)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
@@ -54,7 +54,7 @@ void ADC_DeInit(ADC_TypeDef * ADCx) {
     ADCx->ADC_CON   = (uint32_t)0x00000000U;
     ADCx->ADC_VALUE = (uint32_t)0x00000000U;
     ADCx->ADC_STS   = (uint32_t)0x00000001U;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
 
@@ -74,7 +74,7 @@ void ADC_DeInit(ADC_TypeDef * ADCx) {
  * @retval None
  */
 void ADC_Init(ADC_TypeDef * ADCx, ADC_InitTypeDef * ADC_InitStruct) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
     defined(SC32R806) || defined(SC32R803)
     uint32_t tmpreg;
     /* Check the parameters */
@@ -90,7 +90,7 @@ void ADC_Init(ADC_TypeDef * ADCx, ADC_InitTypeDef * ADC_InitStruct) {
                ADC_InitStruct->ADC_ConvMode);
     ADCx->ADC_CON = tmpreg;
     ADCx->ADC_CFG = ADC_InitStruct->ADC_EAIN;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
@@ -120,7 +120,7 @@ void ADC_StructInit(ADC_InitTypeDef * ADC_InitStruct) {
     ADC_InitStruct->ADC_ConvMode  = ADC_ConvMode_Single;
     ADC_InitStruct->ADC_EAIN      = ADC_EAIN_Less;
     ADC_InitStruct->ADC_Prescaler = ADC_Prescaler_3CLOCK;
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
     ADC_InitStruct->ADC_VREF = ADC_VREF_VDD;
 #else
     ADC_InitStruct->ADC_VREF = ADC_RefSource_VDD;
@@ -155,10 +155,10 @@ void ADC_Cmd(ADC_TypeDef * ADCx, FunctionalState NewState) {
  * @param  ADCx[out]: select the ADCx peripheral.
  *                  - ADC: Only ADC can be select the ADCx peripheral.
  * @param  ADC_ConvMode[in]: new conversion mode of the ADCx peripheral.
- *                  SC32f10xx Selection range(ADC_ConvMode_Single,ADC_ConvMode_Continuous)
+ *                  SC32F10XX Selection range(ADC_ConvMode_Single,ADC_ConvMode_Continuous)
  *                  SC32R803 Selection range(ADC_ConvMode_Single,ADC_ConvMode_Continuous)
- *                  SC32f12xx Selection range(ADC_ConvMode_Single,ADC_ConvMode_Continuous)
- *                  SC32f15xx Selection range(ADC_ConvMode_Single,ADC_ConvMode_Sequence)
+ *                  SC32F12XX Selection range(ADC_ConvMode_Single,ADC_ConvMode_Continuous)
+ *                  SC32F15XX Selection range(ADC_ConvMode_Single,ADC_ConvMode_Sequence)
  *                  SC32R601 Selection range(ADC_ConvMode_Single,ADC_ConvMode_Sequence)
  *                  - ADC_ConvMode_Single:Single conversion mode
  *                  - ADC_ConvMode_Continuous:Continuous conversion mode
@@ -183,10 +183,10 @@ void ADC_ConvModeConfig(ADC_TypeDef * ADCx, ADC_ConvMode_TypeDef ADC_ConvMode) {
  * @param  ADCx[out]: select the ADCx peripheral.
  *                  - ADC: Only ADC can be select the ADCx peripheral.
  * @param  ADC_Channel[in]: ADC input channel selection.
- *                         SC32f10xx Selection range(ADC_Channel_0 - ADC_Channel_16
+ *                         SC32F10XX Selection range(ADC_Channel_0 - ADC_Channel_16
  * ADC_Channel_VDD_D4) SC32R803 Selection range(ADC_Channel_0 - ADC_Channel_17
- * ADC_Channel_VDD_D4 ADC_Channel_OP) SC32f12xx Selection range(ADC_Channel_0 -
- * ADC_Channel_15    ADC_Channel_VDD_D4 ADC_Channel_OP) SC32f15xx Selection
+ * ADC_Channel_VDD_D4 ADC_Channel_OP) SC32F12XX Selection range(ADC_Channel_0 -
+ * ADC_Channel_15    ADC_Channel_VDD_D4 ADC_Channel_OP) SC32F15XX Selection
  * range(ADC_Channel_0 - ADC_Channel_15    ADC_Channel_VDD_D4 ADC_Channel_TEMP)
  *                         - ADC_Channel_0 : ADC input channel 0
  *                         - ADC_Channel_1 : ADC input channel 1
@@ -213,7 +213,7 @@ void ADC_ConvModeConfig(ADC_TypeDef * ADCx, ADC_ConvMode_TypeDef ADC_ConvMode) {
  * @retval None
  */
 void ADC_SetChannel(ADC_TypeDef * ADCx, ADC_ChannelTypedef ADC_Channel) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
@@ -226,7 +226,7 @@ void ADC_SetChannel(ADC_TypeDef * ADCx, ADC_ChannelTypedef ADC_Channel) {
     tmpreg |= ADC_Channel;
 
     ADCx->ADC_CON = tmpreg;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
     ADCx->ADC_CON &= (uint32_t)~(ADC_CON_ADCISA);
@@ -239,10 +239,10 @@ void ADC_SetChannel(ADC_TypeDef * ADCx, ADC_ChannelTypedef ADC_Channel) {
  * @param  ADCx[out]: select the ADCx peripheral.
  *                  - ADC: Only ADC can be select the ADCx peripheral.
  * @retval ADC channel type
- *                         SC32f10xx Selection range(ADC_Channel_0 - ADC_Channel_16
+ *                         SC32F10XX Selection range(ADC_Channel_0 - ADC_Channel_16
  * ADC_Channel_VDD_D4) SC32R803 Selection range(ADC_Channel_0 - ADC_Channel_17
- * ADC_Channel_VDD_D4 ADC_Channel_OP) SC32f12xx Selection range(ADC_Channel_0 -
- * ADC_Channel_15    ADC_Channel_VDD_D4 ADC_Channel_OP) SC32f15xx Selection
+ * ADC_Channel_VDD_D4 ADC_Channel_OP) SC32F12XX Selection range(ADC_Channel_0 -
+ * ADC_Channel_15    ADC_Channel_VDD_D4 ADC_Channel_OP) SC32F15XX Selection
  * range(ADC_Channel_0 - ADC_Channel_15    ADC_Channel_VDD_D4 ADC_Channel_TEMP)
  *                         - ADC_Channel_0 : ADC input channel 0
  *                         - ADC_Channel_1 : ADC input channel 1
@@ -268,14 +268,14 @@ void ADC_SetChannel(ADC_TypeDef * ADCx, ADC_ChannelTypedef ADC_Channel) {
  *                         - ADC_Channel_TEMP:ADC_CHANNEL_TEMP
  */
 ADC_ChannelTypedef ADC_GetChannel(ADC_TypeDef * ADCx) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
 
     /* Get the ADC channel type */
     return (ADC_ChannelTypedef)(ADCx->ADC_CON & ADC_CON_ADCIS);
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
 
@@ -348,10 +348,10 @@ uint16_t ADC_GetConversionValue(ADC_TypeDef * ADCx) {
  * @param  ADCx[out]: select the ADCx peripheral.
  *                  - ADC: Only ADC can be select the ADCx peripheral.
  * @param  ADC_IT[in]: specifies the ADC interrupts sources to be enabled or disabled.
- *                SC32f10xx Selection range(ADC_IT_ADCIF)
+ *                SC32F10XX Selection range(ADC_IT_ADCIF)
  *                SC32R803 Selection range(ADC_IT_ADCIF)
- *                SC32f12xx Selection range(ADC_IT_ADCIF)
- *                SC32f15xx Selection range(ADC_IT_INTEN - ADC_IT_LOWTHIE)
+ *                SC32F12XX Selection range(ADC_IT_ADCIF)
+ *                SC32F15XX Selection range(ADC_IT_INTEN - ADC_IT_LOWTHIE)
  *                  - ADC_IT_ADCIF:ADC Interrupt: ADC  Interrupt
  *                  - ADC_IT_INTEN:ADC Interrupt: ADC  Interrupt
  *                  - ADC_IT_EOCIE:ADC sequence 0 sampling + conversion complete interrupt
@@ -370,7 +370,7 @@ void ADC_ITConfig(ADC_TypeDef * ADCx, uint16_t ADC_IT, FunctionalState NewState)
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
     assert_param(IS_ADC_IT(ADC_IT));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     if (NewState != DISABLE) {
         /* Enable the Interrupt sources */
@@ -379,7 +379,7 @@ void ADC_ITConfig(ADC_TypeDef * ADCx, uint16_t ADC_IT, FunctionalState NewState)
         /* Disable the Interrupt sources */
         ADCx->ADC_CON &= (uint32_t)~ADC_IT;
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     if (NewState != DISABLE) {
         /* Enable the Interrupt sources */
         ADCx->ADC_IDE |= ADC_IT;
@@ -395,10 +395,10 @@ void ADC_ITConfig(ADC_TypeDef * ADCx, uint16_t ADC_IT, FunctionalState NewState)
  * @param  ADCx[out]: select the ADCx peripheral.
  *                  - ADC: Only ADC can be select the ADCx peripheral.
  * @param  ADC_FLAG[in]:specifies the flag to check.
- *                SC32f10xx Selection range(ADC_Flag_ADCIF)
+ *                SC32F10XX Selection range(ADC_Flag_ADCIF)
  *                SC32R803 Selection range(ADC_Flag_ADCIF)
- *                SC32f12xx Selection range(ADC_Flag_ADCIF)
- *                SC32f15xx Selection range(ADC_Flag_ADCIF - ADC_Flag_LOWTHIF)
+ *                SC32F12XX Selection range(ADC_Flag_ADCIF)
+ *                SC32F15XX Selection range(ADC_Flag_ADCIF - ADC_Flag_LOWTHIF)
  *                  - ADC_Flag_ADCIF :ADC Flag
  *                  - ADC_Flag_EOSIF0:ADC sequence 0 sampling + conversion complete
  * interrupt Flag
@@ -427,10 +427,10 @@ FlagStatus ADC_GetFlagStatus(ADC_TypeDef * ADCx, uint32_t ADC_FLAG) {
  * @param  ADCx[out]: select the ADCx peripheral.
  *                  - ADC: Only ADC can be select the ADCx peripheral.
  * @param  ADC_FLAG[in]:specifies the flag bit to clear.
- *                SC32f10xx Selection range(ADC_Flag_ADCIF)
+ *                SC32F10XX Selection range(ADC_Flag_ADCIF)
  *                SC32R803 Selection range(ADC_Flag_ADCIF)
- *                SC32f12xx Selection range(ADC_Flag_ADCIF)
- *                SC32f15xx Selection range(ADC_Flag_ADCIF - ADC_Flag_LOWTHIF)
+ *                SC32F12XX Selection range(ADC_Flag_ADCIF)
+ *                SC32F15XX Selection range(ADC_Flag_ADCIF - ADC_Flag_LOWTHIF)
  *                  - ADC_Flag_ADCIF :ADC Flag
  *                  - ADC_Flag_EOSIF0:ADC sequence 0 sampling + conversion complete
  * interrupt Flag
@@ -457,7 +457,7 @@ void ADC_ClearFlag(ADC_TypeDef * ADCx, uint32_t ADC_FLAG) {
  * @retval None
  */
 void ADC_DMACmd(ADC_TypeDef * ADCx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
@@ -469,7 +469,7 @@ void ADC_DMACmd(ADC_TypeDef * ADCx, FunctionalState NewState) {
         /* Disable the selected ADC DMA requests */
         ADCx->ADC_CON &= (uint32_t)~ADC_CON_DMAEN;
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_ADC_ALL_PERIPH(ADCx));
 
@@ -487,7 +487,7 @@ void ADC_DMACmd(ADC_TypeDef * ADCx, FunctionalState NewState) {
  * @}
  */
 /* End of ADC_Group3.	*/
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 /** @defgroup ADC_Group4 Common interface functions of motors
  *  @brief    multi-channel, continuous sampling and other functions
  *

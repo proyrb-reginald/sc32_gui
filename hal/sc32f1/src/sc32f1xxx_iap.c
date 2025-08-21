@@ -260,7 +260,7 @@ static uint16_t IAP_ProgramArray_InRam(uint32_t           Address,
 boolType IAP_Unlock(void) {
     /* Check if software lock is open (IAP write operations are permitted) */
     if (IapWriteFlag == IAP_ENABLE) {
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
         /* HIRC must be enabled before IAP operation */
         RCC_Unlock(0xFF);
         RCC_HIRCCmd(ENABLE);
@@ -334,8 +334,8 @@ void IAP_EraseSector(uint32_t IAP_Sector) {
     }
 }
 
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  Erases a specified FLASH Sector.
  * @note   If an erase and a program operations are requested simultaneously,
@@ -359,7 +359,7 @@ void IAP_EEPROMEraseSector(uint32_t IAP_Sector) {
 
 #endif
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 /**
  * @brief  Program a word (32-bit) at a specified address.
  * @param  Address[in]: specifies the address to be programmed.
@@ -471,7 +471,7 @@ boolType IAP_ProgramByte(uint32_t Address, uint8_t Data) {
     }
 }
 
-#elif defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  Program a word (32-bit) at a specified address.
  * @param  Address[in]: specifies the address to be programmed.
@@ -592,7 +592,7 @@ boolType IAP_ProgramByte(uint32_t Address, uint8_t Data) {
     }
 }
 
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 /**
  * @brief  Program a word (32-bit) at a specified address.
  * @param  Address[in]: specifies the address to be programmed.
@@ -800,7 +800,7 @@ uint8_t IAP_ReadByte(uint32_t Address) {
     return Data;
 }
 
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 /**
  * @brief  Program a word (32-bit) array of configurable length.
  * @param  Address[in]: specifies the address to be program.
@@ -868,7 +868,7 @@ IAP_ProgramWordArray(uint32_t Address, uint32_t * ByteArray, uint16_t ArraySize)
     }
 }
 
-#elif defined(SC32f10xx)
+#elif defined(SC32F10XX)
 /**
  * @brief  Program a word (32-bit) array of configurable length.
  * @param  Address[in]: specifies the address to be program.
@@ -1057,7 +1057,7 @@ uint16_t IAP_ProgramByteArray(uint32_t Address, uint8_t * ByteArray, uint16_t Ar
     }
 }
 
-#elif defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  Program a word (32-bit) array of configurable length.
  * @param  Address[in]: specifies the address to be program.
@@ -1354,7 +1354,7 @@ void IAP_SoftwareReset(IAP_BTLD_TypeDef IAP_BTLDType) {
  */
 /* End of IAP_Group2.	*/
 
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 /** @defgroup IAP_Group3 Automatic continuous burning  functions
  *  @brief   Automatic continuous burning  functions
  *

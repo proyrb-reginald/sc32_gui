@@ -40,10 +40,10 @@
 /**
  * @brief  DeInitialize the CMPx peripheral registers to their default reset values.
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -52,7 +52,7 @@
  * @retval None
  */
 void CMP_DeInit(CMP_TypeDef * CMPx) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -62,7 +62,7 @@ void CMP_DeInit(CMP_TypeDef * CMPx) {
         CMPx->CMP_CFG = 0x0000;
         CMPx->CMP_STS = 0xFFFF;
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
     if (CMPx == CMP_0 || CMPx == CMP_1 || CMPx == CMP_2) {
         CMP->CMP_STS  = 0x00;
@@ -84,10 +84,10 @@ void CMP_DeInit(CMP_TypeDef * CMPx) {
  * @brief  Initializes the peripheral CMP register according to the parameters specified
  * in CMP_InitStruct
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -98,7 +98,7 @@ void CMP_DeInit(CMP_TypeDef * CMPx) {
  * @retval None
  */
 void CMP_Init(CMP_TypeDef * CMPx, CMP_InitTypeDef * CMP_InitStruct) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
@@ -120,7 +120,7 @@ void CMP_Init(CMP_TypeDef * CMPx, CMP_InitTypeDef * CMP_InitStruct) {
                          CMP_InitStruct->CMP_TriggerMode);
     /* Write to CMPx CMP_CFG */
     CMPx->CMP_CFG = tmpreg;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     if (CMPx == CMP_0 || CMPx == CMP_1 || CMPx == CMP_2) {
         /* Check the parameters */
@@ -210,13 +210,13 @@ void CMP_Init(CMP_TypeDef * CMPx, CMP_InitTypeDef * CMP_InitStruct) {
  * @retval None
  */
 void CMP_StructInit(CMP_InitTypeDef * CMP_InitStruct) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Set the default configuration */
     CMP_InitStruct->CMP_Negative    = CMP_Negative_CMPR;
     CMP_InitStruct->CMP_Positive    = CMP_Positive_CMP0;
     CMP_InitStruct->CMP_TriggerMode = CMP_TriggerMode_Disable;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Set the default configuration */
 
     CMP_InitStruct->CMP_Negative    = CMP0_1_2NegativeSelect_CMPxN;
@@ -231,10 +231,10 @@ void CMP_StructInit(CMP_InitTypeDef * CMP_InitStruct) {
 /**
  * @brief  Enables or disables the specified CMP.
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -246,7 +246,7 @@ void CMP_StructInit(CMP_InitTypeDef * CMP_InitStruct) {
  * @retval None
  */
 void CMP_Cmd(CMP_TypeDef * CMPx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -259,7 +259,7 @@ void CMP_Cmd(CMP_TypeDef * CMPx, FunctionalState NewState) {
         /* Disable the CMP Function */
         CMPx->CMP_CFG &= (uint16_t)~CMP_CFG_CMPEN;
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -305,10 +305,10 @@ void CMP_Cmd(CMP_TypeDef * CMPx, FunctionalState NewState) {
 /**
  * @brief  Configure the CMP negative input channel
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -335,7 +335,7 @@ void CMP_Cmd(CMP_TypeDef * CMPx, FunctionalState NewState) {
  */
 void CMP_SetNegativeChannel(CMP_TypeDef *        CMPx,
                             CMP_Negative_TypeDef CMP_Negative_Channel) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -343,7 +343,7 @@ void CMP_SetNegativeChannel(CMP_TypeDef *        CMPx,
 
     CMPx->CMP_CFG &= (uint32_t)~CMP_CFG_CMPRF;
     CMPx->CMP_CFG |= (uint32_t)CMP_Negative_Channel;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
     assert_param(IS_CMP_Negative(CMP_Negative_Channel));
@@ -357,10 +357,10 @@ void CMP_SetNegativeChannel(CMP_TypeDef *        CMPx,
 /**
  * @brief  Get the CMP negative input channel
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -385,14 +385,14 @@ void CMP_SetNegativeChannel(CMP_TypeDef *        CMPx,
  *                  - CMPx_Negative_15D16VDD:The comparison voltage of CMP is 15/16VDD
  */
 CMP_Negative_TypeDef CMP_GetNegativeChannel(CMP_TypeDef * CMPx) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
 
     /* Get the CMP negative input channel type */
     return (CMP_Negative_TypeDef)(CMPx->CMP_CFG & CMP_CFG_CMPRF);
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     CMP_Negative_TypeDef ReadCMPRF;
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -407,21 +407,21 @@ CMP_Negative_TypeDef CMP_GetNegativeChannel(CMP_TypeDef * CMPx) {
 /**
  * @brief  Configure the CMP positive input channel
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
  *               - CMP_2: select the CMP2 peripheral
  *               - CMP3: select the CMP3 peripheral
  * @param  CMP_Positive_Channel[in]: CMP positive input channel selection.
- *                  SC32f10xx Selection
+ *                  SC32F10XX Selection
  * range(CMP_Positive_CMP0-CMP_Positive_CMP3,CMP_Positive_1_5V) SC32R803 Selection
- * range(CMP_Positive_CMP0-CMP_Positive_CMP1,CMP_Positive_1_5V,CMP_Positive_OP) SC32f12xx
+ * range(CMP_Positive_CMP0-CMP_Positive_CMP1,CMP_Positive_1_5V,CMP_Positive_OP) SC32F12XX
  * Selection range(CMP_Positive_CMP0-CMP_Positive_CMP3,CMP_Positive_1_5V,CMP_Positive_OP)
- * SC32f15xx Selection range(CMP0_Positive_CMP0P-CMP3_Positive_OP2O)
+ * SC32F15XX Selection range(CMP0_Positive_CMP0P-CMP3_Positive_OP2O)
  *                  - CMP_Positive_CMP0:Select CMP0 as the CMP input port
  *                  - CMP_Positive_CMP1:Select CMP1 as the CMP input port
  *                  - CMP_Positive_CMP2:Select CMP2 as the CMP input port
@@ -440,7 +440,7 @@ CMP_Negative_TypeDef CMP_GetNegativeChannel(CMP_TypeDef * CMPx) {
  */
 void CMP_SetPositiveChannel(CMP_TypeDef *        CMPx,
                             CMP_Positive_TypeDef CMP_Positive_Channel) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -448,7 +448,7 @@ void CMP_SetPositiveChannel(CMP_TypeDef *        CMPx,
 
     CMPx->CMP_CFG &= (uint32_t)~(CMP_CFG_CMPIS | CMP_CFG_CMPP);
     CMPx->CMP_CFG |= (uint32_t)CMP_Positive_Channel;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
     assert_param(IS_CMP_Positive(CMP_Positive_Channel));
@@ -466,21 +466,21 @@ void CMP_SetPositiveChannel(CMP_TypeDef *        CMPx,
 /**
  * @brief  Get the CMP positive input channel
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
  *               - CMP_2: select the CMP2 peripheral
  *               - CMP3: select the CMP3 peripheral
  * @param  CMP_Positive_Channel[in]: CMP positive input channel selection.
- *                  SC32f10xx Selection
+ *                  SC32F10XX Selection
  * range(CMP_Positive_CMP0-CMP_Positive_CMP3,CMP_Positive_1_5V) SC32R803 Selection
- * range(CMP_Positive_CMP0-CMP_Positive_CMP1,CMP_Positive_1_5V,CMP_Positive_OP) SC32f12xx
+ * range(CMP_Positive_CMP0-CMP_Positive_CMP1,CMP_Positive_1_5V,CMP_Positive_OP) SC32F12XX
  * Selection range(CMP_Positive_CMP0-CMP_Positive_CMP3,CMP_Positive_1_5V,CMP_Positive_OP)
- * SC32f15xx Selection range(CMP0_Positive_CMP0P-CMP3_Positive_OP2O)
+ * SC32F15XX Selection range(CMP0_Positive_CMP0P-CMP3_Positive_OP2O)
  *                  - CMP_Positive_CMP0:Select CMP0 as the CMP input port
  *                  - CMP_Positive_CMP1:Select CMP1 as the CMP input port
  *                  - CMP_Positive_CMP2:Select CMP2 as the CMP input port
@@ -497,14 +497,14 @@ void CMP_SetPositiveChannel(CMP_TypeDef *        CMPx,
  *                  - CMP3_Positive_OP2O:Select OP2Oas the CMP input port
  */
 CMP_Positive_TypeDef CMP_GetPositiveChannel(CMP_TypeDef * CMPx) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
 
     /* Get the CMP positive input channel type */
     return (CMP_Positive_TypeDef)(CMPx->CMP_CFG & (CMP_CFG_CMPIS | CMP_CFG_CMPP));
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     CMP_Positive_TypeDef ReadCMPPositive;
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -518,7 +518,7 @@ CMP_Positive_TypeDef CMP_GetPositiveChannel(CMP_TypeDef * CMPx) {
     return ReadCMPPositive;
 #endif
 }
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  Configure the CMP negative input channel
  * @param  CMPx[out]:
@@ -613,7 +613,7 @@ CMP_NegativeSelect_TypeDef CMP_GetNegativeSelection(CMP_TypeDef * CMPx) {
 @endverbatim
   * @{
   */
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  Checks whether the specified CMP it is set or not.
  * @param  CMPx[out]:
@@ -660,10 +660,10 @@ void CMP_ITConfig(CMP_TypeDef * CMPx, uint16_t CMP_IT, FunctionalState NewState)
 #endif
 /**
  * @brief  Return the cmp state (high or low) of the selected comparator.
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -692,7 +692,7 @@ void CMP_ITConfig(CMP_TypeDef * CMPx, uint16_t CMP_IT, FunctionalState NewState)
  * the negative terminal voltage
  */
 CMP_CMPSTA_TypeDef CMP_GetCMPSTA(CMP_TypeDef * CMPx) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     CMP_CMPSTA_TypeDef CMP_CMPSTA = CMP_CMPSTA_Low;
     /* Check the parameters */
@@ -705,7 +705,7 @@ CMP_CMPSTA_TypeDef CMP_GetCMPSTA(CMP_TypeDef * CMPx) {
     }
 
     return CMP_CMPSTA;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     CMP_CMPSTA_TypeDef CMP_CMPSTA;
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -746,20 +746,20 @@ CMP_CMPSTA_TypeDef CMP_GetCMPSTA(CMP_TypeDef * CMPx) {
 /**
  * @brief  Checks whether the specified CMP flag is set or not.
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
  *               - CMP_2: select the CMP2 peripheral
  *               - CMP3: select the CMP3 peripheral
  * @param  CMP_FLAG[in]:specifies the flag to check.
- *                SC32f10xx Selection range(CMP_FLAG_IF)
+ *                SC32F10XX Selection range(CMP_FLAG_IF)
  *                SC32R803 Selection range(CMP_FLAG_IF)
- *                SC32f12xx Selection range(CMP_FLAG_IF)
- *                SC32f15xx Selection range(CMP_FLAG_CMP0 - CMP_FLAG_CMP3)
+ *                SC32F12XX Selection range(CMP_FLAG_IF)
+ *                SC32F15XX Selection range(CMP_FLAG_CMP0 - CMP_FLAG_CMP3)
  *               - CMP_FLAG_IF: Interrupt flag
  *               - CMP_FLAG_CMP0: CMP0 flag
  *               - CMP_FLAG_CMP1: CMP1 flag
@@ -770,7 +770,7 @@ CMP_CMPSTA_TypeDef CMP_GetCMPSTA(CMP_TypeDef * CMPx) {
  *                  -  SET :Flag up.
  */
 FlagStatus CMP_GetFlagStatus(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ITStatus bitstatus = RESET;
     /* Check the parameters */
@@ -783,7 +783,7 @@ FlagStatus CMP_GetFlagStatus(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG) {
         bitstatus = RESET;
     }
     return bitstatus;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ITStatus bitstatus = RESET;
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
@@ -810,10 +810,10 @@ FlagStatus CMP_GetFlagStatus(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG) {
 /**
  * @brief  Clears the CMPx's pending flags.
  * @param  CMPx[out]:
- *                SC32f10xx Selection range(CMP)
+ *                SC32F10XX Selection range(CMP)
  *                SC32R803 Selection range(CMP)
- *                SC32f12xx Selection range(CMP)
- *                SC32f15xx Selection range(CMP_0 - CMP3)
+ *                SC32F12XX Selection range(CMP)
+ *                SC32F15XX Selection range(CMP_0 - CMP3)
  *               - CMP: Only CMP can be select the CMPx peripheral.
  *               - CMP_0: select the CMP0 peripheral
  *               - CMP_1: select the CMP1 peripheral
@@ -828,14 +828,14 @@ FlagStatus CMP_GetFlagStatus(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG) {
  * @retval None
  */
 void CMP_ClearFlag(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
 
     /* Clear the flags */
     CMPx->CMP_STS = (uint16_t)CMP_FLAG;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_CMP_ALL_PERIPH(CMPx));
     if (CMPx == CMP_0 || CMPx == CMP_1 || CMPx == CMP_2) {

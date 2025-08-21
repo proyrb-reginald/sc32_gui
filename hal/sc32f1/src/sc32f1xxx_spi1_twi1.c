@@ -24,7 +24,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 #    include "sc32f1xxx_spi1_twi1.h"
 
 /** @defgroup spi1_twi1_Group1 Configuration of the spi1_twi1 computation unit functions

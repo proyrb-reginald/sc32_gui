@@ -41,7 +41,7 @@
 #include "sc32f1xxx_btm.h"
 #include "sc32f1xxx_crc.h"
 
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
 #    include "sc32f1xxx_pwm.h"
 #    include "sc32f1xxx_ledpwm.h"
 #    include "sc32f1xxx_lcd.h"
@@ -58,18 +58,18 @@
 #    include "sc32f1xxx_qspi.h"
 #endif
 
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 #    include "sc32f1xxx_op.h"
 #endif
 
-#if defined(SC32f15xx)
+#if defined(SC32F15XX)
 #    include "sc32f1xxx_dac.h"
 #    include "sc32f1xxx_can.h"
 // #include "sc32f1xxx_spi1_twi1.h"
 #    include "sc32f1xxx_op.h"
 #endif
 
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 #    include "sc32f1xxx_temper.h"
 #    include "sc32f1xxx_vref.h"
 #    include "sc32f1xxx_qep.h"

@@ -24,7 +24,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
 #    include "sc32f1xxx_ledpwm.h"
 
 /** @defgroup LEDPWM_Exported_Functions_Group1 Configuration of the LEDPWM computation
@@ -60,7 +60,7 @@ void LEDPWM_StructInit(LEDPWM_InitTypeDef * LEDPWM_InitStruct) {
     /* Set the default configuration */
     LEDPWM_InitStruct->LEDPWM_AlignedMode = LEDPWM_AlignmentMode_Edge;
     LEDPWM_InitStruct->LEDPWM_Cycle       = 0x0000;
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     LEDPWM_InitStruct->LEDPWM_LowPolarityChannl = LEDPWMChannel_Less;
     LEDPWM_InitStruct->LEDPWM_OutputChannel     = LEDPWMChannel_Less;
 #    elif defined(SC32R803)
@@ -97,7 +97,7 @@ void LEDPWM_Init(LEDPWM_InitTypeDef * LEDPWM_InitStruct) {
 
     /* Write to LEDPWM LEDPWM_CON */
     LEDPWM->LEDPWM_CON = tmpreg;
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     /* Write to LEDPWM LEDPWM_CHN */
     LEDPWM->LEDPWM_CHN = LEDPWM_InitStruct->LEDPWM_OutputChannel;
 
@@ -205,10 +205,10 @@ uint8_t LEDPWM_GetCycle() {
 /**
  * @brief  Sets the LEDPWM Duty value.
  * @param  LEDPWM_Channel[in]: specifies the LEDPWM channel to check.
- *                SC32f10xx Selection range(LEDPWMChannel_Less,LEDPWM_Channel_0 -
+ *                SC32F10XX Selection range(LEDPWMChannel_Less,LEDPWM_Channel_0 -
  * LEDPWM_Channel_31,LEDPWM_Channel_All) SC32R803 Selection
  * range(LEDPWMChannel_Less,LED_RAMRegister_0 -
- * LED_RAMRegister_38,LEDPWM_Channel_32_38,LEDPWM_Channel_All) SC32f12xx Selection
+ * LED_RAMRegister_38,LEDPWM_Channel_32_38,LEDPWM_Channel_All) SC32F12XX Selection
  * range(LEDPWMChannel_Less,LEDPWM_Channel_0 - LEDPWM_Channel_31,LEDPWM_Channel_All)
  *                - LEDPWMChannel_Less : No channels are selected
  *                - LEDPWM_Channel_0:PMW output channel 0
@@ -260,7 +260,7 @@ void LEDPWM_SetDuty(LEDPWM_Channel_Typedef LEDPWM_Channel, uint8_t LEDPWM_Duty) 
     uint32_t tmpchannel;
     /* Check the parameters */
     assert_param(IS_LEDPWM_CHANNEL(LEDPWM_Channel));
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     tmpchannel = 1;
     for (tmpvalue = 0; tmpvalue < 32; tmpvalue++) {
         if ((uint32_t)LEDPWM_Channel & tmpchannel) {
@@ -290,10 +290,10 @@ void LEDPWM_SetDuty(LEDPWM_Channel_Typedef LEDPWM_Channel, uint8_t LEDPWM_Duty) 
 /**
  * @brief  Gets the LEDPWM Duty value.
  * @param  LEDPWM_Channel[in]:
- *                SC32f10xx Selection range(LEDPWMChannel_Less,LEDPWM_Channel_0 -
+ *                SC32F10XX Selection range(LEDPWMChannel_Less,LEDPWM_Channel_0 -
  * LEDPWM_Channel_31,LEDPWM_Channel_All) SC32R803 Selection
  * range(LEDPWMChannel_Less,LED_RAMRegister_0 -
- * LED_RAMRegister_38,LEDPWM_Channel_32_38,LEDPWM_Channel_All) SC32f12xx Selection
+ * LED_RAMRegister_38,LEDPWM_Channel_32_38,LEDPWM_Channel_All) SC32F12XX Selection
  * range(LEDPWMChannel_Less,LEDPWM_Channel_0 - LEDPWM_Channel_31,LEDPWM_Channel_All)
  *                - LEDPWMChannel_Less : No channels are selected
  *                - LEDPWM_Channel_0:PMW output channel 0
@@ -346,7 +346,7 @@ uint8_t LEDPWM_GetDuty(LEDPWM_Channel_Typedef LEDPWM_Channel) {
     assert_param(IS_LEDPWM_CHANNEL(LEDPWM_Channel));
 
     tmpchannel = 1;
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     for (tmpvalue = 0; tmpvalue < 32; tmpvalue++) {
         if ((uint32_t)LEDPWM_Channel & tmpchannel) {
             return (uint16_t)(LEDPWM->LEDPWM_DT[tmpvalue]);

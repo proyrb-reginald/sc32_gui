@@ -30,7 +30,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
 /* Includes ------------------------------------------------------------------*/
 #    include "sc32.h"
 #    include "sc32f1xxx_rcc.h"
@@ -189,7 +189,7 @@ typedef struct {
  * @}
  */
 #    define IS_OP_ALL_PERIPH(PERIPH) ((PERIPH) == OP)
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 /* Includes ------------------------------------------------------------------*/
 #    include "sc32f1xxx.h"
 #    include "sc32.h"
@@ -543,8 +543,8 @@ typedef struct {
 /* End of Struct -----------------------------------------------------*/
 #endif
 
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) ||                      \
-    defined(SC32f15xx) || defined(SC32R803) || defined(SC32R601)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) ||                      \
+    defined(SC32F15XX) || defined(SC32R803) || defined(SC32R601)
 /* OP Base functions ********************************************************/
 void OP_DeInit(OP_TypeDef * OPx);
 void OP_Init(OP_TypeDef * PGAx, OP_InitTypeDef * OP_InitStruct);
@@ -556,9 +556,9 @@ void OP_OffsetTrimConfig(OP_TypeDef * OPx,
                          uint32_t     OP_TrimValueL);
 void OP_GainSelection(OP_TypeDef * OPx, OP_PGAGain_TypeDef PGAGain);
 void OP_OutputSelection(OP_TypeDef * OPx, OP_Output_TypeDef OPOutput);
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
 ErrorStatus OP_OffsetSet(OP_TypeDef * OPx);
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 void OP_StructInit(OP_InitTypeDef * OP_InitStruet);
 void OP_InputSelection(OP_TypeDef * OPx, OP_InvertInput_TypeDef OPInvertInput);
 void OP_ReferenceVref(OP_TypeDef * OPx, OP_VREF_TypeDef OPVREF);

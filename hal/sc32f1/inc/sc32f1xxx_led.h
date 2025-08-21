@@ -90,7 +90,7 @@ typedef enum {
 /** @brief LED_Duty LED Duty
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     LED_Duty_1_8 =
         (uint32_t)(0x00U << DDR_CFG_DUTY_Pos), /*!< LED/LED display duty cycle: 1/8    */
@@ -136,7 +136,7 @@ typedef enum {
 /** @brief  LED_Channel
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     LED_Channel_Less = (int32_t)0x00000000U, /*!< PMW output channel 0 */
     LED_Channel_0    = (int32_t)0x00000001U, /*!< PMW output channel 0 */
@@ -222,7 +222,7 @@ typedef enum {
 /** @brief LED_RAMRegister
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     LED_RAMRegister_0  = 0x00000000U,
     LED_RAMRegister_1  = 0x00000001U,
@@ -337,7 +337,7 @@ typedef struct {
     uint32_t LED_ComPin; /*!< Specifies the Com Pin.
                                                                 Each bit represents a Seg
                             channel,Support 8 channels.*/
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t LED_SegPin; /*!< Specifies the Seg Pin.
                                                                 Each bit represents a Seg
                             channel,Support 28 channels.*/

@@ -45,10 +45,10 @@
 /**
  * @brief  DeInitializes the DMA peripheral
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -71,10 +71,10 @@ void DMA_DeInit(DMA_TypeDef * DMAx) {
  * @brief  Initialize the DMA according to the specified
  *         parameters in the DMA_InitTypeDef and create the associated handle.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -141,10 +141,10 @@ void DMA_StructInit(DMA_InitTypeDef * DMA_InitStruct) {
 /**
  * @brief  Enables or disables the specified DMAx.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -172,10 +172,10 @@ void DMA_Cmd(DMA_TypeDef * DMAx, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the specified DMAx Pause.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -202,10 +202,10 @@ void DMA_PauseCmd(DMA_TypeDef * DMAx, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the specified DMAx CHRQ.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -232,10 +232,10 @@ void DMA_CHRQCmd(DMA_TypeDef * DMAx, FunctionalState NewState) {
 /**
  * @brief  Reset DMA Channel
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -267,10 +267,10 @@ void DMA_ChannelReset(DMA_TypeDef * DMAx) {
 /**
  * @brief  Sets the source address for the specified DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -290,10 +290,10 @@ void DMA_SetSrcAddress(DMA_TypeDef * DMAx, uint32_t SrcAddress) {
 /**
  * @brief  Sets the destination address for the specified DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -312,10 +312,10 @@ void DMA_SetDstAddress(DMA_TypeDef * DMAx, uint32_t DstAddress) {
 /**
  * @brief  Sets the number of transfers for the specified DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -336,10 +336,10 @@ void DMA_SetCurrDataCounter(DMA_TypeDef * DMAx, uint32_t Counter) {
 /**
  * @brief  Gets the number of transfers for the specified DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -357,10 +357,10 @@ uint32_t DMA_GetCurrDataCounter(DMA_TypeDef * DMAx) {
 /**
  * @brief  The software triggers the transfer of the specified DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -393,10 +393,10 @@ void DMA_SoftwareTrigger(DMA_TypeDef * DMAx) {
 /**
  * @brief  Gets the transfer status of the specified DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -425,10 +425,10 @@ DMA_State_TypeDef DMA_GetStatus(DMA_TypeDef * DMAx) {
 /**
  * @brief  Enables or disables the specified DMAy Streamx interrupts.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -461,10 +461,10 @@ void DMA_ITConfig(DMA_TypeDef * DMAx, uint32_t DMA_IT, FunctionalState NewState)
 /**
  * @brief  Checks whether the specified DMAy Streamx flag is set or not.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -501,10 +501,10 @@ FlagStatus DMA_GetFlagStatus(DMA_TypeDef * DMAx, DMA_Flag_TypeDef DMA_FLAG) {
 /**
  * @brief  Clears the DMAy Streamx's pending flags.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals
@@ -528,10 +528,10 @@ void DMA_ClearFlag(DMA_TypeDef * DMAx, uint32_t DMA_FLAG) {
 /**
  * @brief  Enable or disable DMA Requests DMA.
  * @param  DMAx[out]:
- *                 SC32f10xx Selection range(DMA0 - DMA3)
+ *                 SC32F10XX Selection range(DMA0 - DMA3)
  *                 SC32R803 Selection range(DMA0 - DMA3)
- *                 SC32f12xx Selection range(DMA0 - DMA1)
- *                 SC32f15xx Selection range(DMA0 - DMA3)
+ *                 SC32F12XX Selection range(DMA0 - DMA1)
+ *                 SC32F15XX Selection range(DMA0 - DMA3)
  *                  - DMA0 :select DMA0 peripherals
  *                  - DMA1 :select DMA1 peripherals
  *                  - DMA2 :select DMA2 peripherals

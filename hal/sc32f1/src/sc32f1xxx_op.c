@@ -23,8 +23,8 @@
  ******************************************************************************
  */
 /* Includes ------------------------------------------------------------------*/
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) ||                      \
-    defined(SC32f15xx) || defined(SC32R803)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) ||                      \
+    defined(SC32F15XX) || defined(SC32R803)
 #    include "sc32f1xxx_op.h"
 /** @defgroup OP_Exported_Functions_Group1 Configuration of the OP computation unit
 functions
@@ -41,9 +41,9 @@ functions
 /**
  * @brief  DeInitialize the OP peripheral registers to their default reset values.
  * @param  OPx[out]:  can be select the OPx peripheral.
- *                SC32f12xx Selection range(OP)
+ *                SC32F12XX Selection range(OP)
  *                SC32R803  Selection range(OP)
- *                SC32f15xx Selection range(OP0 - OP2)
+ *                SC32F15XX Selection range(OP0 - OP2)
  *               - OP: OP can be select the OPx peripheral.
  *               - OP0: select the OP0 peripheral
  *               - OP1: select the OP1 peripheral
@@ -51,7 +51,7 @@ functions
  * @retval None
  */
 void OP_DeInit(OP_TypeDef * OPx) {
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
@@ -66,7 +66,7 @@ void OP_DeInit(OP_TypeDef * OPx) {
         /* Write to OPx OP_CON */
         OPx->OP_CON = (uint32_t)tmpreg;
     }
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F15XX)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
 
@@ -87,9 +87,9 @@ void OP_DeInit(OP_TypeDef * OPx) {
 /**
  * @brief  DeInitializes the OP peripheral
  * @param  OPx[out]:  can be select the OPx peripheral.
- *                SC32f12xx Selection range(OP)
+ *                SC32F12XX Selection range(OP)
  *                SC32R803 Selection range(OP)
- *                SC32f15xx Selection range(OP0 - OP2)
+ *                SC32F15XX Selection range(OP0 - OP2)
  *               - OP: OP can be select the OPx peripheral.
  *               - OP_0: select the OP0 peripheral
  *               - OP_1: select the OP1 peripheral
@@ -98,7 +98,7 @@ void OP_DeInit(OP_TypeDef * OPx) {
  * @retval None
  */
 void OP_Init(OP_TypeDef * OPx, OP_InitTypeDef * OP_InitStruct) {
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
@@ -123,7 +123,7 @@ void OP_Init(OP_TypeDef * OPx, OP_InitTypeDef * OP_InitStruct) {
 
     /* Write to OPx OP_CON */
     OPx->OP_CON = tmpreg;
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F15XX)
     uint32_t tmpreg;
 
     /* Check the parameters */
@@ -177,7 +177,7 @@ void OP_Init(OP_TypeDef * OPx, OP_InitTypeDef * OP_InitStruct) {
     }
 #    endif
 }
-#    if defined(SC32f15xx)
+#    if defined(SC32F15XX)
 /**
  * @brief  Fills each OP_StruetInit member with its default value.
  * @param  OP_InitStruet[out]: pointer to an OP_InitTypeDef structure that contains
@@ -200,9 +200,9 @@ void OP_StructInit(OP_InitTypeDef * OP_InitStruet) {
 /**
  * @brief  Enables or disables the specified OP peripheral.
  * @param  OPx[out]:  can be select the OPx peripheral.
- *                SC32f12xx Selection range(OP)
+ *                SC32F12XX Selection range(OP)
  *                SC32R803 Selection range(OP)
- *                SC32f15xx Selection range(OP0 - OP2)
+ *                SC32F15XX Selection range(OP0 - OP2)
  *               - OP: OP can be select the OPx peripheral.
  *               - OP_0: select the OP0 peripheral
  *               - OP_1: select the OP1 peripheral
@@ -213,7 +213,7 @@ void OP_StructInit(OP_InitTypeDef * OP_InitStruet) {
  * @retval None
  */
 void OP_Cmd(OP_TypeDef * OPx, FunctionalState NewState) {
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -225,7 +225,7 @@ void OP_Cmd(OP_TypeDef * OPx, FunctionalState NewState) {
         /* Disable the OP Function */
         OPx->OP_CON &= (uint16_t)~OP_CON_ENOP;
     }
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F15XX)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -256,9 +256,9 @@ void OP_Cmd(OP_TypeDef * OPx, FunctionalState NewState) {
 /**
  * @brief  Configure the trimming value of the OPAMP.
  * @param  OPx[out]:  can be select the OPx peripheral.
- *                SC32f12xx Selection range(OP)
+ *                SC32F12XX Selection range(OP)
  *                SC32R803 Selection range(OP)
- *                SC32f15xx Selection range(OP0 - OP2)
+ *                SC32F15XX Selection range(OP0 - OP2)
  *               - OP: OP can be select the OPx peripheral.
  *               - OP_0: select the OP0 peripheral
  *               - OP_1: select the OP1 peripheral
@@ -270,7 +270,7 @@ void OP_Cmd(OP_TypeDef * OPx, FunctionalState NewState) {
 void OP_OffsetTrimConfig(OP_TypeDef * OPx,
                          uint32_t     OP_TrimValueH,
                          uint32_t     OP_TrimValueL) {
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
     uint32_t tmpreg = 0;
 
     /* Check the parameters */
@@ -288,7 +288,7 @@ void OP_OffsetTrimConfig(OP_TypeDef * OPx,
 
     /*!< Write to OPAMPx_CSR register */
     OPx->OP_CON = tmpreg;
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F15XX)
     uint32_t tmpreg = 0;
 
     /* Check the parameters */
@@ -338,19 +338,19 @@ void OP_OffsetTrimConfig(OP_TypeDef * OPx,
 /**
  * @brief  OP gain selection.
  * @param  OPx[out]:  can be select the OPx peripheral.
- *                SC32f12xx Selection range(OP)
+ *                SC32F12XX Selection range(OP)
  *                SC32R803 Selection range(OP)
- *                SC32f15xx Selection range(OP0 - OP2)
+ *                SC32F15XX Selection range(OP0 - OP2)
  *               - OP: OP can be select the OPx peripheral.
  *               - OP_0: select the OP0 peripheral
  *               - OP_1: select the OP1 peripheral
  *               - OP_2: select the OP2 peripheral
  * @param  OPGain[in]: Gain multiple.
- *                SC32f12xx Selection
+ *                SC32F12XX Selection
  * range(OP_PGAGain_NonInvert8_Invert7,OP_PGAGain_NonInvert16_Invert15,OP_PGAGain_NonInvert32_Invert31,OP_PGAGain_NonInvert64_Invert63)
  *                SC32R803 Selection
  * range(OP_PGAGain_NonInvert8_Invert7,OP_PGAGain_NonInvert16_Invert15,OP_PGAGain_NonInvert32_Invert31,OP_PGAGain_NonInvert64_Invert63)
- *                SC32f15xx Selection
+ *                SC32F15XX Selection
  * range(OP_PGAGain_NonInvert4_Invert3,OP_PGAGain_NonInvert8_Invert7,OP_PGAGain_NonInvert16_Invert15,OP_PGAGain_NonInvert32_Invert31)
  *                  - OP_PGAGain_NonInvert4_Invert3:The OP inverting input gain is 4/3
  * times
@@ -365,14 +365,14 @@ void OP_OffsetTrimConfig(OP_TypeDef * OPx,
  * @retval None
  */
 void OP_GainSelection(OP_TypeDef * OPx, OP_PGAGain_TypeDef PGAGain) {
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
     assert_param(IS_OP_PGAGain(PGAGain));
 
     OPx->OP_CON &= ~(OP_CON_PGAGAIN);
     OPx->OP_CON |= PGAGain;
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F15XX)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
     assert_param(IS_OP_GAN(PGAGain));
@@ -396,9 +396,9 @@ void OP_GainSelection(OP_TypeDef * OPx, OP_PGAGain_TypeDef PGAGain) {
 /**
  * @brief  OP Output port selection.
  * @param  OPx[out]:  can be select the OPx peripheral.
- *                SC32f12xx Selection range(OP)
+ *                SC32F12XX Selection range(OP)
  *                SC32R803 Selection range(OP)
- *                SC32f15xx Selection range(OP0 - OP2)
+ *                SC32F15XX Selection range(OP0 - OP2)
  *               - OP: OP can be select the OPx peripheral.
  *               - OP_0: select the OP0 peripheral
  *               - OP_1: select the OP1 peripheral
@@ -409,14 +409,14 @@ void OP_GainSelection(OP_TypeDef * OPx, OP_PGAGain_TypeDef PGAGain) {
  * @retval None
  */
 void OP_OutputSelection(OP_TypeDef * OPx, OP_Output_TypeDef OPOutput) {
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
     assert_param(IS_OP_Output(OPOutput));
 
     OPx->OP_CON &= ~(OP_CON_OPOSEL);
     OPx->OP_CON |= OPOutput;
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F15XX)
     /* Check the parameters */
     assert_param(IS_OP_ALL_PERIPH(OPx));
     assert_param(IS_OP_OUTPUTPIN(OPOutput));
@@ -433,7 +433,7 @@ void OP_OutputSelection(OP_TypeDef * OPx, OP_Output_TypeDef OPOutput) {
     }
 #    endif
 }
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
 /**
  * @brief  Check whether the OP check value is written correctly
  * @retval Set state:
@@ -472,7 +472,7 @@ ErrorStatus OP_OffsetSet(OP_TypeDef * OPx) {
         return ERROR;
     }
 }
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  OP Non Invert Input port selection.
  * @param  OPx[out]:  can be select the OPx peripheral.

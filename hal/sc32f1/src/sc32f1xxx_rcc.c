@@ -68,7 +68,7 @@ void RCC_DeInit(void) {
     /* Reset RCC_CFG1 register */
     RCC->RCC_CFG1 = (uint32_t)0x00000000;
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     /* Reset PLL_CFG register */
     RCC->PLL_CFG = (uint32_t)0x00000000;
 #endif
@@ -97,7 +97,7 @@ ErrorStatus RCC_Unlock(uint8_t TimeLimit) {
         return ERROR;
     }
 }
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
 /**
  * @brief  Enables or disables the HXT clock.
  * @param  NewState[in]: new state of the HXT clock.
@@ -170,7 +170,7 @@ void RCC_LIRCCmd(FunctionalState NewState) {
     }
 }
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 /**
  * @brief  Enables or disables the PLL clock.
  * @param  NewState[in]: new state of the PLL clock.
@@ -211,8 +211,8 @@ void RCC_PLLRCmd(FunctionalState NewState) {
     }
 }
 #endif
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803) || \
+    defined(SC32F15XX) || defined(SC32R601)
 /**
  * @brief  Enables or disables the HIRCDIV1_EN clock.
  * @param  NewState[in]:new state of the HIRCDIV1 clock.
@@ -286,7 +286,7 @@ void RCC_APB2Cmd(FunctionalState NewState) {
     }
 }
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 /**
  * @brief Configures the PLL clock source
  * @param  RCC_PLLCLKSource[in] : PLL clock source.
@@ -332,13 +332,13 @@ void RCC_PLLConfig(RCC_PLLCLKSource_TypeDef RCC_PLLCLKSource,
 /**
  * @brief  Configures the RCC system clock source (SYSCLK).
  * @param  RCC_SYSCLKSource[in] : Systick clock source.
- *                         SC32f10xx Selection
+ *                         SC32F10XX Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HXT,RCC_SYSCLKSource_PLLRCLK,RCC_SYSCLKSource_LXT)
  *                         SC32R803 Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HXT,RCC_SYSCLKSource_HIRC_2,RCC_SYSCLKSource_LXT)
- *                         SC32f12xx Selection
+ *                         SC32F12XX Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HXT,RCC_SYSCLKSource_HIRC_2,RCC_SYSCLKSource_LXT)
- *                         SC32f15xx Selection
+ *                         SC32F15XX Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HIRC_2,RCC_SYSCLKSource_LXT)
  *                         - RCC_SYSCLKSource_HIRC:SYSCLK Source is HIRC
  *                         - RCC_SYSCLKSource_LIRC:SYSCLK Source is LIRC
@@ -379,15 +379,15 @@ ErrorStatus RCC_SYSCLKConfig(RCC_SYSCLKSource_TypeDef RCC_SYSCLKSource) {
         RCC->RCC_CFG0 |= RCC_CFG0_SYSCLKSW;
 
         if ((RCC->RCC_CFG0 & RCC_CFG0_SYSCLKSW) != RESET) {
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
             if (RCC_SYSCLKSource == RCC_SYSCLKSource_HIRC) {
                 tmpreg = RCC->RCC_CFG0;
                 tmpreg &= (uint32_t)~RCC_CFG0_WAIT_Msk;
                 tmpreg |= (uint32_t)RCC_WAIT_2;
                 RCC->RCC_CFG0 = tmpreg;
             }
-#elif defined(SC32f10xx)
+#elif defined(SC32F10XX)
             uint32_t Multioperator = 1;
             for (int i = 1; i <= ((RCC->PLL_CFG & 0x03) + 1); i++) {
                 Multioperator *= 2;
@@ -425,13 +425,13 @@ ErrorStatus RCC_SYSCLKConfig(RCC_SYSCLKSource_TypeDef RCC_SYSCLKSource) {
  * @brief  Returns the clock source used as system clock.
  * @param  None
  * @retval The clock source used as system clock.
- *                         SC32f10xx Selection
+ *                         SC32F10XX Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HXT,RCC_SYSCLKSource_PLLRCLK,RCC_SYSCLKSource_LXT)
  *                         SC32R803 Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HXT,RCC_SYSCLKSource_HIRC_2,RCC_SYSCLKSource_LXT)
- *                         SC32f12xx Selection
+ *                         SC32F12XX Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HXT,RCC_SYSCLKSource_HIRC_2,RCC_SYSCLKSource_LXT)
- *                         SC32f15xx Selection
+ *                         SC32F15XX Selection
  * range(RCC_SYSCLKSource_HIRC,RCC_SYSCLKSource_LIRC,RCC_SYSCLKSource_HIRC_2,RCC_SYSCLKSource_LXT)
  *                         - RCC_SYSCLKSource_HIRC:SYSCLK Source is HIRC
  *                         - RCC_SYSCLKSource_LIRC:SYSCLK Source is LIRC
@@ -444,10 +444,10 @@ RCC_SYSCLKSource_TypeDef RCC_GetSYSCLKSource(void) {
     if ((RCC->RCC_CFG0 & RCC_CFG0_SYSCLKSW) != RESET) {
         return ((RCC_SYSCLKSource_TypeDef)(RCC->RCC_CFG0 & RCC_CFG0_SYSCLKSEL));
     } else {
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
         return RCC_SYSCLKSource_HIRC;
-#elif defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                    \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                    \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
         return RCC_SYSCLKSource_HIRC_2;
 #endif
     }
@@ -543,19 +543,19 @@ void RCC_APB2Config(RCC_PCLK_TypeDef RCC_APB2CLK) {
 void RCC_GetClocksFreq(RCC_ClocksTypeDef * RCC_Clocks) {
     uint32_t tmp;
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     uint32_t pllp, pllsource, pllm, plln;
 #endif
 
     /* Get SYSCLK source -------------------------------------------------------*/
     if ((RCC->RCC_CFG0 & RCC_CFG0_SYSCLKSW) == RESET) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
         RCC_Clocks->SYSCLK_Frequency = HIRC_VALUE / 2;
 #endif
     } else {
         switch (RCC->RCC_CFG0 & RCC_CFG0_SYSCLKSEL) {
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
             case RCC_SYSCLKSource_HXT: /* HXT used as system clock source */
                 RCC_Clocks->SYSCLK_Frequency = HXT_VALUE;
                 break;
@@ -566,12 +566,12 @@ void RCC_GetClocksFreq(RCC_ClocksTypeDef * RCC_Clocks) {
             case RCC_SYSCLKSource_LXT: /* LXT used as system clock source */
                 RCC_Clocks->SYSCLK_Frequency = LXT_VALUE;
                 break;
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
             case RCC_SYSCLKSource_HIRC: /* HIRC used as system clock source */
                 RCC_Clocks->SYSCLK_Frequency = HIRC_VALUE;
                 break;
-#elif defined(SC32f10xx)
+#elif defined(SC32F10XX)
             case RCC_SYSCLKSource_PLLRCLK: /* PLL used as system clock source */
                 if ((RCC->PLL_CFG & PLL_CFG_PLLCLKSEL) ==
                     RESET) /* HXT used as PLL clock source */
@@ -638,7 +638,7 @@ void RCC_WaitConfig(RCC_Wait_TypeDef RCC_Wait) {
 @endverbatim
   * @{
   */
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 /**
  * @brief Configures the PWM0 clock source
  * @param  RCC_PWM0CLKSource[in] :
@@ -655,8 +655,8 @@ void RCC_PWM0CLKConfig(RCC_PWM0CLKSource_TypeDef RCC_PWM0CLKSource) {
     RCC->RCC_CFG1 |= (uint32_t)(RCC_PWM0CLKSource);
 }
 #endif
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f10xx)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F10XX)
 /**
  * @brief Configures the LCD/LED clock source
  * @param  RCC_LCDLEDCLKSource[in] :
@@ -692,13 +692,13 @@ void RCC_BTMCLKConfig(RCC_BTMCLKSource_TypeDef RCC_BTMCLKSource) {
 /**
  * @brief  Enables or disables the AHB Periph clock.
  * @param  RCC_AHBPeriph[in]: specifies the AHB1 peripheral to gates its clock.
- *                 SC32f10xx Selection
+ *                 SC32F10XX Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_ALL) SC32R803
  * Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_CAN,RCC_AHBPeriph_ALL)
- *                 SC32f12xx Selection
+ *                 SC32F12XX Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_ALL)
- * SC32f15xx Selection
+ * SC32F15XX Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_CAN,RCC_AHBPeriph_ALL)
  *                - RCC_AHBPeriph_DMA:Select peripheral DMA
  *                - RCC_AHBPeriph_CRC:Select peripheral CRC
@@ -724,13 +724,13 @@ void RCC_AHBPeriphClockCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the APB0 Periph clock.
  * @param  RCC_APB0Periph[in]: specifies the APB01 peripheral to gates its clock.
- *                 SC32f10xx Selection
+ *                 SC32F10XX Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM3,RCC_APB0Periph_TWI0,RCC_APB0Periph_SPI0,RCC_APB0Periph_UART0,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
  *                 SC32R803 Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM3,RCC_APB0Periph_QTWI0,RCC_APB0Periph_QTWI2,RCC_APB0Periph_UART0,RCC_APB0Periph_UART5,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
- *                 SC32f12xx Selection
+ *                 SC32F12XX Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM3,RCC_APB0Periph_TWI0,RCC_APB0Periph_SPI0,RCC_APB0Periph_UART0,RCC_APB0Periph_UART5,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
- *                 SC32f15xx Selection
+ *                 SC32F15XX Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM1,RCC_APB0Periph_TWI0,RCC_APB0Periph_SPI0,RCC_APB0Periph_UART0,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
  *                  - RCC_APB0Periph_TIM0:Select peripheral TIM0
  *                  - RCC_APB0Periph_TIM1:Select peripheral TIM1
@@ -764,13 +764,13 @@ void RCC_APB0PeriphClockCmd(uint32_t RCC_APB0Periph, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the APB1 Periph clock.
  * @param  RCC_APB1Periph[in]: specifies the APB1 peripheral to gates its clock.
- *             SC32f10xx Selection
+ *             SC32F10XX Selection
  * range(RCC_APB1Periph_TIM4-RCC_APB1Periph_TIM7,RCC_APB1Periph_TWI1,RCC_APB1Periph_UART2,RCC_APB1Periph_ALL)
  *             SC32R803 Selection
  * range(RCC_APB1Periph_TIM4-RCC_APB1Periph_TIM7,RCC_APB1Periph_QTWI1,QTWI2,RCC_APB1Periph_UART2,RCC_APB1Periph_UART4,RCC_APB1Periph_ALL)
- *             SC32f12xx Selection
+ *             SC32F12XX Selection
  * range(RCC_APB1Periph_TIM4-RCC_APB1Periph_TIM7,RCC_APB1Periph_TWI1,RCC_APB1Periph_SPI2,RCC_APB1Periph_UART2,RCC_APB1Periph_UART4,RCC_APB1Periph_ALL)
- *             SC32f15xx Selection
+ *             SC32F15XX Selection
  * range(RCC_APB1Periph_TIM2-RCC_APB1Periph_TIM3,RCC_APB1Periph_TWI1,RCC_APB1Periph_UART2,RCC_APB1Periph_ALL)
  *             - RCC_APB1Periph_TIM2:Select peripheral TIM2
  *             - RCC_APB1Periph_TIM3:Select peripheral TIM3
@@ -803,13 +803,13 @@ void RCC_APB1PeriphClockCmd(uint32_t RCC_APB1Periph, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the APB2 Periph clock.
  * @param  RCC_APB2Periph[in]: specifies the APB21 peripheral to gates its clock.
- *             SC32f10xx Selection
+ *             SC32F10XX Selection
  * range(RCC_APB2Periph_LEDPWM,RCC_APB2Periph_LCD_LED,RCC_APB2Periph_UART3,RCC_APB2Periph_ALL)
  *             SC32R803 Selection
  * range(RCC_APB2Periph_LEDPWM,RCC_APB2Periph_LCD_LED,RCC_APB2Periph_UART3,RCC_APB2Periph_ALL)
- *             SC32f12xx Selection
+ *             SC32F12XX Selection
  * range(RCC_APB2Periph_LEDPWM,RCC_APB2Periph_LCD_LED,RCC_APB2Periph_UART3,RCC_APB2Periph_ALL)
- *             SC32f15xx Selection
+ *             SC32F15XX Selection
  * range(RCC_APB2Periph_QEP0-RCC_APB2Periph_QEP1,RCC_APB2Periph_ADC)
  *                   - RCC_APB2Periph_LEDPWM:Select peripheral LEDPWM
  *                   - RCC_APB2Periph_LCD_LED:Select peripheral LCD_LED
@@ -837,13 +837,13 @@ void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState) {
 /**
  * @brief  Forces or releases AHB peripheral reset.
  * @param  RCC_AHBPeriph[in]: specifies the AHB1 peripheral to gates its clock.
- *                 SC32f10xx Selection
+ *                 SC32F10XX Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_ALL) SC32R803
  * Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_CAN,RCC_AHBPeriph_ALL)
- *                 SC32f12xx Selection
+ *                 SC32F12XX Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_ALL)
- * SC32f15xx Selection
+ * SC32F15XX Selection
  * range(RCC_AHBPeriph_DMA,RCC_AHBPeriph_CRC,RCC_AHBPeriph_IFB,RCC_AHBPeriph_CAN,RCC_AHBPeriph_ALL)
  *                - RCC_AHBPeriph_DMA:Select peripheral DMA
  *                - RCC_AHBPeriph_CRC:Select peripheral CRC
@@ -869,13 +869,13 @@ void RCC_AHBPeriphResetCmd(uint32_t RCC_AHBPeriph, FunctionalState NewState) {
 /**
  * @brief  Forces or releases APB0 peripheral reset.
  * @param  RCC_APB0Periph[in]: specifies the APB01 peripheral to gates its clock.
- *                 SC32f10xx Selection
+ *                 SC32F10XX Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM3,RCC_APB0Periph_TWI0,RCC_APB0Periph_SPI0,RCC_APB0Periph_UART0,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
  *                 SC32R803 Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM3,RCC_APB0Periph_QTWI0,RCC_APB0Periph_QTWI2,RCC_APB0Periph_UART0,RCC_APB0Periph_UART5,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
- *                 SC32f12xx Selection
+ *                 SC32F12XX Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM3,RCC_APB0Periph_TWI0,RCC_APB0Periph_SPI0,RCC_APB0Periph_UART0,RCC_APB0Periph_UART5,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
- *                 SC32f15xx Selection
+ *                 SC32F15XX Selection
  * range(RCC_APB0Periph_TIM0-RCC_APB0Periph_TIM1,RCC_APB0Periph_TWI0,RCC_APB0Periph_SPI0,RCC_APB0Periph_UART0,RCC_APB0Periph_UART1,RCC_APB0Periph_PWM0,RCC_APB0Periph_ALL)
  *                  - RCC_APB0Periph_TIM0:Select peripheral TIM0
  *                  - RCC_APB0Periph_TIM1:Select peripheral TIM1
@@ -909,13 +909,13 @@ void RCC_APB0PeriphResetCmd(uint32_t RCC_APB0Periph, FunctionalState NewState) {
 /**
  * @brief  Forces or releases APB1 peripheral reset.
  * @param  RCC_APB1Periph[in]: specifies the APB1 peripheral to gates its clock.
- *             SC32f10xx Selection
+ *             SC32F10XX Selection
  * range(RCC_APB1Periph_TIM4-RCC_APB1Periph_TIM7,RCC_APB1Periph_TWI1,RCC_APB1Periph_UART2,RCC_APB1Periph_ALL)
  *             SC32R803 Selection
  * range(RCC_APB1Periph_TIM4-RCC_APB1Periph_TIM7,RCC_APB1Periph_QTWI1,RCC_APB1Periph_QTWI2,RCC_APB1Periph_UART2,RCC_APB1Periph_UART4,RCC_APB1Periph_ALL)
- *             SC32f12xx Selection
+ *             SC32F12XX Selection
  * range(RCC_APB1Periph_TIM4-RCC_APB1Periph_TIM7,RCC_APB1Periph_TWI1,RCC_APB1Periph_SPI2,RCC_APB1Periph_UART2,RCC_APB1Periph_UART4,RCC_APB1Periph_ALL)
- *             SC32f15xx Selection
+ *             SC32F15XX Selection
  * range(RCC_APB1Periph_TIM2-RCC_APB1Periph_TIM3,RCC_APB1Periph_TWI1,RCC_APB1Periph_UART2,RCC_APB1Periph_ALL)
  *             - RCC_APB1Periph_TIM2:Select peripheral TIM2
  *             - RCC_APB1Periph_TIM3:Select peripheral TIM3
@@ -948,13 +948,13 @@ void RCC_APB1PeriphResetCmd(uint32_t RCC_APB1Periph, FunctionalState NewState) {
 /**
  * @brief  Forces or releases APB2 peripheral reset.
  * @param  RCC_APB2Periph[in]: specifies the APB21 peripheral to gates its clock.
- *             SC32f10xx Selection
+ *             SC32F10XX Selection
  * range(RCC_APB2Periph_LEDPWM,RCC_APB2Periph_LCD_LED,RCC_APB2Periph_UART3,RCC_APB2Periph_ALL)
  *             SC32R803 Selection
  * range(RCC_APB2Periph_LEDPWM,RCC_APB2Periph_LCD_LED,RCC_APB2Periph_UART3,RCC_APB2Periph_ALL)
- *             SC32f12xx Selection
+ *             SC32F12XX Selection
  * range(RCC_APB2Periph_LEDPWM,RCC_APB2Periph_LCD_LED,RCC_APB2Periph_UART3,RCC_APB2Periph_ALL)
- *             SC32f15xx Selection
+ *             SC32F15XX Selection
  * range(RCC_APB2Periph_QEP0-RCC_APB2Periph_QEP1,RCC_APB2Periph_ADC)
  *                   - RCC_APB2Periph_LEDPWM:Select peripheral LEDPWM
  *                   - RCC_APB2Periph_LCD_LED:Select peripheral LCD_LED
@@ -982,13 +982,13 @@ void RCC_APB2PeriphResetCmd(uint32_t RCC_APB2Periph, FunctionalState NewState) {
 /**
  * @brief  Forces or releases NMI peripheral reset.
  * @param  RCC_APB2Periph[in]: specifies the APB2 peripheral to reset its clock.
- *             SC32f10xx Selection
+ *             SC32F10XX Selection
  * range(RCC_NMIPeriph_CSS,RCC_NMIPeriph_CMP,RCC_NMIPeriph_INT0,RCC_NMIPeriph_ALL)
  * SC32R803 Selection
  * range(RCC_NMIPeriph_CSS,RCC_NMIPeriph_CMP,RCC_NMIPeriph_INT0,RCC_NMIPeriph_ALL,RCC_NMIPeriph_SRAMPE)
- *             SC32f12xx Selection
+ *             SC32F12XX Selection
  * range(RCC_NMIPeriph_CSS,RCC_NMIPeriph_CMP,RCC_NMIPeriph_INT0,RCC_NMIPeriph_ALL,RCC_NMIPeriph_SRAMPE)
- *             SC32f15xx Selection
+ *             SC32F15XX Selection
  * range(RCC_NMIPeriph_INT0,RCC_NMIPeriph_SRAMPE,RCC_NMIPeriph_OP2,RCC_NMIPeriph_OP1,RCC_NMIPeriph_CMP
  * RCC_NMIPeriph_MCMP0,RCC_NMIPeriph_ALL)
  *                  - RCC_NMIPeriph_CSS:Select peripheral CSS
@@ -1138,10 +1138,10 @@ void RCC_ITConfig(FunctionalState NewState) {
 /**
  * @brief  Checks whether the specified RCC flag is set or not.
  * @param  RCC_FLAG: specifies the flag to check.
- *                         SC32f10xx Selection
+ *                         SC32F10XX Selection
  * range(RCC_FLAG_CLKIF,RCC_FLAG_LOCKERR,RCC_FLAG_PLLRDY) SC32R803  Selection
- * range(RCC_FLAG_CLKIF,RCC_FLAG_SRAMPEIF) SC32f12xx Selection
- * range(RCC_FLAG_CLKIF,RCC_FLAG_SRAMPEIF) SC32f15xx Selection range(RCC_FLAG_SRAMPEIF)
+ * range(RCC_FLAG_CLKIF,RCC_FLAG_SRAMPEIF) SC32F12XX Selection
+ * range(RCC_FLAG_CLKIF,RCC_FLAG_SRAMPEIF) SC32F15XX Selection range(RCC_FLAG_SRAMPEIF)
  * SC32R601 Selection range(RCC_FLAG_SRAMPEIF)
  *                         - RCC_FLAG_CLKIF: Clock source exception flag
  *                         - RCC_FLAG_LOCKERR:PLL out-of-lock record flag
@@ -1161,7 +1161,7 @@ FlagStatus RCC_GetFlagStatus(uint32_t RCC_FLAG) {
     return (RESET);
 }
 
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 /**
  * @brief  Clears the RCCx's pending flags.
  * @param  RCC_FLAG[in]: specifies the flag bit to clear.

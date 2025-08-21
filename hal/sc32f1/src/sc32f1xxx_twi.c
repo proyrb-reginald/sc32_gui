@@ -40,10 +40,10 @@
 /**
  * @brief  DeInitialize the TWIx peripheral registers to their default reset values.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -51,8 +51,8 @@
  * @retval None
  */
 void TWI_DeInit(TWI_TypeDef * TWIx) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     if (TWIx == TWI0) {
@@ -61,7 +61,7 @@ void TWI_DeInit(TWI_TypeDef * TWIx) {
         /* Disable TWI0 reset state */
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_TWI0, DISABLE);
     } else if (TWIx == TWI1) {
-#    if !(defined(SC32f15xx) || defined(SC32R601))
+#    if !(defined(SC32F15XX) || defined(SC32R601))
         /* Enable TWI1 reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_TWI1, ENABLE);
         /* Disable TWI1 reset state */
@@ -119,10 +119,10 @@ void TWI_StructInit(TWI_InitTypeDef * TWI_InitStruct) {
  * @brief  Initializes the peripheral TWIx register with the parameters specified in
  * TWI_InitStruct
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -131,7 +131,7 @@ void TWI_StructInit(TWI_InitTypeDef * TWI_InitStruct) {
  * @retval None
  */
 void TWI_Init(TWI_TypeDef * TWIx, TWI_InitTypeDef * TWI_InitStruct) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
@@ -165,7 +165,7 @@ void TWI_Init(TWI_TypeDef * TWIx, TWI_InitTypeDef * TWI_InitStruct) {
 
     /* Write to TWIx TWI_ADD */
     TWIx->TWI_ADD = tmpreg;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
@@ -247,10 +247,10 @@ void TWI_Init(TWI_TypeDef * TWIx, TWI_InitTypeDef * TWI_InitStruct) {
 /**
  * @brief  Enables or disables the specified TWI peripheral.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -261,8 +261,8 @@ void TWI_Init(TWI_TypeDef * TWIx, TWI_InitTypeDef * TWI_InitStruct) {
  * @retval None
  */
 void TWI_Cmd(TWI_TypeDef * TWIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -290,10 +290,10 @@ void TWI_Cmd(TWI_TypeDef * TWIx, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the specified TWI acknowledge feature.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -304,8 +304,8 @@ void TWI_Cmd(TWI_TypeDef * TWIx, FunctionalState NewState) {
  * @retval None.
  */
 void TWI_AcknowledgeConfig(TWI_TypeDef * TWIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -333,10 +333,10 @@ void TWI_AcknowledgeConfig(TWI_TypeDef * TWIx, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the specified TWI general call feature.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -347,8 +347,8 @@ void TWI_AcknowledgeConfig(TWI_TypeDef * TWIx, FunctionalState NewState) {
  * @retval None
  */
 void TWI_GeneralCallCmd(TWI_TypeDef * TWIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -376,10 +376,10 @@ void TWI_GeneralCallCmd(TWI_TypeDef * TWIx, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the specified TWI Clock stretching.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -390,8 +390,8 @@ void TWI_GeneralCallCmd(TWI_TypeDef * TWIx, FunctionalState NewState) {
  * @retval None
  */
 void TWI_StretchClockConfig(TWI_TypeDef * TWIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -419,10 +419,10 @@ void TWI_StretchClockConfig(TWI_TypeDef * TWIx, FunctionalState NewState) {
 /**
  * @brief  Example Set the number of Nbytes.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -432,8 +432,8 @@ void TWI_StretchClockConfig(TWI_TypeDef * TWIx, FunctionalState NewState) {
  * @retval None
  */
 void TWI_SetNbytes(TWI_TypeDef * TWIx, uint8_t Nbytes) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
 
@@ -449,10 +449,10 @@ void TWI_SetNbytes(TWI_TypeDef * TWIx, uint8_t Nbytes) {
 /**
  * @brief  Obtain the number of remaining Nbytes.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -460,8 +460,8 @@ void TWI_SetNbytes(TWI_TypeDef * TWIx, uint8_t Nbytes) {
  * @retval Number of bytes to be sent or received.
  */
 uint8_t TWI_GetNbytes(TWI_TypeDef * TWIx) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     uint8_t tmpnum;
 
     /* Check the parameters */
@@ -496,10 +496,10 @@ uint8_t TWI_GetNbytes(TWI_TypeDef * TWIx) {
 /**
  * @brief  Generates TWIx communication START condition.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -510,8 +510,8 @@ uint8_t TWI_GetNbytes(TWI_TypeDef * TWIx) {
  * @retval None.
  */
 void TWI_GenerateSTART(TWI_TypeDef * TWIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -539,10 +539,10 @@ void TWI_GenerateSTART(TWI_TypeDef * TWIx, FunctionalState NewState) {
 /**
  * @brief  Generates TWIx communication STOP condition.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -553,8 +553,8 @@ void TWI_GenerateSTART(TWI_TypeDef * TWIx, FunctionalState NewState) {
  * @retval None.
  */
 void TWI_GenerateSTOP(TWI_TypeDef * TWIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -582,10 +582,10 @@ void TWI_GenerateSTOP(TWI_TypeDef * TWIx, FunctionalState NewState) {
 /**
  * @brief  Sends an address word to the specified slave TWI device.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -624,10 +624,10 @@ void TWI_Send7bitAddress(TWI_TypeDef *       TWIx,
 /**
  * @brief  Send a data through the peripheral TWIx.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -645,10 +645,10 @@ void TWI_SendData(TWI_TypeDef * TWIx, uint8_t Data) {
 /**
  * @brief  Returns the most recent data received via TWIx.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -669,18 +669,18 @@ uint8_t TWI_ReceiveData(TWI_TypeDef * TWIx) {
 /**
  * @brief  Configures the TIMx Pin Remap
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
  *           - TWI3: select the TWI2 peripheral.
  * @param  TWI_Remap[in]:specifies the TIM input remapping source.
- *                  SC32f10xx Selection range(TWI0:TWI_PinRemap_Default,TWI_PinRemap_A -
- * TWI_PinRemap_C TWI1:TWI_PinRemap_Default,TWI_PinRemap_A - TWI_PinRemap_B) SC32f12xx
- * Selection range(TWI_PinRemap_Default,TWI_PinRemap_A - TWI_PinRemap_E) SC32f15xx
+ *                  SC32F10XX Selection range(TWI0:TWI_PinRemap_Default,TWI_PinRemap_A -
+ * TWI_PinRemap_C TWI1:TWI_PinRemap_Default,TWI_PinRemap_A - TWI_PinRemap_B) SC32F12XX
+ * Selection range(TWI_PinRemap_Default,TWI_PinRemap_A - TWI_PinRemap_E) SC32F15XX
  * Selection range(TWI0:TWI_PinRemap_Default,TWI_PinRemap_A - TWI_PinRemap_C)
  *                  - TWI_PinRemap_Default:TIM Pin Remap  Disable
  *                  - TWI_PinRemap_A:TIM Pin Remap: Remap mode A
@@ -691,7 +691,7 @@ uint8_t TWI_ReceiveData(TWI_TypeDef * TWIx) {
  * @retval None
  */
 void TWI_PinRemapConfig(TWI_TypeDef * TWIx, TWI_PinRemap_TypeDef TWI_Remap) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
@@ -708,7 +708,7 @@ void TWI_PinRemapConfig(TWI_TypeDef * TWIx, TWI_PinRemap_TypeDef TWI_Remap) {
     tmpreg |= TWI_Remap;
 
     TWIx->TWI_CON = tmpreg;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
@@ -753,10 +753,10 @@ void TWI_PinRemapConfig(TWI_TypeDef * TWIx, TWI_PinRemap_TypeDef TWI_Remap) {
 /**
  * @brief  Enables or disables the specified TWI interrupts.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -786,19 +786,19 @@ void TWI_ITConfig(TWI_TypeDef * TWIx, uint16_t TWI_IT, FunctionalState NewState)
 /**
  * @brief  Checks whether the specified TWI flag is set or not.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
  *           - TWI3: select the TWI2 peripheral.
  * @param  TWI_FLAG[in]: specifies the flag to check.
- *                         SC32f10xx Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
+ *                         SC32F10XX Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
  * TWI_FLAG_GCA,TWI_FLAG_MSTR) SC32R803 Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
- * TWI_FLAG_GCA,TWI_FLAG_MSTR) SC32f12xx Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
- * TWI_FLAG_GCA,TWI_FLAG_MSTR) SC32f15xx Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
+ * TWI_FLAG_GCA,TWI_FLAG_MSTR) SC32F12XX Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
+ * TWI_FLAG_GCA,TWI_FLAG_MSTR) SC32F15XX Selection range(TWI_FLAG_TWIF,TWI_FLAG_TXRXnE
  * TWI_FLAG_GCA,TWI_FLAG_QTWIF)
  *                  - TWI_FLAG_TWIF:Interrupt flag
  *                  - TWI_FLAG_TXRXnE:Transmit/receive completion flag
@@ -825,10 +825,10 @@ FlagStatus TWI_GetFlagStatus(TWI_TypeDef * TWIx, TWI_FLAG_TypeDef TWI_FLAG) {
 /**
  * @brief  Clears the TWIx's pending flags.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -850,10 +850,10 @@ void TWI_ClearFlag(TWI_TypeDef * TWIx, TWI_FLAG_TypeDef TWI_FLAG) {
 /**
  * @brief  Get whether the specified TWI State Machine.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.
@@ -873,8 +873,8 @@ void TWI_ClearFlag(TWI_TypeDef * TWIx, TWI_FLAG_TypeDef TWI_FLAG) {
  *                  - TWI_Master_ReceivedaUACK
  */
 TWI_StateMachine_TypeDef TWI_GetStateMachine(TWI_TypeDef * TWIx) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_TWI_ALL_PERIPH(TWIx));
 
@@ -890,10 +890,10 @@ TWI_StateMachine_TypeDef TWI_GetStateMachine(TWI_TypeDef * TWIx) {
 /**
  * @brief  Enables or disables the TWI's DMA interface.
  * @param  TWIx[out]:where x can be 0 or 3 to select the TWIx peripheral.
- *           SC32f10xx Selection range(TWI0 - TWI1)
+ *           SC32F10XX Selection range(TWI0 - TWI1)
  *           SC32R803 Selection range(TWI0 - TWI3)
- *           SC32f12xx Selection range(TWI0 - TWI1)
- *           SC32f15xx Selection range(TWI0 - TWI1)
+ *           SC32F12XX Selection range(TWI0 - TWI1)
+ *           SC32F15XX Selection range(TWI0 - TWI1)
  *           - TWI0: select the TWI0 peripheral.
  *           - TWI1: select the TWI1 peripheral.
  *           - TWI2: select the TWI2 peripheral.

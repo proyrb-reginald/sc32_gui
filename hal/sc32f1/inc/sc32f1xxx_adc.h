@@ -55,11 +55,11 @@ extern "C" {
 typedef enum {
     ADC_ConvMode_Single =
         (uint16_t)(0x00 << ADC_CON_CONT_Pos), /*!<Single conversion mode */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ADC_ConvMode_Continuous =
         (uint16_t)(0x01 << ADC_CON_CONT_Pos), /*!<Continuous conversion mode */
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ADC_ConvMode_Sequence =
         (uint16_t)(0x01 << ADC_CON_CONT_Pos), /*!<Continuous sequence mode */
 #endif
@@ -75,7 +75,7 @@ typedef enum {
  * @{
  */
 typedef enum {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ADC_Prescaler_3CLOCK =
         (uint32_t)(0x04 << ADC_CON_LOWSP_Pos), /*!<The sampling time is 3 APB2 clocks */
@@ -85,7 +85,7 @@ typedef enum {
         (uint32_t)(0x06 << ADC_CON_LOWSP_Pos), /*!<The sampling time is 16 APB2 clocks */
     ADC_Prescaler_32CLOCK =
         (uint32_t)(0x07 << ADC_CON_LOWSP_Pos), /*!<The sampling time is 32 APB2 clocks */
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ADC_Prescaler_3CLOCK =
         (uint32_t)(0x00 << ADC_CON_LOWSP_Pos), /* The sampling time is 3   APB2 clocks */
     ADC_Prescaler_6CLOCK =
@@ -104,14 +104,14 @@ typedef enum {
         (uint32_t)(0x07 << ADC_CON_LOWSP_Pos), /* The sampling time is 480 APB2 clocks */
 #endif
 } ADC_Prescaler_TypeDef;
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 #    define IS_ADC_PRESCALER(PRESCALER)                                                  \
         (((PRESCALER) == ADC_Prescaler_3CLOCK) ||                                        \
          ((PRESCALER) == ADC_Prescaler_6CLOCK) ||                                        \
          ((PRESCALER) == ADC_Prescaler_16CLOCK) ||                                       \
          ((PRESCALER) == ADC_Prescaler_32CLOCK))
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 #    define IS_ADC_PRESCALER(PRESCALER)                                                  \
         (((PRESCALER) == ADC_Prescaler_3CLOCK) ||                                        \
          ((PRESCALER) == ADC_Prescaler_6CLOCK) ||                                        \
@@ -152,7 +152,7 @@ typedef enum {
 #endif
     ADC_Channel_15 = (uint16_t)0x0F, /*!< ADC input channel 15 */
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     ADC_Channel_16     = (uint16_t)0x10, /*!< ADC input channel 16 */
     ADC_Channel_VDD_D4 = (uint16_t)0x1F, /*!< ADC_CHANNEL VDD Divide 4 */
 #elif defined(SC32R803)
@@ -160,10 +160,10 @@ typedef enum {
     ADC_Channel_17     = (uint16_t)0x11, /*!< ADC input channel 17 */
     ADC_Channel_OP     = (uint16_t)0x1E, /*!< ADC_CHANNEL OP */
     ADC_Channel_VDD_D4 = (uint16_t)0x1F, /*!< ADC_CHANNEL VDD Divide 4 */
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     ADC_Channel_OP     = (uint16_t)0x1E, /*!< ADC_CHANNEL OP */
     ADC_Channel_VDD_D4 = (uint16_t)0x1F, /*!< ADC_CHANNEL VDD Divide 4 */
-#elif defined(SC32f15xx)
+#elif defined(SC32F15XX)
     ADC_Channel_VDD_D4 = (uint16_t)0x10, /*!< ADC_CHANNEL VDD Divide 4 */
     ADC_Channel_TEMP   = (uint16_t)0x11, /*!< ADC input channel TEMP */
 #elif defined(SC32R601)
@@ -172,18 +172,18 @@ typedef enum {
 #endif
 } ADC_ChannelTypedef;
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 #    define IS_ADC_CHANNEL(CHANNEL)                                                      \
         ((CHANNEL) <= ADC_Channel_16 || (CHANNEL) == ADC_Channel_VDD_D4)
 #elif defined(SC32R803)
 #    define IS_ADC_CHANNEL(CHANNEL)                                                      \
         ((CHANNEL) <= ADC_Channel_17 || (CHANNEL) == ADC_Channel_OP ||                   \
          (CHANNEL) == ADC_Channel_VDD_D4)
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 #    define IS_ADC_CHANNEL(CHANNEL)                                                      \
         ((CHANNEL) <= ADC_Channel_15 || (CHANNEL) == ADC_Channel_OP ||                   \
          (CHANNEL) == ADC_Channel_VDD_D4)
-#elif defined(SC32f15xx)
+#elif defined(SC32F15XX)
 #    define IS_ADC_CHANNEL(CHANNEL)                                                      \
         ((CHANNEL) <= ADC_Channel_15 || (CHANNEL) == ADC_Channel_TEMP ||                 \
          (CHANNEL) == ADC_Channel_VDD_D4)
@@ -194,7 +194,7 @@ typedef enum {
 /**
  * @}
  */
-#if defined(SC32f15xx)
+#if defined(SC32F15XX)
 /** @defgroup ADC_ChannelATypedef ADC input channel
  * @{
  */
@@ -317,15 +317,15 @@ typedef enum {
     ADC_EAIN_13   = (uint32_t)0x00002000, /*!< ADC port 13 */
     ADC_EAIN_14   = (uint32_t)0x00004000, /*!< ADC port 14 */
     ADC_EAIN_15   = (uint32_t)0x00008000, /*!< ADC port 15 */
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     ADC_EAIN_16  = (uint32_t)0x00010000, /*!< ADC port 16 */
     ADC_EAIN_All = (uint32_t)0x0001FFFF, /*!< ADC port All */
 #elif defined(SC32R803)
     ADC_EAIN_16  = (uint32_t)0x00010000, /*!< ADC port 16 */
     ADC_EAIN_17  = (uint32_t)0x00020000, /*!< ADC port 17 */
     ADC_EAIN_All = (uint32_t)0x0003FFFF, /*!< ADC port All */
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) ||                    \
-    defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) ||                    \
+    defined(SC32F15XX) || defined(SC32R601)
     ADC_EAIN_All = (uint32_t)0x0000FFFF, /*!< ADC port All */
 #endif
 } ADC_EAIN_Typedef;
@@ -339,7 +339,7 @@ typedef enum {
  * @{
  */
 typedef enum {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ADC_VREF_VDD =
         (uint32_t)(0x00 << ADC_CON_VREFS_Pos), /*!< ADC reference voltage is VDD    */
@@ -349,19 +349,19 @@ typedef enum {
         (uint32_t)(0x02 << ADC_CON_VREFS_Pos), /*!< ADC reference voltage is 1.024V */
     ADC_VREF_2_4V =
         (uint32_t)(0x03 << ADC_CON_VREFS_Pos) /*!< ADC reference voltage is 2.4V   */
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ADC_RefSource_VDD =
         (uint32_t)(0x00 << ADC_CON_REFSEL_Pos), /*!< ADC reference voltage is VDD */
     ADC_RefSource_VREF =
         (uint32_t)(0x01 << ADC_CON_REFSEL_Pos), /*!< ADC reference voltage is Vref */
 #endif
 } ADC_VREF_TypeDef;
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 #    define IS_ADC_VREF(VREF)                                                            \
         (((VREF) == ADC_VREF_VDD) || ((VREF) == ADC_VREF_2_048V) ||                      \
          ((VREF) == ADC_VREF_1_024V) || ((VREF) == ADC_VREF_2_4V))
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 #    define IS_ADC_VREF(VREF)                                                            \
         (((VREF) == ADC_RefSource_VDD) || ((VREF) == ADC_RefSource_VREF))
 #endif
@@ -373,10 +373,10 @@ typedef enum {
  * @{
  */
 typedef enum {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ADC_IT_ADCIF = (uint16_t)ADC_CON_INTEN, /*!< ADC Interrupt: ADC  Interrupt */
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ADC_IT_INTEN = (uint16_t)ADC_IDE_INTEN,     /*!< ADC interrupt request Flag */
     ADC_IT_EOCIE = (uint16_t)ADC_IDE_EOCIE,     /*!< ADC sequence 0 sampling + conversion
                                                    complete interrupt Flag */
@@ -396,10 +396,10 @@ typedef enum {
  * @{
  */
 typedef enum {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ADC_Flag_ADCIF = (uint8_t)ADC_STS_EOC, /*!< ADC Flag:ADC  Flag */
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ADC_Flag_ADCIF  = (uint8_t)ADC_STS_EOCIF,    /*!< ADC interrupt request Flag */
     ADC_Flag_EOSIF0 = (uint8_t)ADC_STS_EOSIF0,   /*!< ADC sequence 0 sampling + conversion
                                                     complete interrupt Flag */
@@ -410,12 +410,12 @@ typedef enum {
 #endif
     ADC_Flag_OVERRUN = (int)0x80000000UL, /*!< ADC overflow Flag */
 } ADC_FLAG_TypeDef;
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 #    define IS_ADC_FLAG(FLAG)                                                            \
         ((((FLAG) & (uint16_t)0xFFFE) == 0x00) && ((FLAG) != (uint16_t)0x0000))
 #    define IS_GET_ADC_FLAG(FLAG) ((FLAG) == ADC_Flag_ADCIF)
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 #    define IS_ADC_FLAG(FLAG)                                                            \
         ((((FLAG) & (uint32_t)0x7FFE) == 0x00) && ((FLAG) != (uint32_t)0x0000))
 
@@ -496,7 +496,7 @@ void       ADC_ITConfig(ADC_TypeDef * ADCx, uint16_t ADC_IT, FunctionalState New
 FlagStatus ADC_GetFlagStatus(ADC_TypeDef * ADCx, uint32_t ADC_FLAG);
 void       ADC_ClearFlag(ADC_TypeDef * ADCx, uint32_t ADC_FLAG);
 void       ADC_DMACmd(ADC_TypeDef * ADCx, FunctionalState NewState);
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 void ADC_SequenceChannelConfig(ADC_TypeDef *      ADCx,
                                ADC_SQRank_Typedef ADC_SQRank,
                                ADC_ChannelTypedef ADC_Channel);

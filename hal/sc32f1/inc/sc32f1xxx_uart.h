@@ -105,8 +105,8 @@ typedef enum {
     UART_IT_TX = (uint8_t)UART_IDE_TXIE,  /*!< UART Interrupt: Transmit Interrupt */
     UART_IT_RX = (uint8_t)UART_IDE_RXIE,  /*!< UART Interrupt: Receive Interrupt */
     UART_IT_WK = (uint8_t)UART_IDE_WKIE,  /*!< UART Interrupt: Wake up Interrupt */
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
     UART_IT_BK = (uint16_t)UART_IDE_BKIE,    /*!< UART Interrupt: Break Interrupt */
     UART_IT_SL = (uint16_t)UART_IDE_SLVHEIE, /*!< UART Interrupt: SLVHEIE Interrupt */
     UART_IT_SY = (uint16_t)UART_IDE_SYNCIE,  /*!< UART Interrupt: SVNCIE Interrupt */
@@ -125,8 +125,8 @@ typedef enum {
     UART_Flag_RX = (uint8_t)UART_STS_RXIF, /*!< UART Flag: Receive flag */
     UART_Flag_TX = (uint8_t)UART_STS_TXIF, /*!< UART Flag: Transmit flag */
     UART_Flag_WK = (uint8_t)UART_STS_WKIF, /*!< UART Flag: wakeup flag */
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
     UART_Flag_BK    = (uint16_t)UART_STS_BKIF,     /*!< UART Flag: Break flag */
     UART_Flag_SY    = (uint16_t)UART_STS_SYNCIF,   /*!< UART Flag: SYNCIE flag */
     UART_Flag_SLVYN = (uint16_t)UART_STS_SLVSYNIF, /*!< UART Flag: SLVYN flag */
@@ -160,8 +160,8 @@ typedef enum {
 /** @brief UART_LINMODE UART LIN MODE
  * @{
  */
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     UART_MASTER =
         (uint32_t)(0x00 << UART_CON_SLVEN_Pos |
@@ -204,25 +204,25 @@ typedef enum {
 /** @brief UART_Constants UART Constants
  * @{
  */
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 #    define IS_UART_ALL_PERIPH(PERIPH)                                                   \
         (((PERIPH) == UART0) || ((PERIPH) == UART1) || ((PERIPH) == UART2) ||            \
          ((PERIPH) == UART3))
 #endif
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 #    define IS_UART_ALL_PERIPH(PERIPH)                                                   \
         (((PERIPH) == UART0) || ((PERIPH) == UART1) || ((PERIPH) == UART2) ||            \
          ((PERIPH) == UART3) || ((PERIPH) == UART4) || ((PERIPH) == UART5))
 #endif
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 #    define IS_UART_ALL_PERIPH(PERIPH)                                                   \
         (((PERIPH) == UART0) || ((PERIPH) == UART1) || ((PERIPH) == UART2))
 #endif
 #define IS_UART_DMA_PERIPH(PERIPH) (((PERIPH) == UART0) || ((PERIPH) == UART1))
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 #    define IS_UART_REMAP_PERIPH(PERIPH) ((PERIPH) == UART2)
 #endif
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 #    define IS_UART_REMAP_PERIPH(PERIPH) ((PERIPH) == UART2 ) ||\
                                       ((PERIPH) == UART1) ||\
 																			((PERIPH) == UART5))
@@ -232,7 +232,7 @@ typedef enum {
         (((PERIPH) == UART0) || ((PERIPH) == UART1) || ((PERIPH) == UART2) ||            \
          ((PERIPH) == UART3) || ((PERIPH) == UART4) || ((PERIPH) == UART5))
 #endif
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 #    define IS_UART_REMAP_PERIPH(PERIPH) ((PERIPH) == UART0 ) ||\
                                       ((PERIPH) == UART1) ||\
 																			((PERIPH) == UART2))
@@ -267,8 +267,8 @@ typedef struct {
 /**
  * @}
  */
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
 #    define BIT(A, B) ((A >> B) & 0x01)
 #endif
 #ifdef PrintfEnable
@@ -307,8 +307,8 @@ void UART_ITConfig(UART_TypeDef * UARTx, uint16_t UART_IT, FunctionalState NewSt
 FlagStatus UART_GetFlagStatus(UART_TypeDef * UARTx, UART_FLAG_TypeDef UART_FLAG);
 void       UART_ClearFlag(UART_TypeDef * UARTx, uint16_t UART_FLAG);
 void UART_DMACmd(UART_TypeDef * UARTx, uint16_t UART_DMAReq, FunctionalState NewState);
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || \
-    defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || \
+    defined(SC32F15XX) || defined(SC32R601)
 void    UART_LIN_MODE(UART_TypeDef * UARTx, UART_LINMODE_TypeDef UART_LINMODE);
 void    UART_LIN_BKSIZE(UART_TypeDef * UARTx, UART_BKSIZE_TypeDef BKSIZE);
 void    UART_SendBreak(void);

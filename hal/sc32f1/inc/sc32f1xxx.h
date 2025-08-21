@@ -51,13 +51,13 @@ extern "C" {
 #        define SC32F1
 #    endif /* SC32F1 */
 
-#    if defined(SC32f10xx)
-#        include "SC32f10xx.h"
+#    if defined(SC32F10XX)
+#        include "SC32F10XX.h"
 #    elif defined(SC32R803)
 #        include "sc32r803.h"
-#    elif defined(SC32f12xx)
-#        include "SC32f12xx.h"
-#    elif defined(SC32f15xx)
+#    elif defined(SC32F12XX)
+#        include "SC32F12XX.h"
+#    elif defined(SC32F15XX)
 #        include "sc32f15Gx.h"
 #    elif defined(SC32R601)
 #        include "sc32r601.h"

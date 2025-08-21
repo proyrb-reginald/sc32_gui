@@ -126,7 +126,7 @@ boolType IAP_Unlock(void);
 void     IAP_Lock(void);
 void     IAP_WriteCmd(FunctionalState NewState);
 void     IAP_EraseSector(uint32_t IAP_Sector);
-#    if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 void IAP_EEPROMEraseSector(uint32_t IAP_Sector);
 #    endif
 boolType IAP_ProgramWord(uint32_t Address, uint32_t Data);
@@ -136,7 +136,7 @@ uint32_t IAP_ReadWord(uint32_t Address);
 uint16_t IAP_ReadHalfWord(uint32_t Address);
 uint8_t  IAP_ReadByte(uint32_t Address);
 uint16_t IAP_ProgramWordArray(uint32_t Address, uint32_t * ByteArray, uint16_t ArraySize);
-#    if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#    if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 uint16_t
 IAP_ProgramHalfWordArray(uint32_t Address, uint16_t * ByteArray, uint16_t ArraySize);
 uint16_t IAP_ProgramByteArray(uint32_t Address, uint8_t * ByteArray, uint16_t ArraySize);
@@ -148,7 +148,7 @@ uint16_t IAP_ReadByteArray(uint32_t Address, uint8_t * ByteArray, uint16_t Array
 
 /* FLASH Reset functions *****************************************/
 void IAP_SoftwareReset(IAP_BTLD_TypeDef IAP_BTLDType);
-#    if defined(SC32f15xx) || defined(SC32R601)
+#    if defined(SC32F15XX) || defined(SC32R601)
 /* Automatic continuous burning  functions *****************************************/
 void IAP_DMAENCmd(FunctionalState NewState);
 void IAP_CONTBurnlength(uint8_t Burnlength);

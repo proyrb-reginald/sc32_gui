@@ -51,7 +51,7 @@ extern "C" {
 /** @brief CMP_Positive CMP Positive
  * @{
  */
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 typedef enum {
     CMP_Positive_CMP0 =
         (uint16_t)(0x00U << CMP_CFG_CMPIS_Pos), /*!< Select CMP0 as the CMP input port */
@@ -92,7 +92,7 @@ typedef enum {
          ((POSITIVE) == CMP_Positive_CMP2) || ((POSITIVE) == CMP_Positive_CMP3) ||       \
          ((POSITIVE) == CMP_Positive_OP) || ((POSITIVE) == CMP_Positive_1_5V))
 
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     CMP_Positive_CMP0 =
         (uint16_t)(0x00U << CMP_CFG_CMPIS_Pos), /*!< Select CMP0 as the CMP input port */
@@ -113,7 +113,7 @@ typedef enum {
         (((POSITIVE) == CMP_Positive_CMP0) || ((POSITIVE) == CMP_Positive_CMP1) ||       \
          ((POSITIVE) == CMP_Positive_CMP2) || ((POSITIVE) == CMP_Positive_CMP3) ||       \
          ((POSITIVE) == CMP_Positive_1_6V) || ((POSITIVE) == CMP_Positive_OP))
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     CMP0_Positive_CMP0P =
         (uint16_t)(0x00U << CMPX_CFG_CMPPS_Pos), /*!< CMP0 Select CMP0P as the CMP
@@ -144,7 +144,7 @@ typedef enum {
 /**
  * @}
  */
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     CMP0_1_2NegativeSelect_CMPxN =
         (uint16_t)(0x00U << CMPX_CFG_CMPNS_Pos), /*!<  Select CMPxN as the CMP0_1_2
@@ -195,7 +195,7 @@ typedef enum {
 /** @brief CMP_Negative CMP Negative
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 typedef enum {
 
@@ -310,7 +310,7 @@ typedef enum {
 } CMP_FLAG_TypeDef;
 
 #    define IS_CMP_FLAG(FLAG) ((FLAG) == CMP_FLAG_IF)
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     CMP3_Negative_1D16CMP_VREF =
         (uint16_t)(0x01U
@@ -535,10 +535,10 @@ typedef enum {
  */
 /* End of enumerations -----------------------------------------------------*/
 
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 #    define IS_CMP_ALL_PERIPH(PERIPH) ((PERIPH) == CMP)
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 #    define IS_CMP_ALL_PERIPH(PERIPH)                                                    \
         (((PERIPH) == CMP_0) || ((PERIPH) == CMP_1) || ((PERIPH) == CMP_2) ||            \
          ((PERIPH) == CMP3))
@@ -555,7 +555,7 @@ typedef enum {
 /** @brief CMP Time base Configuration Structure definition
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 typedef struct {
     uint16_t CMP_Negative; /*!< This member configures CMP NEGATIVE.
@@ -571,7 +571,7 @@ typedef struct {
                                  CMP_TriggerMode_TypeDef. */
 
 } CMP_InitTypeDef;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 /** @defgroup CMP  base Configuration Structure definition
  * @{
  */
@@ -629,7 +629,7 @@ CMP_Positive_TypeDef CMP_GetPositiveChannel(CMP_TypeDef * CMPx);
 CMP_CMPSTA_TypeDef CMP_GetCMPSTA(CMP_TypeDef * CMPx);
 FlagStatus         CMP_GetFlagStatus(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG);
 void               CMP_ClearFlag(CMP_TypeDef * CMPx, CMP_FLAG_TypeDef CMP_FLAG);
-#if defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F15XX) || defined(SC32R601)
 void CMP_NegativeSelection(CMP_TypeDef * CMPx, CMP_NegativeSelect_TypeDef NegativeSelect);
 CMP_NegativeSelect_TypeDef CMP_GetNegativeSelection(CMP_TypeDef * CMPx);
 void CMP_ITConfig(CMP_TypeDef * CMPx, uint16_t CMP_IT, FunctionalState NewState);

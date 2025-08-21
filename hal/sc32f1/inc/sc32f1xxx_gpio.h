@@ -90,8 +90,8 @@ typedef enum { Bit_RESET = 0, Bit_SET } BitAction;
 /**
  * @}
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
 #    define IS_GPIO_ALL_PERIPH(PERIPH)                                                   \
         (((PERIPH) == GPIOA) || ((PERIPH) == GPIOB) || ((PERIPH) == GPIOC))
 #elif defined(SC32R803)

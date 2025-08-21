@@ -195,8 +195,8 @@ typedef enum {
         ((uint32_t)0x0004U << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: UART1 TX */
     DMA_Request_UART1_RX =
         ((uint32_t)0x0005U << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: UART1 RX */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     DMA_Request_SPI0_TX =
         ((uint32_t)0x000CU << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: SPI0 TX */
     DMA_Request_SPI0_RX =
@@ -248,7 +248,7 @@ typedef enum {
         ((uint32_t)0x0032U
          << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: TIM6 Rising edge capture  */
     DMA_Request_ADC = ((uint32_t)0x003BU << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: ADC */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
     DMA_Request_DMA0 =
         ((uint32_t)0x003CU << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: DMA0    */
     DMA_Request_DMA1 =
@@ -257,7 +257,7 @@ typedef enum {
         ((uint32_t)0x003EU << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: DMA2    */
     DMA_Request_DMA3 =
         ((uint32_t)0x003FU << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: DMA3    */
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     DMA_Request_DMA0 =
         ((uint32_t)0x003EU << DMA_CFG_REQSRC_Pos), /*!< DMA Requtest: DMA0    */
     DMA_Request_DMA1 =
@@ -413,11 +413,11 @@ typedef struct {
 /* End of struct -----------------------------------------------------*/
 
 /* Private macros ------------------------------------------------------------*/
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 #    define IS_DMA_ALL_PERIPH(PERIPH)                                                    \
         (((PERIPH) == DMA0) || ((PERIPH) == DMA1) || ((PERIPH) == DMA2) ||               \
          ((PERIPH) == DMA3))
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 #    define IS_DMA_ALL_PERIPH(PERIPH) (((PERIPH) == DMA0) || ((PERIPH) == DMA1))
 #endif
 /**

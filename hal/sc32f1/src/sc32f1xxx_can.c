@@ -24,7 +24,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#if defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 #    include "sc32f1xxx_can.h"
 
 /** @defgroup CAN_Group1 Initialization and Configuration

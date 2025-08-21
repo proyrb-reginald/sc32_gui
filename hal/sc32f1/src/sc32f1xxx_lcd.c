@@ -24,7 +24,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
 #    include "sc32f1xxx_lcd.h"
 
 /** @defgroup LCD_Group1 Initialization and Configuration functions
@@ -100,7 +100,7 @@ void LCD_Init(LCD_InitTypeDef * LCD_InitStruct) {
     LCD_LED->DDR_CFG = tmpreg;
 
     /* Write to LCD_LEDx SEG_EN */
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     LCD_LED->SEG_EN = LCD_InitStruct->LCD_SegPin;
 #    elif defined(SC32R803)
     LCD_LED->SEG_EN0 = (uint32_t)LCD_InitStruct->LCD_SegPin;
@@ -184,9 +184,9 @@ void LCD_COMConfig(LCD_COMEN_Typedef COMSelect, FunctionalState NewState) {
 /**
  * @brief  Set the SEG pin
  * @param  SEGSelect[in]:Output channel selection.
- *                  SC32f10xx Selection range(LCD_Channel_0 - LCD_Channel_27)
+ *                  SC32F10XX Selection range(LCD_Channel_0 - LCD_Channel_27)
  *                  SC32R803 Selection range(LCD_Channel_0 - LCD_Channel_34)
- *                  SC32f12xx Selection range(LCD_Channel_0 - LCD_Channel_27)
+ *                  SC32F12XX Selection range(LCD_Channel_0 - LCD_Channel_27)
  *                     - LCD_Channel_0:select LCD_Channel_0
  *                     - LCD_Channel_1:select LCD_Channel_1
  *                     - LCD_Channel_2:select LCD_Channel_1
@@ -221,7 +221,7 @@ void LCD_COMConfig(LCD_COMEN_Typedef COMSelect, FunctionalState NewState) {
  * @retval None
  */
 void LCD_SEGConfig(uint64_t SEGSelect, FunctionalState NewState) {
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t temp;
     temp = LCD_LED->SEG_EN;
     if (NewState == ENABLE) {
@@ -249,9 +249,9 @@ void LCD_SEGConfig(uint64_t SEGSelect, FunctionalState NewState) {
 /**
  * @brief  Writes data to SEG RAM.
  * @param  LCD_RAMRegister[in]:LCD RAM register selection.
- *                  SC32f10xx Selection range(LCD_RAMRegister_0 - LCD_RAMRegister_27)
+ *                  SC32F10XX Selection range(LCD_RAMRegister_0 - LCD_RAMRegister_27)
  *                  SC32R803 Selection range(LCD_RAMRegister_0 - LCD_RAMRegister_34)
- *                  SC32f12xx Selection range(LCD_RAMRegister_0 - LCD_RAMRegister_27)
+ *                  SC32F12XX Selection range(LCD_RAMRegister_0 - LCD_RAMRegister_27)
  *                   - LCD_RAMRegister_0:select LCD_RAMRegister_0
  *                   - LCD_RAMRegister_1:select LCD_RAMRegister_1
  *                   - LCD_RAMRegister_2:select LCD_RAMRegister_2

@@ -43,9 +43,9 @@
  * @brief  Deinitializes the GPIOx peripheral registers to their default reset
  *         values.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -70,10 +70,10 @@ void GPIO_DeInit(GPIO_TypeDef * GPIOx) {
  * @brief  Initializes the peripheral GPIOx register with the parameters specified in
  * GPIO_InitStruct.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -121,10 +121,10 @@ void GPIO_Init(GPIO_TypeDef * GPIOx, GPIO_InitTypeDef * GPIO_InitStruct) {
 /**
  * @brief  Sets the I/O driver level
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -196,10 +196,10 @@ void GPIO_SetDriveLevel(GPIO_TypeDef *          GPIOx,
 /**
  * @brief  Reads the specified input port pin.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -235,10 +235,10 @@ uint16_t GPIO_ReadData(GPIO_TypeDef * GPIOx) {
 /**
  * @brief  Reads the selected data port bits.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -285,10 +285,10 @@ BitAction GPIO_ReadDataBit(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin) {
 /**
  * @brief  Sets the selected data port bits.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -332,10 +332,10 @@ void GPIO_SetBits(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin) {
 /**
  * @brief  Clears the specified data port bit.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -381,10 +381,10 @@ void GPIO_ResetBits(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin) {
 /**
  * @brief  Writes data to the specified GPIO data port.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -403,10 +403,10 @@ void GPIO_Write(GPIO_TypeDef * GPIOx, uint16_t PortVal) {
 /**
  * @brief  Sets or clears the specified data port bit.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral
@@ -453,10 +453,10 @@ void GPIO_WriteBit(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, BitAction BitVal) {
 /**
  * @brief  Toggles the specified GPIO pins.
  * @param  GPIOx[in]: where x can be to select the GPIO peripheral.
- *                SC32f10xx Selection range(GPIOA - GPIOC)
+ *                SC32F10XX Selection range(GPIOA - GPIOC)
  *                SC32R803 Selection range(GPIOA - GPIOD)
- *                SC32f12xx Selection range(GPIOA - GPIOC)
- *                SC32f15xx Selection range(GPIOA - GPIOC)
+ *                SC32F12XX Selection range(GPIOA - GPIOC)
+ *                SC32F15XX Selection range(GPIOA - GPIOC)
  *               - GPIOA: select the GPIOA peripheral
  *               - GPIOB: select the GPIOB peripheral
  *               - GPIOC: select the GPIOC peripheral

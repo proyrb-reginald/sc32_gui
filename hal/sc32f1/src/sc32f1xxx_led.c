@@ -24,7 +24,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
 #    include "sc32f1xxx_led.h"
 
 /** @defgroup LED_Group1 Initialization and Configuration functions
@@ -88,7 +88,7 @@ void LED_Init(LED_InitTypeDef * LED_InitStruct) {
     LCD_LED->DDR_CFG |= (uint32_t)LED_InitStruct->LED_Duty;
 
     /* Write to LCD_LEDx SEG_EN */
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     LCD_LED->SEG_EN = LED_InitStruct->LED_SegPin;
 #    elif defined(SC32R803)
     LCD_LED->SEG_EN0 = (uint32_t)LED_InitStruct->LED_SegPin;
@@ -150,9 +150,9 @@ void LED_Cmd(FunctionalState NewState) {
 /**
  * @brief  Writes data to SEG RAM.
  * @param  LED_RAMRegister[in]:Output channel selection.
- *                  SC32f10xx Selection range(LED_RAMRegister_0 - LED_RAMRegister_27)
+ *                  SC32F10XX Selection range(LED_RAMRegister_0 - LED_RAMRegister_27)
  *                  SC32R803 Selection range(LED_RAMRegister_0 - LED_RAMRegister_34)
- *                  SC32f12xx Selection range(LED_RAMRegister_0 - LED_RAMRegister_27)
+ *                  SC32F12XX Selection range(LED_RAMRegister_0 - LED_RAMRegister_27)
  *                     - LED_RAMRegister_0:select LED_RAMRegister_0
  *                     - LED_RAMRegister_1:select LED_RAMRegister_1
  *                     - LED_RAMRegister_2:select LED_RAMRegister_2
@@ -216,9 +216,9 @@ void LED_COMConfig(LED_COMEN_Typedef COMSelect, FunctionalState NewState) {
 /**
  * @brief  Set the SEG pin
  * @param  SEGSelect[in]:Output channel selection.
- *                  SC32f10xx Selection range(LED_Channel_0 - LED_Channel_27)
+ *                  SC32F10XX Selection range(LED_Channel_0 - LED_Channel_27)
  *                  SC32R803 Selection range(LED_Channel_0 - LED_Channel_34)
- *                  SC32f12xx Selection range(LED_Channel_0 - LED_Channel_27)
+ *                  SC32F12XX Selection range(LED_Channel_0 - LED_Channel_27)
  *                     - LED_Channel_0:select LED_Channel_0
  *                     - LED_Channel_1:select LED_Channel_1
  *                     - LED_Channel_2:select LED_Channel_2
@@ -260,7 +260,7 @@ void LED_COMConfig(LED_COMEN_Typedef COMSelect, FunctionalState NewState) {
  * @retval None
  */
 void LED_SEGConfig(uint64_t SEGSelect, FunctionalState NewState) {
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t temp;
     temp = LCD_LED->SEG_EN;
     if (NewState == ENABLE) {

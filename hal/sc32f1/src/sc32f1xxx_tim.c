@@ -40,10 +40,10 @@
 /**
  * @brief  DeInitializes the TIM peripheral
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803  Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -64,7 +64,7 @@ void TIM_DeInit(TIM_TypeDef * TIMx) {
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_TIM1, ENABLE);
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_TIM1, DISABLE);
     }
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
     else if (TIMx == TIM2) {
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_TIM2, ENABLE);
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_TIM2, DISABLE);
@@ -83,7 +83,7 @@ void TIM_DeInit(TIM_TypeDef * TIMx) {
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM3, DISABLE);
     }
 #endif
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
     else if (TIMx == TIM4) {
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM4, ENABLE);
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_TIM4, DISABLE);
@@ -104,10 +104,10 @@ void TIM_DeInit(TIM_TypeDef * TIMx) {
  * @brief  Initializes the time base unit of TIMx according to the parameter specified in
  *TIM_TimeBaseInitStruct
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -169,10 +169,10 @@ void TIM_TimeBaseStructInit(TIM_TimeBaseInitTypeDef * TIM_TimeBaseInitStruct) {
 /**
  * @brief  Enables or disables the specified TIM peripheral.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -203,10 +203,10 @@ void TIM_Cmd(TIM_TypeDef * TIMx, FunctionalState NewState) {
 /**
  * @brief  Set the Register value of TIMx Counter
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -229,10 +229,10 @@ void TIM_SetCounter(TIM_TypeDef * TIMx, uint32_t Counter) {
 /**
  * @brief  Gets the TIMx Counter value.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -254,10 +254,10 @@ uint32_t TIM_GetCounter(TIM_TypeDef * TIMx) {
 /**
  * @brief  Sets the TIMx Autoreload Register value
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -280,10 +280,10 @@ void TIM_SetAutoreload(TIM_TypeDef * TIMx, uint16_t Autoreload) {
 /**
  * @brief  Get the value of TIMx automatic reload.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -305,10 +305,10 @@ uint16_t TIM_GetAutoreload(TIM_TypeDef * TIMx) {
 /**
  * @brief  Sets the TIMx Clock per-division value.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -343,10 +343,10 @@ void TIM_SetPerscaler(TIM_TypeDef * TIMx, TIM_Prescaler_TypeDef TIM_Perscaler) {
 /**
  * @brief  Gets the TIMx Clock per-division value.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -392,10 +392,10 @@ TIM_Prescaler_TypeDef TIM_GetPrescaler(TIM_TypeDef * TIMx) {
  * @brief  Initializes the input capture mode for TIMx according to the parameters
  *specified in TIM_IC_InitStruct.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -412,14 +412,14 @@ void TIM_ICInit(TIM_TypeDef * TIMx, TIM_IC_InitTypeDef * TIM_IC_InitStruct) {
     uint16_t tmpreg;
     /* Check the parameters */
 
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
     defined(SC32R806) || defined(SC32R803)
     if (TIM_IC_InitStruct->TIM_FICPIN == TIM_FICPin_TnEx)
         assert_param(IS_TIM_TNEX_PERIPH(TIMx));
     if ((TIM_IC_InitStruct->TIM_FICPIN == TIM_FICPin_Tn) ||
         (TIM_IC_InitStruct->TIM_RICPIN == TIM_RICPin_Tn))
         assert_param(IS_TIM_TN_PERIPH(TIMx));
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     assert_param(IS_TIM_ALL_PERIPH(TIMx));
 #endif
 
@@ -429,7 +429,7 @@ void TIM_ICInit(TIM_TypeDef * TIMx, TIM_IC_InitTypeDef * TIM_IC_InitStruct) {
     /* Clear EXENR, EXENF and EXENX SPR bits */
     tmpreg &= ~(TIM_CON_EXENR | TIM_CON_EXENF | TIM_CON_FSEL | TIM_CON_EXENX);
 
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     if (TIMx == TIM0) {
         if (TIM_IC_InitStruct->TIM_FICPIN != TIM_FICPin_Tn) {
             tmpreg |= TIM_IC_InitStruct->TIM_FICPIN;
@@ -438,8 +438,8 @@ void TIM_ICInit(TIM_TypeDef * TIMx, TIM_IC_InitTypeDef * TIM_IC_InitStruct) {
     } else {
         tmpreg |= (TIM_IC_InitStruct->TIM_FICPIN | TIM_IC_InitStruct->TIM_RICPIN);
     }
-#elif defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                    \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                    \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
 
     tmpreg |= (TIM_IC_InitStruct->TIM_FICPIN | TIM_IC_InitStruct->TIM_RICPIN);
 #endif
@@ -462,10 +462,10 @@ void TIM_ICStructInit(TIM_IC_InitTypeDef * TIM_IC_InitStruct) {
 /**
  * @brief  Enables or disables the capture function of TIMx
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -496,10 +496,10 @@ void TIM_ICCmd(TIM_TypeDef * TIMx, FunctionalState NewState) {
 /**
  * @brief  Gets the TIMx Input Rising Capture value.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -521,10 +521,10 @@ uint32_t TIM_GetRisingCapture(TIM_TypeDef * TIMx) {
 /**
  * @brief  Gets the TIMx Input Failing Capture value.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -563,10 +563,10 @@ uint32_t TIM_GetFailingCapture(TIM_TypeDef * TIMx) {
  * @brief  Initializes the PWM mode of TIMx according to the parameters specified in
  *TIM_PWM_InitStruct
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -582,14 +582,14 @@ uint32_t TIM_GetFailingCapture(TIM_TypeDef * TIMx) {
 void TIM_PWMInit(TIM_TypeDef * TIMx, TIM_PWM_InitTypeDef * TIM_PWM_InitStruct) {
     uint32_t tmpreg;
     /* Check the parameters */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     if ((TIM_PWM_InitStruct->TIM_PWMLowPolarityChannl == TIM_PWMChannel_PWMA) ||
         (TIM_PWM_InitStruct->TIM_PWMOutputChannl == TIM_PWMChannel_PWMA))
         assert_param(IS_TIM_TN_PERIPH(TIMx));
     if ((TIM_PWM_InitStruct->TIM_PWMLowPolarityChannl == TIM_PWMChannel_PWMB) ||
         (TIM_PWM_InitStruct->TIM_PWMOutputChannl == TIM_PWMChannel_PWMB))
         assert_param(IS_TIM_TNEX_PERIPH(TIMx));
-#elif defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
     assert_param(IS_TIM_ALL_PERIPH(TIMx));
 #endif
     /* Get the TIMx TIM_CON value */
@@ -600,7 +600,7 @@ void TIM_PWMInit(TIM_TypeDef * TIMx, TIM_PWM_InitTypeDef * TIM_PWM_InitStruct) {
         (uint32_t)~(TIM_CON_EPWMNA | TIM_CON_EPWMNB | TIM_CON_INVNA | TIM_CON_INVNB);
 
     /* TIM0 has no TnPWMA and TIM1,2,3,4,5,6,7 has no TnPWMB */
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     /* TIM0 has no TnPWMA and TIM1,2,3,4,5,6,7 has no TnPWMB */
     if (((TIMx == TIM0) &&
          (TIM_PWM_InitStruct->TIM_PWMOutputChannl != TIM_PWMChannel_PWMA) &&
@@ -613,8 +613,8 @@ void TIM_PWMInit(TIM_TypeDef * TIMx, TIM_PWM_InitTypeDef * TIM_PWM_InitStruct) {
         tmpreg |= (uint32_t)((TIM_PWM_InitStruct->TIM_PWMOutputChannl << (13U)) |
                              (TIM_PWM_InitStruct->TIM_PWMLowPolarityChannl) << (11U));
     }
-#elif defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                    \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                    \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     {
         /* Set EPWMNA and EPWMNB bit to PWM Output Channl value */
         /* Set INVNA and INVNB bit to PWM Low Polarity Channl value */
@@ -643,10 +643,10 @@ void TIM_PWMStructInit(TIM_PWM_InitTypeDef * TIM_PWM_InitStruct) {
 /**
  * @brief  TIMx PWM duty cycle Settings.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -665,7 +665,7 @@ void TIM_PWMStructInit(TIM_PWM_InitTypeDef * TIM_PWM_InitStruct) {
 void TIM_PWMSetDuty(TIM_TypeDef *          TIMx,
                     TIM_PWMChannel_Typedef TIM_PWMChannel,
                     uint16_t               PWM_DutyValue) {
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     /* Check the parameters */
     if (TIM_PWMChannel == TIM_PWMChannel_PWMA)
         assert_param(IS_TIM_TN_PERIPH(TIMx));
@@ -680,8 +680,8 @@ void TIM_PWMSetDuty(TIM_TypeDef *          TIMx,
     else if ((TIMx == TIM0) && (TIM_PWMChannel == TIM_PWMChannel_PWMB)) {
         TIMx->TIM_PDTB_FCAP = PWM_DutyValue;
     }
-#elif defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                    \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                    \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
     assert_param(IS_TIM_ALL_PERIPH(TIMx));
 
     if (TIM_PWMChannel == TIM_PWMChannel_PWMA) {
@@ -696,10 +696,10 @@ void TIM_PWMSetDuty(TIM_TypeDef *          TIMx,
 /**
  * @brief  Get the PWM duty cycle of TIMx
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -748,10 +748,10 @@ uint16_t TIM_PWMGetDuty(TIM_TypeDef * TIMx, TIM_PWMChannel_Typedef TIM_PWMChanne
 /**
  * @brief  Enables or disables TIMx's programmable clock output
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -798,9 +798,9 @@ void TIM_ClockOutputCmd(TIM_TypeDef * TIMx, FunctionalState NewState) {
 /**
  * @brief  Configure the remapping of TIM2/3/7 pins
  * @param  TIMx: where x can be 2,3 and 7 to select the TIM peripheral.
- *					SC32f10xx Selection range(TIM2   TIM3   TIM7)
+ *					SC32F10XX Selection range(TIM2   TIM3   TIM7)
  *          SC32R803 Selection range(TIM2   TIM3   TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -810,7 +810,7 @@ void TIM_ClockOutputCmd(TIM_TypeDef * TIMx, FunctionalState NewState) {
  *          This parameter can be one of TIM_PinRemap_TypeDef.
  * @retval None
  */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 void TIM_PinRemapConfig(TIM_TypeDef * TIMx, TIM_PinRemap_TypeDef TIM_Remap) {
     uint32_t tmpreg;
     /* Check the parameters */
@@ -844,10 +844,10 @@ void TIM_PinRemapConfig(TIM_TypeDef * TIMx, TIM_PinRemap_TypeDef TIM_Remap) {
 /**
  * @brief  Enables or disables the specified TIM interrupts.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -884,10 +884,10 @@ void TIM_ITConfig(TIM_TypeDef * TIMx, uint16_t TIM_IT, FunctionalState NewState)
 /**
  * @brief  Checks whether the specified TIM flag is set or not.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -921,10 +921,10 @@ FlagStatus TIM_GetFlagStatus(TIM_TypeDef * TIMx, TIM_Flag_TypeDef TIM_FLAG) {
 /**
  * @brief  Clears the TIMx's pending flags.
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2
@@ -950,10 +950,10 @@ void TIM_ClearFlag(TIM_TypeDef * TIMx, uint16_t TIM_FLAG) {
 /**
  * @brief  Enables or disables DMA requests for the specified TIMx
  * @param  TIMx[out]: where x can be to select the TIMx peripheral.
- *					SC32f10xx Selection range(TIM0 - TIM7)
+ *					SC32F10XX Selection range(TIM0 - TIM7)
  *          SC32R803 Selection range(TIM0 - TIM7)
- *					SC32f12xx Selection range(TIM0 - TIM7)
- *					SC32f15xx Selection range(TIM0 - TIM3)
+ *					SC32F12XX Selection range(TIM0 - TIM7)
+ *					SC32F15XX Selection range(TIM0 - TIM3)
  *                  - TIM0:Timer peripheral select TIM0
  *                  - TIM1:Timer peripheral select TIM1
  *                  - TIM2:Timer peripheral select TIM2

@@ -103,7 +103,7 @@ typedef enum {
 /** @brief LEDPWM_Channel
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     LEDPWMChannel_Less = 0x00000000UL,          /*!< No channels are selected */
     LEDPWM_Channel_0   = (int32_t)0x00000001UL, /*!< PMW output channel 0 */

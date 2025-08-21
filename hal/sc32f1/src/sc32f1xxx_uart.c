@@ -41,10 +41,10 @@ UART_TypeDef * printf_uart = NULL;
 /**
  * @brief  DeInitializes the UART peripheral
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -72,7 +72,7 @@ void UART_DeInit(UART_TypeDef * UARTx) {
         /* Release UART2 from reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_UART2, DISABLE);
     }
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
     else if (UARTx == UART3) {
         /* Enable UART3 reset state */
         RCC_APB2PeriphResetCmd(RCC_APB2Periph_UART3, ENABLE);
@@ -80,7 +80,7 @@ void UART_DeInit(UART_TypeDef * UARTx) {
         RCC_APB2PeriphResetCmd(RCC_APB2Periph_UART3, DISABLE);
     }
 #endif
-#if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     if (UARTx == UART4) {
         /* Enable UART0 reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_UART4, ENABLE);
@@ -99,10 +99,10 @@ void UART_DeInit(UART_TypeDef * UARTx) {
  * @brief  Initializes the UARTx peripheral according to
  *         the specified parameters in the UART_InitStruct.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -142,10 +142,10 @@ void UART_Init(UART_TypeDef * UARTx, UART_InitTypeDef * UART_InitStruct) {
 /**
  * @brief  Enables or disables the specified UART peripheral.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -174,10 +174,10 @@ void UART_TXCmd(UART_TypeDef * UARTx, FunctionalState NewState) {
 /**
  * @brief  Enables or disables the specified UART peripheral.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -221,10 +221,10 @@ void UART_RXCmd(UART_TypeDef * UARTx, FunctionalState NewState) {
 /**
  * @brief  Transmits single data through the UARTx peripheral.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -245,10 +245,10 @@ void UART_SendData(UART_TypeDef * UARTx, uint16_t Data) {
 /**
  * @brief  Returns the most recent received data by the UARTx peripheral.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -283,10 +283,10 @@ uint16_t UART_ReceiveData(UART_TypeDef * UARTx) {
 /**
  * @brief  Configures the TIMx Pin Remap
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -302,7 +302,7 @@ void UART_PinRemapConfig(UART_TypeDef * UARTx, UART_PinRemap_TypeDef UART_Remap)
     uint32_t tmpreg;
 
     /* Check the parameters */
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
     if (UARTx == UART2) {
         tmpreg = UARTx->UART_CON;
 
@@ -322,8 +322,8 @@ void UART_PinRemapConfig(UART_TypeDef * UARTx, UART_PinRemap_TypeDef UART_Remap)
 
     UARTx->UART_CON = tmpreg;
 
-#elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) ||                    \
-    defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) ||                    \
+    defined(SC32F15XX) || defined(SC32R601)
     tmpreg = UARTx->UART_CON;
 
     tmpreg &= (uint32_t)(~UART_CON_SPOS);
@@ -352,10 +352,10 @@ void UART_PinRemapConfig(UART_TypeDef * UARTx, UART_PinRemap_TypeDef UART_Remap)
 /**
  * @brief  Enables or disables the specified UART interrupts.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -363,11 +363,11 @@ void UART_PinRemapConfig(UART_TypeDef * UARTx, UART_PinRemap_TypeDef UART_Remap)
  *                  - UART4:UART peripheral select UART4
  *                  - UART5:UART peripheral select UART5
  * @param  UART_IT[in]:specifies the UART interrupts sources to be enabled or disabled.
- *                   SC32f10xx Selection range(UART_IT_EN,UART_IT_TX,UART_IT_RX)
+ *                   SC32F10XX Selection range(UART_IT_EN,UART_IT_TX,UART_IT_RX)
  *                   SC32R803 Selection
- * range(UART_IT_EN,UART_IT_TX,UART_IT_RX,UART_IT_BK,UART_IT_SL,UART_IT_SV) SC32f12xx
+ * range(UART_IT_EN,UART_IT_TX,UART_IT_RX,UART_IT_BK,UART_IT_SL,UART_IT_SV) SC32F12XX
  * Selection range(UART_IT_EN,UART_IT_TX,UART_IT_RX,UART_IT_BK,UART_IT_SL,UART_IT_SV)
- * SC32f15xx Selection
+ * SC32F15XX Selection
  * range(UART_IT_EN,UART_IT_TX,UART_IT_RX,UART_IT_BK,UART_IT_SL,UART_IT_SV)
  *                  - UART_IT_EN:UART Interrupt
  *                  - UART_IT_TX:Transmit Interrupt
@@ -397,10 +397,10 @@ void UART_ITConfig(UART_TypeDef * UARTx, uint16_t UART_IT, FunctionalState NewSt
 /**
  * @brief  Checks whether the specified UART flag is set or not.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -408,10 +408,10 @@ void UART_ITConfig(UART_TypeDef * UARTx, uint16_t UART_IT, FunctionalState NewSt
  *                  - UART4:UART peripheral select UART4
  *                  - UART5:UART peripheral select UART5
  * @param  UART_FLAG[in]: specifies the flag to check.
- *                   SC32f10xx Selection range(UART_Flag_RX,UART_Flag_TX)
+ *                   SC32F10XX Selection range(UART_Flag_RX,UART_Flag_TX)
  *                   SC32R803 Selection
- * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY) SC32f12xx Selection
- * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY) SC32f15xx Selection
+ * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY) SC32F12XX Selection
+ * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY) SC32F15XX Selection
  * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY)
  *                  - UART_Flag_RX:Receive flag
  *                  - UART_Flag_TX:Transmit flag
@@ -436,10 +436,10 @@ FlagStatus UART_GetFlagStatus(UART_TypeDef * UARTx, UART_FLAG_TypeDef UART_FLAG)
 /**
  * @brief  Clears the UARTx's pending flags.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -447,12 +447,12 @@ FlagStatus UART_GetFlagStatus(UART_TypeDef * UARTx, UART_FLAG_TypeDef UART_FLAG)
  *                  - UART4:UART peripheral select UART4
  *                  - UART5:UART peripheral select UART5
  * @param  UART_FLAG[in]: specifies the flag bit to clear.
- *                   SC32f10xx Selection range(UART_Flag_RX,UART_Flag_TX)
+ *                   SC32F10XX Selection range(UART_Flag_RX,UART_Flag_TX)
  *                   SC32R803 Selection
  * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY,UART_Flag_SLVYN,UART_Flag_SLVHE)
- *                   SC32f12xx Selection
+ *                   SC32F12XX Selection
  * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY,UART_Flag_SLVYN,UART_Flag_SLVHE)
- *                   SC32f15xx Selection
+ *                   SC32F15XX Selection
  * range(UART_Flag_RX,UART_Flag_TX,UART_Flag_BK,UART_Flag_SY,UART_Flag_SLVYN,UART_Flag_SLVHE)
  *                  - UART_Flag_RX:Receive flag
  *                  - UART_Flag_TX:Transmit flag
@@ -473,10 +473,10 @@ void UART_ClearFlag(UART_TypeDef * UARTx, uint16_t UART_FLAG) {
 /**
  * @brief  Clears the UARTx's pending flags.
  * @param  UARTx[out]:  where x can be to select the UARTx peripheral.
- *                   SC32f10xx Selection range(UART0 - UART3)
+ *                   SC32F10XX Selection range(UART0 - UART3)
  *                   SC32R803 Selection range(UART0 - UART5)
- *                   SC32f12xx Selection range(UART0 - UART5)
- *                   SC32f15xx Selection range(UART0 - UART2)
+ *                   SC32F12XX Selection range(UART0 - UART5)
+ *                   SC32F15XX Selection range(UART0 - UART2)
  *                  - UART0:UART peripheral select UART0
  *                  - UART1:UART peripheral select UART1
  *                  - UART2:UART peripheral select UART2
@@ -505,8 +505,8 @@ void UART_DMACmd(UART_TypeDef * UARTx, uint16_t UART_DMAReq, FunctionalState New
     }
 }
 /* End of UART_Group3.	*/
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) ||                      \
-    defined(SC32f15xx) || defined(SC32R803) || defined(SC32R601)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) ||                      \
+    defined(SC32F15XX) || defined(SC32R803) || defined(SC32R601)
 
 /** @defgroup UART_Group5 Interrupts, LIN functions
  *  @brief

@@ -181,21 +181,21 @@ typedef enum {
 /** @brief TIM_PinRemap TIM Pin Remap
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     TIM_PinRemap_Default =
         (uint32_t)(0x00 << TIM_CON_SPOS_Pos), /*!< TIM Pin Remap: Disable */
     TIM_PinRemap_A =
         (uint32_t)(0x01 << TIM_CON_SPOS_Pos), /*!< TIM  Pin Remap: Remap mode A*/
-#    if defined(SC32f15xx) || defined(SC32R601)
+#    if defined(SC32F15XX) || defined(SC32R601)
     TIM_PinRemap_B =
         (uint32_t)(0x02 << TIM_CON_SPOS_Pos), /*!< TIM  Pin Remap: Remap mode B*/
 #    endif
 } TIM_PinRemap_TypeDef;
-#    if defined(SC32f10xx) || defined(SC32R803)
+#    if defined(SC32F10XX) || defined(SC32R803)
 #        define IS_TIM_PINREMAP(REMAP)                                                   \
             (((REMAP) == TIM_PinRemap_Default) || ((REMAP) == TIM_PinRemap_A))
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 #        define IS_TIM_PINREMAP(REMAP)                                                   \
             (((REMAP) == TIM_PinRemap_Default) || ((REMAP) == TIM_PinRemap_A) ||         \
              ((REMAP) == TIM_PinRemap_B))
@@ -260,13 +260,13 @@ typedef enum {
 /** @brief TIM_Constants TIM Constants
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
 #    define IS_TIM_ALL_PERIPH(PERIPH)                                                    \
         (((PERIPH) == TIM0) || ((PERIPH) == TIM1) || ((PERIPH) == TIM2) ||               \
          ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5) ||               \
          ((PERIPH) == TIM6) || ((PERIPH) == TIM7))
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
 #    define IS_TIM_ALL_PERIPH(PERIPH)                                                    \
         (((PERIPH) == TIM0) || ((PERIPH) == TIM1) || ((PERIPH) == TIM2) ||               \
          ((PERIPH) == TIM3))
@@ -274,8 +274,8 @@ typedef enum {
         (((PERIPH) == TIM0) || ((PERIPH) == TIM1) || ((PERIPH) == TIM2) ||               \
          ((PERIPH) == TIM3))
 #endif
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
 #    define IS_TIM_TN_PERIPH(PERIPH)                                                     \
         (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) ||               \
          ((PERIPH) == TIM4) || ((PERIPH) == TIM5) || ((PERIPH) == TIM6) ||               \
@@ -298,7 +298,7 @@ typedef enum {
 #    define IS_TIM_DMA_PERIPH(PERIPH)                                                    \
         (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM6))
 #endif
-#if defined(SC32f10xx)
+#if defined(SC32F10XX)
 #    define IS_TIM_REMAP_PERIPH(PERIPH)                                                  \
         (((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM7))
 #elif defined(SC32R803)
@@ -423,7 +423,7 @@ uint16_t TIM_PWMGetDuty(TIM_TypeDef * TIMx, TIM_PWMChannel_Typedef TIM_PWMChanne
 void TIM_ClockOutputCmd(TIM_TypeDef * TIMx, FunctionalState NewState);
 
 /* Pin Remap functions**********************************************/
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 void TIM_PinRemapConfig(TIM_TypeDef * TIMx, TIM_PinRemap_TypeDef TIM_Remap);
 #endif
 /* Interrupts, DMA and flags management functions

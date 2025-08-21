@@ -51,8 +51,8 @@ extern "C" {
 /** @brief TWI_Ack TWI Ack State
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     TWI_Ack_Disable = (uint16_t)(0X00U << TWI_CON_AA_Pos), /*!< TWI Ack:Disable    */
     TWI_Ack_Enable  = (uint16_t)(0X01U << TWI_CON_AA_Pos), /*!< TWI Ack:Enable   */
@@ -67,7 +67,7 @@ typedef enum {
 /** @brief TWI_Prescaler TWI Prescaler
  * @{
  */
-#    if !(defined(SC32f15xx) || defined(SC32R601))
+#    if !(defined(SC32F15XX) || defined(SC32R601))
 typedef enum {
     TWI_PRESCALER_4096 =
         (uint16_t)(0x00U << TWI_CON_TWCK_Pos), /*!< Clock division: Fsource/4096 */
@@ -230,7 +230,7 @@ typedef enum {
 /** @brief TWI_PinRemap TIM Pin Remap
  * @{
  */
-#    if defined(SC32f10xx) || defined(SC32f15xx) || defined(SC32R601)
+#    if defined(SC32F10XX) || defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     TWI_PinRemap_Default =
         (uint32_t)(0x00 << TWI_CON_SPOS_Pos), /*!< TIM Pin Remap: Disable */
@@ -250,7 +250,7 @@ typedef enum {
             (((REMAP) == TWI_PinRemap_Default) || ((REMAP) == TWI_PinRemap_A) ||         \
              ((REMAP) == TWI_PinRemap_B))
 
-#    elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     TWI_PinRemap_Default =
         (uint32_t)(0x00 << TWI_CON_SPOS_Pos), /*!< TIM Pin Remap: Disable */
@@ -345,7 +345,7 @@ typedef enum {
 /** @brief TWI_FLAG TWI Flag
  * @{
  */
-#    if !(defined(SC32f15xx) || defined(SC32R601))
+#    if !(defined(SC32F15XX) || defined(SC32R601))
 typedef enum {
     TWI_FLAG_TWIF = (uint32_t)TWI_STS_TWIF, /*!< TWI Flag: Interrupt flag */
     TWI_FLAG_TXRXnE =
@@ -598,8 +598,8 @@ typedef enum {
 /** @brief TWI_Constants TWI Constants
  * @{
  */
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX)
 #    define IS_TWI_ALL_PERIPH(PERIPH) (((PERIPH) == TWI0) || ((PERIPH) == TWI1))
 #elif defined(SC32R803)
 #    define IS_TWI_ALL_PERIPH(PERIPH)                                                    \

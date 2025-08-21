@@ -40,10 +40,10 @@
 /**
  * @brief  DeInitialize the SPIx peripheral registers to their default reset values.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -54,8 +54,8 @@ void SPI_DeInit(SPI_TypeDef * SPIx) {
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     if (SPIx == SPI0) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) ||                     \
-    defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) ||                     \
+    defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
         /* Enable SPI0 reset state */
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_SPI0, ENABLE);
         /* Release SPI0 from reset state */
@@ -67,7 +67,7 @@ void SPI_DeInit(SPI_TypeDef * SPIx) {
         RCC_APB0PeriphResetCmd(RCC_APB0Periph_QTWI0, DISABLE);
 #endif
     } else if (SPIx == SPI1) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
         /* Clear SPI1 Register */
         SPIx->SPI_CON  = (uint16_t)0x00000000;
         SPIx->SPI_DATA = (uint16_t)0x00000000;
@@ -77,14 +77,14 @@ void SPI_DeInit(SPI_TypeDef * SPIx) {
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_QTWI1, ENABLE);
         /* Disable TWI0 reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_QTWI1, DISABLE);
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
         /* Enable SPI1 reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_SPI1_TWI1, ENABLE);
         /* Release SPI1 from reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_SPI1_TWI1, DISABLE);
 #endif
     }
-#if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     if (SPIx == SPI2) {
         /* Clear SPI1 Register */
         SPIx->SPI_CON  = (uint16_t)0x00000000;
@@ -125,10 +125,10 @@ void SPI_StructInit(SPI_InitTypeDef * SPI_InitStruct) {
  * @brief  Initializes the peripheral SPIx register with the parameters specified in
  * SPI_InitStruct
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -137,7 +137,7 @@ void SPI_StructInit(SPI_InitTypeDef * SPI_InitStruct) {
  * @retval None
  */
 void SPI_Init(SPI_TypeDef * SPIx, SPI_InitTypeDef * SPI_InitStruct) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -167,7 +167,7 @@ void SPI_Init(SPI_TypeDef * SPIx, SPI_InitTypeDef * SPI_InitStruct) {
                          SPI_InitStruct->SPI_CPOL | SPI_InitStruct->SPI_Prescaler);
     /* Write to SPIx SPI_CON */
     SPIx->SPI_CON = tmpreg;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -268,10 +268,10 @@ void SPI_Init(SPI_TypeDef * SPIx, SPI_InitTypeDef * SPI_InitStruct) {
 /**
  * @brief  Enables or disables the specified SPI peripheral.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -282,7 +282,7 @@ void SPI_Init(SPI_TypeDef * SPIx, SPI_InitTypeDef * SPI_InitStruct) {
  * @retval None
  */
 void SPI_Cmd(SPI_TypeDef * SPIx, FunctionalState NewState) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -293,7 +293,7 @@ void SPI_Cmd(SPI_TypeDef * SPIx, FunctionalState NewState) {
         /* Disable the SPI TX Function */
         SPIx->SPI_CON &= (uint16_t)~SPI_CON_SPEN;
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     assert_param(IS_FUNCTIONAL_STATE(NewState));
@@ -333,10 +333,10 @@ void SPI_Cmd(SPI_TypeDef * SPIx, FunctionalState NewState) {
 /**
  * @brief  Set the working mode of the SPI.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -347,7 +347,7 @@ void SPI_Cmd(SPI_TypeDef * SPIx, FunctionalState NewState) {
  * @retval None
  */
 void SPI_SetMode(SPI_TypeDef * SPIx, SPI_Mode_TypeDef SPI_Mode) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -359,7 +359,7 @@ void SPI_SetMode(SPI_TypeDef * SPIx, SPI_Mode_TypeDef SPI_Mode) {
     tmpreg |= (uint32_t)SPI_Mode;
     /* Set new MSTR bit value */
     SPIx->SPI_CON |= tmpreg;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -397,19 +397,19 @@ void SPI_SetMode(SPI_TypeDef * SPIx, SPI_Mode_TypeDef SPI_Mode) {
 /**
  * @brief  Configures the data size for the selected SPI.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
  *           - SPI3: select the SPI2 peripheral.
  * @param  SPI_DataSize[in]:specifies the SPI data size.
- *           SC32f10xx Selection range(SPI_DataSize_8B , SPI_DataSize_16B)
+ *           SC32F10XX Selection range(SPI_DataSize_8B , SPI_DataSize_16B)
  *           SC32R803 Selection range(SPI_DataSize_8B - SPI_DataSize_32B)
- *           SC32f12xx Selection range(SPI_DataSize_8B , SPI_DataSize_16B)
- *           SC32f15xx Selection range(SPI_DataSize_8B , SPI_DataSize_16B)
+ *           SC32F12XX Selection range(SPI_DataSize_8B , SPI_DataSize_16B)
+ *           SC32F15XX Selection range(SPI_DataSize_8B , SPI_DataSize_16B)
  *               - SPI_DataSize_8B:Set data frame format to 8bit
  *               - SPI_DataSize_16B:Set data frame format to 16bit
  *               - SPI_DataSize_24B:Set data frame format to 24bit
@@ -417,7 +417,7 @@ void SPI_SetMode(SPI_TypeDef * SPIx, SPI_Mode_TypeDef SPI_Mode) {
  * @retval None
  */
 void SPI_DataSizeConfig(SPI_TypeDef * SPIx, SPI_DataSize_TypeDef SPI_DataSize) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     assert_param(IS_SPI_DATASIZE(SPI_DataSize));
@@ -426,7 +426,7 @@ void SPI_DataSizeConfig(SPI_TypeDef * SPIx, SPI_DataSize_TypeDef SPI_DataSize) {
     SPIx->SPI_CON &= (uint16_t)~SPI_CON_SPMD;
     /* Set new SPMD bit value */
     SPIx->SPI_CON |= SPI_DataSize;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     assert_param(IS_SPI_DATASIZE(SPI_DataSize));
@@ -473,10 +473,10 @@ void SPI_DataSizeConfig(SPI_TypeDef * SPIx, SPI_DataSize_TypeDef SPI_DataSize) {
 /**
  * @brief  Transmits multiple data through the SPIx peripheral FIFO.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -486,7 +486,7 @@ void SPI_DataSizeConfig(SPI_TypeDef * SPIx, SPI_DataSize_TypeDef SPI_DataSize) {
  * @retval None
  */
 void SPI_SendDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint8_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -502,7 +502,7 @@ void SPI_SendDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
             SPIx->SPI_DATA = (uint16_t)(*((uint8_t *)Data + tmpNum));
         }
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint8_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -549,10 +549,10 @@ void SPI_SendDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
 /**
  * @brief  SPIx receives data through FIFO.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -562,7 +562,7 @@ void SPI_SendDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
  * @retval The received data.
  */
 void SPI_ReceiveDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint16_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -578,7 +578,7 @@ void SPI_ReceiveDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
             (*((uint8_t *)Data + tmpNum)) = (uint8_t)SPIx->SPI_DATA;
         }
     }
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint16_t tmpNum;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -625,10 +625,10 @@ void SPI_ReceiveDataFIFO(SPI_TypeDef * SPIx, uint32_t * Data, uint16_t length) {
 /**
  * @brief  Send a data through the peripheral SPIx.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -646,10 +646,10 @@ void SPI_SendData(SPI_TypeDef * SPIx, uint32_t Data) {
 /**
  * @brief  Returns the most recent data received through SPIx.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -681,18 +681,18 @@ uint32_t SPI_ReceiveData(SPI_TypeDef * SPIx) {
 /**
  * @brief  Configure remapping pins for SPIx
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
  *           - SPI3: select the SPI2 peripheral.
  * @param  SPI_Remap[in]: specifies the TIM input remapping source.
- *             SC32f10xx Selection
- * range(SPI_PinRemap_Default,SPI_PinRemap_A-SPI_PinRemap_B) SC32f12xx Selection
- * range(SPI_PinRemap_Default,SPI_PinRemap_A-SPI_PinRemap_C) SC32f15xx Selection
+ *             SC32F10XX Selection
+ * range(SPI_PinRemap_Default,SPI_PinRemap_A-SPI_PinRemap_B) SC32F12XX Selection
+ * range(SPI_PinRemap_Default,SPI_PinRemap_A-SPI_PinRemap_C) SC32F15XX Selection
  * range(SPI_PinRemap_Default,SPI_PinRemap_A-SPI_PinRemap_C)
  *            - SPI_PinRemap_Default:TIM Pin Remap Disable
  *            - SPI_PinRemap_A:TIM Pin Remap select Remap mode A
@@ -701,7 +701,7 @@ uint32_t SPI_ReceiveData(SPI_TypeDef * SPIx) {
  * @retval None
  */
 void SPI_PinRemapConfig(SPI_TypeDef * SPIx, SPI_PinRemap_TypeDef SPI_PinRemap) {
-#if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -719,7 +719,7 @@ void SPI_PinRemapConfig(SPI_TypeDef * SPIx, SPI_PinRemap_TypeDef SPI_PinRemap) {
 
     SPIx->SPI_CON = tmpreg;
 
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     uint32_t tmpreg;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -771,10 +771,10 @@ void SPI_PinRemapConfig(SPI_TypeDef * SPIx, SPI_PinRemap_TypeDef SPI_PinRemap) {
 /**
  * @brief  Enables or disables the specified SPI interrupts.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -809,10 +809,10 @@ void SPI_ITConfig(SPI_TypeDef * SPIx, uint16_t SPI_IT, FunctionalState NewState)
 /**
  * @brief  Checks whether the specified SPI flag is set or not.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -831,7 +831,7 @@ void SPI_ITConfig(SPI_TypeDef * SPIx, uint16_t SPI_IT, FunctionalState NewState)
  *                  -  SET :Flag up
  */
 FlagStatus SPI_GetFlagStatus(SPI_TypeDef * SPIx, SPI_FLAG_TypeDef SPI_FLAG) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     ITStatus bitstatus = RESET;
     /* Check the parameters */
@@ -844,7 +844,7 @@ FlagStatus SPI_GetFlagStatus(SPI_TypeDef * SPIx, SPI_FLAG_TypeDef SPI_FLAG) {
         bitstatus = RESET;
     }
     return bitstatus;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     ITStatus bitstatus = RESET;
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
@@ -877,10 +877,10 @@ FlagStatus SPI_GetFlagStatus(SPI_TypeDef * SPIx, SPI_FLAG_TypeDef SPI_FLAG) {
 /**
  * @brief  Clears the SPIx's pending flags.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.
@@ -896,13 +896,13 @@ FlagStatus SPI_GetFlagStatus(SPI_TypeDef * SPIx, SPI_FLAG_TypeDef SPI_FLAG) {
  * @retval None
  */
 void SPI_ClearFlag(SPI_TypeDef * SPIx, SPI_FLAG_TypeDef SPI_FLAG) {
-#if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                     \
+#if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                     \
     defined(SC32R805) || defined(SC32R806)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     /* Clear the flags */
     SPIx->SPI_STS = (uint16_t)SPI_FLAG;
-#elif defined(SC32f15xx) || defined(SC32R601)
+#elif defined(SC32F15XX) || defined(SC32R601)
     /* Check the parameters */
     assert_param(IS_SPI_ALL_PERIPH(SPIx));
     /* Clear the flags */
@@ -922,10 +922,10 @@ void SPI_ClearFlag(SPI_TypeDef * SPIx, SPI_FLAG_TypeDef SPI_FLAG) {
 /**
  * @brief  Enables or disables the SPI's DMA interface.
  * @param  SPIx[out]:where x can be select the SPIx peripheral.
- *           SC32f10xx Selection range(SPI0 - SPI1)
+ *           SC32F10XX Selection range(SPI0 - SPI1)
  *           SC32R803 Selection range(SPI0 - SPI3)
- *           SC32f12xx Selection range(SPI0 - SPI2)
- *           SC32f15xx Selection range(SPI0 - SPI1)
+ *           SC32F12XX Selection range(SPI0 - SPI2)
+ *           SC32F15XX Selection range(SPI0 - SPI1)
  *           - SPI0: select the SPI0 peripheral.
  *           - SPI1: select the SPI1 peripheral.
  *           - SPI2: select the SPI2 peripheral.

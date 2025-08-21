@@ -47,7 +47,7 @@ extern "C" {
 /** @brief RCC_SYSCLKSource System Clock Source
  * @{
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 typedef enum {
     RCC_SYSCLKSource_HIRC = (uint16_t)(~RCC_CFG0_SYSCLKSW), /*!< SYSCLK Source    HIRC */
     RCC_SYSCLKSource_LIRC =
@@ -66,7 +66,7 @@ typedef enum {
              ((SOURCE) == RCC_SYSCLKSource_HXT) ||                                       \
              ((SOURCE) == RCC_SYSCLKSource_PLLRCLK) ||                                   \
              ((SOURCE) == RCC_SYSCLKSource_LXT))
-#    elif defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                \
+#    elif defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                \
         defined(SC32R806)
 typedef enum {
     RCC_SYSCLKSource_HIRC_2 =
@@ -86,7 +86,7 @@ typedef enum {
              ((SOURCE) == RCC_SYSCLKSource_LIRC) ||                                      \
              ((SOURCE) == RCC_SYSCLKSource_HXT) ||                                       \
              ((SOURCE) == RCC_SYSCLKSource_HIRC) || ((SOURCE) == RCC_SYSCLKSource_LXT))
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 /** @defgroup RCC_SysTickSource SysTick Clock Source
  * @{
  */
@@ -187,8 +187,8 @@ typedef enum {
 /** @brief RCC_LCDLEDCLKSource LCDLED clock Source
  * @{
  */
-#    if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                  \
-        defined(SC32R806) || defined(SC32f10xx)
+#    if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                  \
+        defined(SC32R806) || defined(SC32F10XX)
 typedef enum {
     RCC_LCDLEDCLKSource_LIRC =
         (uint32_t)(0x00 << RCC_CFG1_LCDCLKSEL_Pos), /*!< LCD_LED clock = LIRC */
@@ -220,7 +220,7 @@ typedef enum {
 /**
  * @}
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 /** @brief RCC_PLLCLKSource PLL clock Source
  * @{
  */
@@ -241,7 +241,7 @@ typedef enum {
  * @{
  */
 
-#    if defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
+#    if defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806) || defined(SC32R803)
 typedef enum {
     RCC_PWM0CLKSource_PCLK =
         (uint32_t)(0x00 << RCC_CFG1_PWM0CLKSEL_Pos), /*!< PWM0 clock = PCLK */
@@ -252,7 +252,7 @@ typedef enum {
 #        define RCC_PWM0CLKSOURCE(SOURCE)                                                \
             (((SOURCE) == RCC_PWM0CLKSource_PCLK) ||                                     \
              ((SOURCE) == RCC_PWM0CLKSource_Div1HIRC))
-#    elif defined(SC32f10xx)
+#    elif defined(SC32F10XX)
 typedef enum {
     RCC_PWM0CLKSource_PCLK =
         (uint32_t)(0x00 << RCC_CFG1_PWM0CLKSEL_Pos), /*!< PWM0 clock = PCLK */
@@ -269,7 +269,7 @@ typedef enum {
 /** @brief RCC_AHBPeriph AHB Periph
  * @{
  */
-#    if defined(SC32f10xx) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32F10XX) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     RCC_AHBPeriph_DMA = (uint8_t)AHB_CFG_DMAEN,
     RCC_AHBPeriph_CRC = (uint8_t)AHB_CFG_CRCEN,
@@ -278,7 +278,7 @@ typedef enum {
 } RCC_AHBPeriph_TypeDef;
 #        define IS_RCC_AHBPERIPH(PERIPH)                                                 \
             ((((PERIPH) & (uint8_t)0xF8) == 0x00) && ((PERIPH) != (uint8_t)0x00))
-#    elif defined(SC32R803) || defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32R803) || defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     RCC_AHBPeriph_DMA = (uint8_t)AHB_CFG_DMAEN,
     RCC_AHBPeriph_CRC = (uint8_t)AHB_CFG_CRCEN,
@@ -296,7 +296,7 @@ typedef enum {
 /** @brief RCC_APB0Periph APB0 Periph
  * @{
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 typedef enum {
     RCC_APB0Periph_TIM0  = (uint16_t)APB0_CFG_TIM0EN,
     RCC_APB0Periph_TIM1  = (uint16_t)APB0_CFG_TIM1EN,
@@ -312,7 +312,7 @@ typedef enum {
 #        define IS_RCC_APB0PERIPH(PERIPH)                                                \
             ((((PERIPH) & (uint8_t)0xFE00) == 0x00) && ((PERIPH) != (uint16_t)0x00))
 
-#    elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     RCC_APB0Periph_TIM0  = (uint16_t)APB0_CFG_TIM0EN,
     RCC_APB0Periph_TIM1  = (uint16_t)APB0_CFG_TIM1EN,
@@ -345,7 +345,7 @@ typedef enum {
 #        define IS_RCC_APB0PERIPH(PERIPH)                                                \
             ((((PERIPH) & (uint8_t)0xFC00) == 0x00) && ((PERIPH) != (uint16_t)0x00))
 
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 
 typedef enum {
     RCC_APB0Periph_TIM0  = (uint16_t)APB0_CFG_TIM0EN,
@@ -367,7 +367,7 @@ typedef enum {
 /** @brief RCC_APB1Periph APB1 Periph
  * @{
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 typedef enum {
     RCC_APB1Periph_TIM4  = (uint16_t)APB1_CFG_TIM4EN,
     RCC_APB1Periph_TIM5  = (uint16_t)APB1_CFG_TIM5EN,
@@ -395,7 +395,7 @@ typedef enum {
 #        define IS_RCC_APB1PERIPH(PERIPH)                                                \
             ((((PERIPH) & (uint8_t)0xFE00) == 0x00) && ((PERIPH) != (uint16_t)0x00))
 
-#    elif defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    elif defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 typedef enum {
     RCC_APB1Periph_TIM4  = (uint16_t)APB1_CFG_TIM4EN,
     RCC_APB1Periph_TIM5  = (uint16_t)APB1_CFG_TIM5EN,
@@ -410,7 +410,7 @@ typedef enum {
 } RCC_APB1Periph_TypeDef;
 #        define IS_RCC_APB1PERIPH(PERIPH)                                                \
             ((((PERIPH) & (uint8_t)0xFE00) == 0x00) && ((PERIPH) != (uint16_t)0x00))
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 
 /** @defgroup RCC_APB1Periph APB1 Periph
  * @{
@@ -433,7 +433,7 @@ typedef enum {
 /** @brief RCC_APB2Periph APB2 Periph
  * @{
  */
-#    if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                 \
+#    if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                 \
         defined(SC32R805) || defined(SC32R806)
 typedef enum {
     RCC_APB2Periph_LEDPWM  = (uint16_t)APB2_CFG_LEDPWMEN,
@@ -443,12 +443,12 @@ typedef enum {
 } RCC_APB2Periph_TypeDef;
 #        define IS_RCC_APB2PERIPH(PERIPH)                                                \
             ((((PERIPH) & (uint8_t)0xFFF8) == 0x00) && ((PERIPH) != (uint16_t)0x00))
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 /** @defgroup RCC_APB2Periph APB2 Periph
  * @{
  */
 typedef enum {
-#        if defined(SC32f15xx)
+#        if defined(SC32F15XX)
     RCC_APB2Periph_QEP0 = (uint16_t)APB2_CFG_QEP0EN,
 #        endif
     RCC_APB2Periph_QEP1 = (uint16_t)APB2_CFG_QEP1EN,
@@ -464,13 +464,13 @@ typedef enum {
 /** @defgroup NMI_CFG Periph NMI Periph
  * @{
  */
-#    if defined(SC32f10xx) || defined(SC32R803) || defined(SC32f12xx) ||                 \
+#    if defined(SC32F10XX) || defined(SC32R803) || defined(SC32F12XX) ||                 \
         defined(SC32R805) || defined(SC32R806)
 typedef enum {
     RCC_NMIPeriph_CSS  = (uint16_t)NMI_CFG_CSSEN,
     RCC_NMIPeriph_CMP  = (uint16_t)NMI_CFG_CMPEN,
     RCC_NMIPeriph_INT0 = (uint16_t)NMI_CFG_INT0EN,
-#        if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||              \
+#        if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||              \
             defined(SC32R806)
     RCC_NMIPeriph_SRAMPE = (uint16_t)NMI_CFG_SRAMPEEN,
 #        endif
@@ -478,7 +478,7 @@ typedef enum {
 } RCC_NMIPeriph_TypeDef;
 #        define IS_RCC_NMIPeriph(NMIPeriph)                                              \
             ((((NMIPeriph) & (uint8_t)0xFF00) == 0x00) && ((NMIPeriph) != (uint16_t)0x00))
-#    elif defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
     RCC_NMIPeriph_INT0   = (uint16_t)NMI_CFG_INT0EN,
     RCC_NMIPeriph_SRAMPE = (uint16_t)NMI_CFG_SRAMPEEN,
@@ -504,7 +504,7 @@ typedef enum {
 /** @brief RCC_FLAG RCC FLAG
  * @{
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 typedef enum {
     RCC_FLAG_CLKIF =
         (uint8_t)RCC_STS_CLKFIF, /*!< RCC FLAG: Clock source exception flag */
@@ -518,10 +518,10 @@ typedef enum {
 #        define IS_GET_RCC_FLAG(FLAG)                                                    \
             (((FLAG) == RCC_FLAG_CLKIF) || ((FLAG) == RCC_FLAG_LOCKERR) ||               \
              ((FLAG) == RCC_FLAG_PLLRDY))
-#    elif defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                \
-        defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#    elif defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                \
+        defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
 typedef enum {
-#        if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||              \
+#        if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||              \
             defined(SC32R806)
     RCC_FLAG_CLKIF =
         (uint8_t)RCC_STS_CLKFIF, /*!< CLKIF FLAG: Clock source exception flag */
@@ -529,13 +529,13 @@ typedef enum {
     RCC_FLAG_SRAMPEIF =
         (uint8_t)RCC_STS_SRAMPEIF, /*!< SRAMPEIF FLAG: SRAM parity error flag */
 } RCC_FLAG_TypeDef;
-#        if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||              \
+#        if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||              \
             defined(SC32R806)
 #            define IS_RCC_FLAG(FLAG)                                                    \
                 ((((FLAG) & (uint8_t)0xFFF6) == 0x00) && ((FLAG) != (uint16_t)0x00))
 #            define IS_GET_RCC_FLAG(FLAG)                                                \
                 (((FLAG) == RCC_FLAG_CLKIF) || ((FLAG) == RCC_FLAG_SRAMPEIF))
-#        elif defined(SC32f15xx) || defined(SC32R601)
+#        elif defined(SC32F15XX) || defined(SC32R601)
 #            define IS_RCC_FLAG(FLAG)                                                    \
                 ((((FLAG) & (uint8_t)0xFFF6) == 0x00) && ((FLAG) != (uint16_t)0x00))
 #            define IS_GET_RCC_FLAG(FLAG) (((FLAG) == RCC_FLAG_SRAMPEIF))
@@ -544,7 +544,7 @@ typedef enum {
 /**
  * @}
  */
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 /** @defgroup RLL_Factor  RLL Factor
  * @{
  */
@@ -587,21 +587,21 @@ void RCC_DeInit(void);
 
 ErrorStatus RCC_Unlock(uint8_t TimeLimit);
 
-#    if !(defined(SC32f15xx) || defined(SC32R601))
+#    if !(defined(SC32F15XX) || defined(SC32R601))
 void RCC_HXTCmd(FunctionalState NewState);
 #    endif
 void RCC_LXTCmd(FunctionalState NewState);
 void RCC_HIRCCmd(FunctionalState NewState);
 void RCC_LIRCCmd(FunctionalState NewState);
 
-#    if defined(SC32f10xx)
+#    if defined(SC32F10XX)
 void RCC_PLLCmd(FunctionalState NewState);
 void RCC_PLLRCmd(FunctionalState NewState);
 void RCC_PLLConfig(RCC_PLLCLKSource_TypeDef RCC_PLLCLKSource,
                    RLL_Factor_TypeDef *     PLL_Factor);
 #    endif
-#    if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                  \
-        defined(SC32R806) || defined(SC32f15xx) || defined(SC32R601)
+#    if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                  \
+        defined(SC32R806) || defined(SC32F15XX) || defined(SC32R601)
 void RCC_HIRCDIV1Cmd(FunctionalState NewState);
 #    endif
 void RCC_APB0Cmd(FunctionalState NewState);
@@ -619,11 +619,11 @@ void                     RCC_GetClocksFreq(RCC_ClocksTypeDef * RCC_Clocks);
 void                     RCC_WaitConfig(RCC_Wait_TypeDef RCC_Wait);
 void                     RCC_NMICmd(uint32_t RCC_NMIPeriph, FunctionalState NewState);
 /* Peripheral clocks configuration functions **********************************/
-#    if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) || defined(SC32R806)
+#    if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) || defined(SC32R806)
 void RCC_PWM0CLKConfig(RCC_PWM0CLKSource_TypeDef RCC_PWM0CLKSource);
 #    endif
-#    if defined(SC32R803) || defined(SC32f12xx) || defined(SC32R805) ||                  \
-        defined(SC32R806) || defined(SC32f10xx)
+#    if defined(SC32R803) || defined(SC32F12XX) || defined(SC32R805) ||                  \
+        defined(SC32R806) || defined(SC32F10XX)
 void RCC_LCDLEDCLKConfig(RCC_LCDLEDCLKSource_TypeDef RCC_LCDLEDCLKSource);
 #    endif
 void RCC_BTMCLKConfig(RCC_BTMCLKSource_TypeDef RCC_BTMCLKSource);

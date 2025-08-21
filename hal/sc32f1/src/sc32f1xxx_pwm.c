@@ -24,7 +24,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#if !(defined(SC32f15xx) || defined(SC32R601))
+#if !(defined(SC32F15XX) || defined(SC32R601))
 #    include "sc32f1xxx_pwm.h"
 
 /** @defgroup PWM_Exported_Functions_Group1 Configuration of the PWM computation unit
