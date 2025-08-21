@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>SC32R803, PrintfEnable</Define>
               <Undefine></Undefine>
-              <IncludePath>..\hal\sc32f1\inc;..\drvs;..\inc;..\inc\cmsis;..\mid\littlefs;..\mid\rtos\inc;..\mid\rtos\port;..\src\fs</IncludePath>
+              <IncludePath>..\hal\sc32f1\inc;..\drvs;..\inc;..\inc\cmsis;..\mid\fatfs;..\mid\rtos\inc;..\mid\rtos\port;..\src\fs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -547,17 +547,32 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>mid/littlefs/</GroupName>
+          <GroupName>drvs/w25q/</GroupName>
           <Files>
             <File>
-              <FileName>lfs.c</FileName>
+              <FileName>w25q.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\mid\littlefs\lfs.c</FilePath>
+              <FilePath>..\drvs\w25q\w25q.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>mid/fatfs/</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mid\fatfs\diskio.c</FilePath>
             </File>
             <File>
-              <FileName>lfs_util.c</FileName>
+              <FileName>ff.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\mid\littlefs\lfs_util.c</FilePath>
+              <FilePath>..\mid\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\mid\fatfs\ffsystem.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -703,16 +718,6 @@
               <FileName>fs.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\fs\fs.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>src/fs/ebd/</GroupName>
-          <Files>
-            <File>
-              <FileName>ebd_fs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\fs\ebd\ebd_fs.c</FilePath>
             </File>
           </Files>
         </Group>
