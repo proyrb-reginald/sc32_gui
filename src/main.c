@@ -5,20 +5,20 @@
 #include <drvs_if.h>
 
 int main(void) {
-    // {
-    //     /**
-    //      * @brief 片上ROM文件系统测试。
-    //      * @retval
-    //      * @warning
-    //      * @note
-    //      */
-    //     fs_mnt(FS_ROM);
-    //     fs_rcd_boot_cnt();
-    //     PRTF_OS_LOG(NEWS_LOG, "rom boot cnt: %u\n", fs_get_boot_cnt());
-    //     fs_ls("0:/");
-    //     fs_ls("0:/sys");
-    //     fs_unmnt();
-    // }
+    {
+        /**
+         * @brief 片上ROM文件系统测试。
+         * @retval
+         * @warning
+         * @note
+         */
+        fs_mnt(FS_ROM);
+        fs_rcd_boot_cnt();
+        PRTF_OS_LOG(NEWS_LOG, "rom boot cnt: %u\n", fs_get_boot_cnt());
+        fs_ls("0:/");
+        fs_ls("0:/sys");
+        fs_unmnt();
+    }
     {
         /**
          * @brief 外部Flash文件系统测试。
@@ -29,8 +29,8 @@ int main(void) {
         fs_mnt(FS_FLASH);
         fs_rcd_boot_cnt();
         PRTF_OS_LOG(NEWS_LOG, "flash boot cnt: %u\n", fs_get_boot_cnt());
-        // fs_ls("0:/");
-        // fs_ls("0:/sys");
+        fs_ls("1:/");
+        fs_ls("1:/sys");
         fs_unmnt();
     }
     // {

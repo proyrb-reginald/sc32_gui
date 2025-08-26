@@ -53,7 +53,7 @@ void uart5_init(void) {
 
 void qspi0_init(void) {
     QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
-                                    .QSPI_Prescaler = QSPI_Prescaler_4,
+                                    .QSPI_Prescaler = QSPI_Prescaler_8,
                                     .QSPI_Mode      = QSPI_Mode_QSPI,
                                     .QSPI_CPMode    = QSPI_CPMode_Low};
 
@@ -166,22 +166,22 @@ __attribute__((interrupt("IRQ"))) void UART1_3_5_IRQHandler(void) {
     rt_interrupt_leave();
 }
 
-// __attribute__((interrupt("IRQ"))) void DMA0_IRQHandler(void) {
-//     rt_interrupt_enter();
-//     DMA_ClearFlag(DMA0, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
-//     rt_interrupt_leave();
-// }
+__attribute__((interrupt("IRQ"))) void DMA0_IRQHandler(void) {
+    rt_interrupt_enter();
+    DMA_ClearFlag(DMA0, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
+    rt_interrupt_leave();
+}
 
-// __attribute__((interrupt("IRQ"))) void DMA1_IRQHandler(void) {
-//     rt_interrupt_enter();
-//     DMA_ClearFlag(DMA1, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
-//     w25q_dma_tx_irq();
-//     rt_interrupt_leave();
-// }
+__attribute__((interrupt("IRQ"))) void DMA1_IRQHandler(void) {
+    rt_interrupt_enter();
+    DMA_ClearFlag(DMA1, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
+    w25q_dma_tx_irq();
+    rt_interrupt_leave();
+}
 
-// __attribute__((interrupt("IRQ"))) void DMA2_IRQHandler(void) {
-//     rt_interrupt_enter();
-//     DMA_ClearFlag(DMA2, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
-//     w25q_dma_rx_irq();
-//     rt_interrupt_leave();
-// }
+__attribute__((interrupt("IRQ"))) void DMA2_IRQHandler(void) {
+    rt_interrupt_enter();
+    DMA_ClearFlag(DMA2, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
+    w25q_dma_rx_irq();
+    rt_interrupt_leave();
+}
