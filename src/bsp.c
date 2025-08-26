@@ -38,9 +38,22 @@ void uart1_init(void) {
     Printf_UartInit(UART1);
 }
 
+void uart5_init(void) {
+    UART_InitTypeDef uart_struct = {.UART_ClockFrequency = 64000000,
+                                    .UART_BaudRate       = 115200,
+                                    .UART_Mode           = UART_Mode_10B};
+
+    RCC_APB0Config(RCC_HCLK_Div1);
+    RCC_APB0Cmd(ENABLE);
+    RCC_APB0PeriphClockCmd(RCC_APB0Periph_UART5, ENABLE);
+    UART_Init(UART5, &uart_struct);
+    UART_TXCmd(UART5, ENABLE);
+    Printf_UartInit(UART5);
+}
+
 void qspi0_init(void) {
     QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
-                                    .QSPI_Prescaler = QSPI_Prescaler_8,
+                                    .QSPI_Prescaler = QSPI_Prescaler_4,
                                     .QSPI_Mode      = QSPI_Mode_QSPI,
                                     .QSPI_CPMode    = QSPI_CPMode_Low};
 

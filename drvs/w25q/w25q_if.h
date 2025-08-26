@@ -25,7 +25,7 @@ typedef enum {
     ReadSR2      = 0x35,
     ReadSR3      = 0x15,
     ReadDataSPI  = 0x03,  // 未实现
-    ReadDataQSPI = 0xeB,
+    ReadDataQSPI = 0xeb,
     WriteDisable = 0x04,
     WriteEnable  = 0x06,
     Erase4KB     = 0x20,
