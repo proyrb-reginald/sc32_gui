@@ -74,7 +74,7 @@ void ui_init(void) {
     ui_Screen_Screen6_screen_init();
     ui_Startevents____initial_actions0 = lv_obj_create(NULL);
 
-    lv_timer_t * t = lv_timer_create(timer_cb, 4000, NULL);
+    lv_timer_t * t = lv_timer_create(timer_cb, 100, NULL);
 }
 
 void ui_destroy(void) {
