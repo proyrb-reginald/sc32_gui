@@ -66,7 +66,7 @@ void qspi0_init(void) {
 
 void qspi1_init(void) {
     QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
-                                    .QSPI_Prescaler = QSPI_Prescaler_16,
+                                    .QSPI_Prescaler = QSPI_Prescaler_2,
                                     .QSPI_Mode      = QSPI_Mode_QSPI,
                                     .QSPI_CPMode    = QSPI_CPMode_Low};
 
@@ -78,19 +78,19 @@ void qspi1_init(void) {
 }
 
 void spi2_init(void) {
-    RCC_APB0PeriphClockCmd(RCC_APB0Periph_QTWI2, ENABLE);  // 使能时钟
+    RCC_APB0PeriphClockCmd(RCC_APB0Periph_QTWI2, ENABLE);
     SPI_InitTypeDef spi_struct = {.SPI_Mode      = SPI_Mode_Master,
                                   .SPI_DataSize  = SPI_DataSize_8B,
                                   .SPI_CPHA      = SPI_CPHA_1Edge,
                                   .SPI_CPOL      = SPI_CPOL_Low,
                                   .SPI_FirstBit  = SPI_FirstBit_MSB,
                                   .SPI_Prescaler = SPI_Prescaler_4};
-    SPI_Init(SPI2, &spi_struct);                // 初始化
-    SPI_PinRemapConfig(SPI2, SPI_PinRemap_C);   // 设置引脚映射
-    SPI_ITConfig(SPI2, SPI_IT_INTEN, DISABLE);  // 禁用中断
-    SPI_DMACmd(SPI2, SPI_DMAReq_TX, DISABLE);   // 关闭发送DMA请求
-    SPI_DMACmd(SPI2, SPI_DMAReq_RX, DISABLE);   // 关闭发送DMA请求
-    SPI_Cmd(SPI2, ENABLE);                      // 使能
+    SPI_Init(SPI2, &spi_struct);
+    SPI_PinRemapConfig(SPI2, SPI_PinRemap_C);
+    SPI_ITConfig(SPI2, SPI_IT_INTEN, DISABLE);
+    SPI_DMACmd(SPI2, SPI_DMAReq_TX, DISABLE);
+    SPI_DMACmd(SPI2, SPI_DMAReq_RX, DISABLE);
+    SPI_Cmd(SPI2, ENABLE);
 }
 
 void dma0_init(void) {
@@ -166,11 +166,12 @@ __attribute__((interrupt("IRQ"))) void UART1_3_5_IRQHandler(void) {
     rt_interrupt_leave();
 }
 
-__attribute__((interrupt("IRQ"))) void DMA0_IRQHandler(void) {
-    rt_interrupt_enter();
-    DMA_ClearFlag(DMA0, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
-    rt_interrupt_leave();
-}
+// __attribute__((interrupt("IRQ"))) void DMA0_IRQHandler(void) {
+//     rt_interrupt_enter();
+//     DMA_ClearFlag(DMA0, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
+//     ep15301t_dma_irq();
+//     rt_interrupt_leave();
+// }
 
 __attribute__((interrupt("IRQ"))) void DMA1_IRQHandler(void) {
     rt_interrupt_enter();

@@ -16,6 +16,9 @@
 /* 添加ep15301t */
 #define USE_EP15301T
 
+/* 添加gc9a01 */
+#define USE_GC9A01
+
 /* 添加rom */
 #define USE_ROM
 

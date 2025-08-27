@@ -19,6 +19,10 @@
 #    include "ep15301t/ep15301t_if.h"
 #endif
 
+#ifdef USE_GC9A01
+#    include "gc9a01/gc9a01_if.h"
+#endif
+
 #ifdef USE_ROM
 #    include "rom/rom_cfg.h"
 #    include "rom/rom_if.h"

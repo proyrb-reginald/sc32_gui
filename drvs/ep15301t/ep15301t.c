@@ -40,8 +40,8 @@ __attribute__((optnone)) void ep15301t_ctl(const ep15301t_cmd_t * const cmd) {
 
     if ((cmd->data != NULL) && (cmd->size > 0)) {
         switch (cmd->ins) {
-            case Write_RAM:
 #ifdef USE_DMA
+            case Write_RAM:
                 DMA_SetSrcAddress(DMA_DEV, (uint32_t)cmd->data);
                 DMA_SetCurrDataCounter(DMA_DEV, cmd->size);
                 DMA_Cmd(DMA_DEV, ENABLE);
@@ -50,10 +50,8 @@ __attribute__((optnone)) void ep15301t_ctl(const ep15301t_cmd_t * const cmd) {
                 return;
 #endif
             default:
-                for (uint8_t i = 0; i < cmd->size; ++i) {
-                    QSPI_SendData8(QSPI_DEV, cmd->data[i]);
-                    while (QSPI_GetFlagStatus(QSPI_DEV, QSPI_Flag_BUSY)) {}
-                }
+                PRTF_OS_LOG(NEWS_LOG, "send size: %u\n", cmd->size);
+                QSPI_SendMultipleData(QSPI_DEV, cmd->data, cmd->size);
                 break;
         }
     }
@@ -68,11 +66,11 @@ int ep15301t_init(void) {
     GPIO_WriteBit(BACK_GPIO_GRP, BACK_GPIO_PIN, 1);
     GPIO_WriteBit(CHIP_GPIO_GRP, CHIP_GPIO_PIN, 1);
     GPIO_WriteBit(RESET_GPIO_GRP, RESET_GPIO_PIN, 1);
-    RTOS_DELAY_IF(1);
+    RTOS_DELAY_IF(10);
     GPIO_WriteBit(RESET_GPIO_GRP, RESET_GPIO_PIN, 0);
-    RTOS_DELAY_IF(1);
+    RTOS_DELAY_IF(20);
     GPIO_WriteBit(RESET_GPIO_GRP, RESET_GPIO_PIN, 1);
-    RTOS_DELAY_IF(120);
+    RTOS_DELAY_IF(20);
     GPIO_WriteBit(CHIP_GPIO_GRP, CHIP_GPIO_PIN, 1);
 
     /********** 生产商初始化指令 **********/
@@ -99,9 +97,7 @@ int ep15301t_init(void) {
     //
 #endif
 
-    RTOS_DELAY_IF(50);
     PRTF_OS_LOG(NEWS_LOG, "init ok!\n");
-
     return RT_EOK;
 }
 
@@ -130,6 +126,8 @@ void ep15301t_fill(const ep15301t_area_t * const area,
     cmd.ins  = Write_RAM;
     cmd.data = (uint8_t *)buf;
     cmd.size = ((area->x2 - area->x1) * (area->y2 - area->y1)) * unit_size;
+    PRTF_OS_LOG(NEWS_LOG, "area: (%u, %u, %u, %u) crt size: %u\n", area->x1, area->x2,
+                area->y1, area->y2, cmd.size);
     ep15301t_ctl(&cmd);
 }
 
@@ -137,7 +135,7 @@ void ep15301t_fill(const ep15301t_area_t * const area,
 
 #    define TEST_WIDTH 360
 #    define TEST_HIGHT 360
-#    define FLUSH_SIZE 4
+#    define FLUSH_SIZE 2
 #    define FLUSH_CNT (TEST_HIGHT / FLUSH_SIZE)
 #    define DATA_SIZE (TEST_WIDTH * FLUSH_SIZE * 2)
 
@@ -145,6 +143,7 @@ static uint8_t test_data_r[DATA_SIZE] = {0};
 static uint8_t test_data_b[DATA_SIZE] = {0};
 
 __attribute__((noreturn)) void ep15301t_test(void * thread_args) {
+    ep15301t_init();
     PRTF_OS_LOG(NEWS_LOG, "start test!\n");
 
     for (uint16_t i = 0; i < DATA_SIZE; i++) {
@@ -169,7 +168,7 @@ __attribute__((noreturn)) void ep15301t_test(void * thread_args) {
             } else {
                 ep15301t_fill(&area, test_data_r, 2);
             }
-            RTOS_DELAY_IF(3);
+            RTOS_DELAY_IF(10);
         }
         flag = (flag) ? 0 : 1;
     }
@@ -177,14 +176,14 @@ __attribute__((noreturn)) void ep15301t_test(void * thread_args) {
 
 #endif
 
-#ifdef USE_DMA
 __attribute__((always_inline)) void ep15301t_dma_irq(void) {
     GPIO_WriteBit(CHIP_GPIO_GRP, CHIP_GPIO_PIN, 1);
     QSPI_DMACmd(QSPI_DEV, QSPI_DMAReq_TX, DISABLE);
+#ifdef USE_DMA
     DMA_Cmd(DMA_DEV, DISABLE);
-
-#    ifdef USE_LVGL
-    LVGL_DONE(LVGL_DISP);
-#    endif
-}
 #endif
+
+#ifdef USE_LVGL
+    LVGL_DONE(LVGL_DISP);
+#endif
+}

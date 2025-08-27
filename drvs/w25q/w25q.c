@@ -124,10 +124,10 @@ __attribute__((optnone)) void w25q_ctl(const w25q_cmd_t * const cmd) {
 #endif
                 break;
             case ProgramSPI:
-                /********** 连续接收 **********/
+                /********** 连续发送 **********/
                 break;
             case ProgramQSPI:
-                /********** 连续接收 **********/
+                /********** 连续发送 **********/
 
 #ifdef USE_DMA
                 QSPI_Write_ComSet(QSPI_DEV, QSPI_LMode_4Line, QSPI_DWidth_8bit,

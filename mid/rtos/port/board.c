@@ -7,11 +7,11 @@ void rt_hw_board_init(void) {
     rcc_init();
     // uart1_init();
     uart5_init();
-    qspi0_init();
-    // qspi1_init();
+    // qspi0_init();
+    qspi1_init();
     // dma0_init();
-    dma1_init();
-    dma2_init();
+    // dma1_init();
+    // dma2_init();
 
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();

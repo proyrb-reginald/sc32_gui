@@ -106,23 +106,22 @@ DSTATUS disk_status(BYTE pdrv) {
 /* Read Sector(s)                                                        */
 /*-----------------------------------------------------------------------*/
 
-DRESULT disk_read(BYTE pdrv, BYTE * buf, LBA_t sector, UINT count) {
+DRESULT disk_read(BYTE pdrv, BYTE * buf, LBA_t sct, UINT cnt) {
     DRESULT res = RES_PARERR;
 
     switch (pdrv) {
 #ifdef USE_FS_ROM
 #    define SCT_SIZE ROM_SCT_SIZE
         case DEV_ROM: {
-            uint32_t adr = ROM_FS_START_ADR + sector * SCT_SIZE;
+            uint32_t adr = ROM_FS_START_ADR + sct * SCT_SIZE;
 
-            for (UINT i = 0; i < count; i++) {
-                if (IAP_ReadByteArray(adr, buf, SCT_SIZE) < SCT_SIZE) {
-                    PRTF_OS_LOG(ERRO_LOG, "read sct: %u cnt: %u adr: 0x%08x fail!\n",
-                                sector, count, adr);
+            for (UINT i = 0; i < cnt; i++, adr += SCT_SIZE, buf += SCT_SIZE) {
+                PRTF_OS_LOG(INFO_LOG, "read cnt: %u adr: 0x%08x\n", i, adr);
+                uint16_t rd_cnt = IAP_ReadByteArray(adr, buf, SCT_SIZE);
+                if (rd_cnt < SCT_SIZE) {
+                    PRTF_OS_LOG(ERRO_LOG, "read size: %u < %u!\n", rd_cnt, SCT_SIZE);
                     return RES_ERROR;
                 }
-                adr += SCT_SIZE;
-                buf += SCT_SIZE;
             }
 
             res = RES_OK;
@@ -134,29 +133,19 @@ DRESULT disk_read(BYTE pdrv, BYTE * buf, LBA_t sector, UINT count) {
 #ifdef USE_FS_FLASH
 #    define SCT_SIZE (4 * 1024)
         case DEV_FLASH: {
-            uint32_t adr = sector * SCT_SIZE;
+            uint32_t adr = sct * SCT_SIZE;
 
-            PRTF_OS_LOG(INFO_LOG, "read sct: %u cnt: %u adr: 0x%08x\n", sector, count,
-                        adr);
+            PRTF_OS_LOG(INFO_LOG, "read cnt: %u adr: 0x%08x\n", cnt, adr);
 
             uint8_t * const raw_buf = buf;
 
-            for (UINT i = 0; i < count; i++) {
+            for (UINT i = 0; i < cnt; i++, adr += SCT_SIZE, buf += SCT_SIZE) {
                 w25q_cmd_t cmd = {.ins  = ReadDataQSPI,
                                   .adr  = {.byte = {adr >> 16, adr >> 8, adr >> 0}},
                                   .data = buf,
                                   .size = SCT_SIZE};
                 w25q_ctl(&cmd);
-
-                adr += SCT_SIZE;
-                buf += SCT_SIZE;
             }
-
-            PRTF_OS_LOG(INFO_LOG, "data:\n");
-            for (uint16_t i = 0; i < 64; i++) {
-                PRTF_LOG(INFO_LOG, "0x%02x ", raw_buf[i]);
-            }
-            PRTF_LOG(INFO_LOG, "\n");
 
             res = RES_OK;
             break;
@@ -180,33 +169,30 @@ DRESULT disk_read(BYTE pdrv, BYTE * buf, LBA_t sector, UINT count) {
 /*-----------------------------------------------------------------------*/
 
 #if FF_FS_READONLY == 0
-DRESULT disk_write(BYTE pdrv, const BYTE * buf, LBA_t sector, UINT count) {
+DRESULT disk_write(BYTE pdrv, const BYTE * buf, LBA_t sct, UINT cnt) {
     DRESULT res;
 
     switch (pdrv) {
 #    ifdef USE_FS_ROM
 #        define SCT_SIZE ROM_SCT_SIZE
         case DEV_ROM: {
-            uint32_t adr = ROM_FS_START_ADR + sector * SCT_SIZE;
+            uint32_t adr = ROM_FS_START_ADR + sct * SCT_SIZE;
+            for (UINT i = 0; i < cnt; i++, adr += SCT_SIZE, buf += SCT_SIZE) {
+                PRTF_OS_LOG(INFO_LOG, "write cnt: %u adr: 0x%x\n", i, adr);
 
-            IAP_Unlock();
-            IAP_EraseSector(adr / SCT_SIZE);
-            IAP_WriteCmd(ENABLE);
+                IAP_Unlock();
+                IAP_EraseSector(adr / SCT_SIZE);
+                rt_thread_delay(1);
+                IAP_WriteCmd(ENABLE);
+                uint16_t wrt_cnt = IAP_ProgramByteArray(adr, (uint8_t *)buf, SCT_SIZE);
+                IAP_Lock();
 
-            for (UINT i = 0; i < count; i++) {
-                if (IAP_ProgramByteArray(adr, (uint8_t *)buf, SCT_SIZE) < SCT_SIZE) {
-                    IAP_Lock();
-                    PRTF_OS_LOG(ERRO_LOG, "write sct: %u cnt: %u adr: 0x%x fail!\n",
-                                sector, count, adr);
+                if (wrt_cnt < SCT_SIZE) {
+                    PRTF_OS_LOG(ERRO_LOG, "write size: %u < %u\n", wrt_cnt, SCT_SIZE);
                     return RES_ERROR;
                 }
-                adr += SCT_SIZE;
-                buf += SCT_SIZE;
             }
-
-            IAP_Lock();
             res = RES_OK;
-
             break;
         }
 #        undef SCT_SIZE
@@ -215,18 +201,11 @@ DRESULT disk_write(BYTE pdrv, const BYTE * buf, LBA_t sector, UINT count) {
 #    ifdef USE_FS_FLASH
 #        define SCT_SIZE (4 * 1024)
         case DEV_FLASH: {
-            uint32_t adr = sector * SCT_SIZE;
+            uint32_t adr = sct * SCT_SIZE;
 
-            PRTF_OS_LOG(INFO_LOG, "write sct: %u cnt: %u adr: 0x%08x\n", sector, count,
-                        adr);
+            PRTF_OS_LOG(INFO_LOG, "write cnt: %u adr: 0x%08x\n", cnt, adr);
 
-            PRTF_OS_LOG(INFO_LOG, "data:\n");
-            for (uint16_t i = 0; i < 64; i++) {
-                PRTF_LOG(INFO_LOG, "0x%02x ", buf[i]);
-            }
-            PRTF_LOG(INFO_LOG, "\n");
-
-            for (UINT i = 0; i < count; i++) {
+            for (UINT i = 0; i < cnt; i++, adr += SCT_SIZE, buf += SCT_SIZE) {
                 // 擦除扇区（4KB）
                 w25q_cmd_t cmd = {.ins = WriteEnable, .size = 0};
                 w25q_ctl(&cmd);
@@ -271,11 +250,7 @@ DRESULT disk_write(BYTE pdrv, const BYTE * buf, LBA_t sector, UINT count) {
                         w25q_ctl(&cmd);
                     } while (sr1 & 0x01);
                 }
-
-                adr += SCT_SIZE;
-                buf += SCT_SIZE;
             }
-
             res = RES_OK;
             break;
         }
