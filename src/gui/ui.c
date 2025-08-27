@@ -33,27 +33,27 @@ static void timer_cb(lv_timer_t * timer) {
     static uint8_t flag = 0;
     switch (flag++ % 6) {
         case 0:
-            lv_scr_load(ui_Screen_Screen1);
+            lv_scr_load_anim(ui_Screen_Screen1, LV_SCR_LOAD_ANIM_OVER_TOP, 500, 0, false);
             PRTF_OS_LOG(NEWS_LOG, "load screen1\n");
             break;
         case 1:
-            lv_scr_load(ui_Screen_Screen2);
+            lv_scr_load_anim(ui_Screen_Screen2, LV_SCR_LOAD_ANIM_OVER_TOP, 500, 0, false);
             PRTF_OS_LOG(NEWS_LOG, "load screen2\n");
             break;
         case 2:
-            lv_scr_load(ui_Screen_Screen3);
+            lv_scr_load_anim(ui_Screen_Screen3, LV_SCR_LOAD_ANIM_OVER_TOP, 500, 0, false);
             PRTF_OS_LOG(NEWS_LOG, "load screen3\n");
             break;
         case 3:
-            lv_scr_load(ui_Screen_Screen4);
+            lv_scr_load_anim(ui_Screen_Screen4, LV_SCR_LOAD_ANIM_OVER_TOP, 500, 0, false);
             PRTF_OS_LOG(NEWS_LOG, "load screen4\n");
             break;
         case 4:
-            lv_scr_load(ui_Screen_Screen5);
+            lv_scr_load_anim(ui_Screen_Screen5, LV_SCR_LOAD_ANIM_OVER_TOP, 500, 0, false);
             PRTF_OS_LOG(NEWS_LOG, "load screen5\n");
             break;
         case 05:
-            lv_scr_load(ui_Screen_Screen6);
+            lv_scr_load_anim(ui_Screen_Screen6, LV_SCR_LOAD_ANIM_OVER_TOP, 500, 0, false);
             PRTF_OS_LOG(NEWS_LOG, "load screen6\n");
             break;
         default: break;
