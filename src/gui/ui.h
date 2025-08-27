@@ -16,8 +16,12 @@ extern "C" {
 
 ///////////////////// SCREENS ////////////////////
 
-#include "screens/ui_Screen1.h"
-#include "screens/ui_Screen2.h"
+#include "screens/ui_Screen_Screen1.h"
+#include "screens/ui_Screen_Screen2.h"
+#include "screens/ui_Screen_Screen3.h"
+#include "screens/ui_Screen_Screen4.h"
+#include "screens/ui_Screen_Screen5.h"
+#include "screens/ui_Screen_Screen6.h"
 
 ///////////////////// VARIABLES ////////////////////
 
@@ -33,11 +37,15 @@ extern "C" {
 
 // EVENTS
 
-extern lv_obj_t * ui____initial_actions0;
+extern lv_obj_t * ui_Startevents____initial_actions0;
 
 // IMAGES AND IMAGE SETS
 LV_IMG_DECLARE(ui_img_cycle_png);       // assets/cycle.png
 LV_IMG_DECLARE(ui_img_drop_water_png);  // assets/drop_water.png
+LV_IMG_DECLARE(ui_img_children_png);    // assets/children.png
+LV_IMG_DECLARE(ui_img_livephoto_png);   // assets/livephoto.png
+LV_IMG_DECLARE(ui_img_timer_png);       // assets/timer.png
+LV_IMG_DECLARE(ui_img_clean_fill_png);  // assets/clean_fill.png
 
 // UI INIT
 void ui_init(void);

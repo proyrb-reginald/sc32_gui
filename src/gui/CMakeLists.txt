@@ -1,0 +1,17 @@
+SET(SOURCES screens/ui_Screen_Screen1.c
+    screens/ui_Screen_Screen2.c
+    screens/ui_Screen_Screen3.c
+    screens/ui_Screen_Screen4.c
+    screens/ui_Screen_Screen5.c
+    screens/ui_Screen_Screen6.c
+    ui.c
+    components/ui_comp_hook.c
+    ui_helpers.c
+    images/ui_img_cycle_png.c
+    images/ui_img_drop_water_png.c
+    images/ui_img_children_png.c
+    images/ui_img_livephoto_png.c
+    images/ui_img_timer_png.c
+    images/ui_img_clean_fill_png.c)
+
+add_library(ui ${SOURCES})

@@ -10,7 +10,7 @@
 ///////////////////// VARIABLES ////////////////////
 
 // EVENTS
-lv_obj_t * ui____initial_actions0;
+lv_obj_t * ui_Startevents____initial_actions0;
 
 // IMAGES AND IMAGE SETS
 
@@ -31,12 +31,32 @@ lv_obj_t * ui____initial_actions0;
 static void timer_cb(lv_timer_t * timer) {
     LV_UNUSED(timer);
     static uint8_t flag = 0;
-    if (flag++ % 2 == 0) {
-        lv_scr_load_anim(ui_Screen1, LV_SCR_LOAD_ANIM_OVER_TOP, 1500, 0, false);
-        PRTF_OS_LOG(NEWS_LOG, "load screen1\n");
-    } else {
-        lv_scr_load_anim(ui_Screen2, LV_SCR_LOAD_ANIM_OVER_TOP, 1500, 0, false);
-        PRTF_OS_LOG(NEWS_LOG, "load screen2\n");
+    switch (flag++ % 6) {
+        case 0:
+            lv_scr_load(ui_Screen_Screen1);
+            PRTF_OS_LOG(NEWS_LOG, "load screen1\n");
+            break;
+        case 1:
+            lv_scr_load(ui_Screen_Screen2);
+            PRTF_OS_LOG(NEWS_LOG, "load screen2\n");
+            break;
+        case 2:
+            lv_scr_load(ui_Screen_Screen3);
+            PRTF_OS_LOG(NEWS_LOG, "load screen3\n");
+            break;
+        case 3:
+            lv_scr_load(ui_Screen_Screen4);
+            PRTF_OS_LOG(NEWS_LOG, "load screen4\n");
+            break;
+        case 4:
+            lv_scr_load(ui_Screen_Screen5);
+            PRTF_OS_LOG(NEWS_LOG, "load screen5\n");
+            break;
+        case 05:
+            lv_scr_load(ui_Screen_Screen6);
+            PRTF_OS_LOG(NEWS_LOG, "load screen6\n");
+            break;
+        default: break;
     }
 }
 
@@ -46,14 +66,22 @@ void ui_init(void) {
         lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE),
                               lv_palette_main(LV_PALETTE_RED), true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_Screen1_screen_init();
-    ui_Screen2_screen_init();
-    ui____initial_actions0 = lv_obj_create(NULL);
+    ui_Screen_Screen1_screen_init();
+    ui_Screen_Screen2_screen_init();
+    ui_Screen_Screen3_screen_init();
+    ui_Screen_Screen4_screen_init();
+    ui_Screen_Screen5_screen_init();
+    ui_Screen_Screen6_screen_init();
+    ui_Startevents____initial_actions0 = lv_obj_create(NULL);
 
     lv_timer_t * t = lv_timer_create(timer_cb, 4000, NULL);
 }
 
 void ui_destroy(void) {
-    ui_Screen1_screen_destroy();
-    ui_Screen2_screen_destroy();
+    ui_Screen_Screen1_screen_destroy();
+    ui_Screen_Screen2_screen_destroy();
+    ui_Screen_Screen3_screen_destroy();
+    ui_Screen_Screen4_screen_destroy();
+    ui_Screen_Screen5_screen_destroy();
+    ui_Screen_Screen6_screen_destroy();
 }
