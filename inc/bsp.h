@@ -11,6 +11,8 @@
 #ifndef __SC32_GUI_BSP_H__
 #define __SC32_GUI_BSP_H__
 
+#define USE_LVGL
+
 /****************************** 函数接口 ******************************/
 
 void rcc_init(void);

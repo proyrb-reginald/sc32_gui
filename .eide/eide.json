@@ -24,7 +24,6 @@
       "excludeList": [
         "drvs/w25q64",
         "drvs/sd",
-        "mid/lvgl",
         "mid/uip",
         "drvs/ep15301t"
       ],
@@ -173,14 +172,14 @@
           "src/fs",
           "mid/fatfs",
           "mid/rtos/port",
-          "mid/uip/lib",
-          "mid/uip/uip",
-          "mid/uip/unix"
+          "mid/lvgl",
+          "src/gui"
         ],
         "libList": [],
         "defineList": [
           "SC32R803",
-          "PrintfEnable"
+          "PrintfEnable",
+          "LV_LVGL_H_INCLUDE_SIMPLE"
         ]
       },
       "builderOptions": {

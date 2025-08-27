@@ -2,6 +2,7 @@
 #include <sc32_conf.h>
 #include <rtthread.h>
 #include <drvs_if.h>
+#include <lvgl.h>
 
 void rcc_init(void) {
     if (RCC_Unlock(0xFF) != SUCCESS)
@@ -66,7 +67,7 @@ void qspi0_init(void) {
 
 void qspi1_init(void) {
     QSPI_InitTypeDef qspi_struct = {.QSPI_SShift    = QSPI_SShift_OFF,
-                                    .QSPI_Prescaler = QSPI_Prescaler_2,
+                                    .QSPI_Prescaler = QSPI_Prescaler_1,
                                     .QSPI_Mode      = QSPI_Mode_QSPI,
                                     .QSPI_CPMode    = QSPI_CPMode_Low};
 
@@ -101,8 +102,8 @@ void dma0_init(void) {
                                   .DMA_TargetMode   = DMA_TargetMode_FIXED,
                                   .DMA_SourceMode   = DMA_SourceMode_INC,
                                   .DMA_Burst        = DMA_Burst_Disable,
-                                  .DMA_Request      = DMA_Request_TWI_SPI2_TX,
-                                  .DMA_DstAddress   = (uint32_t)&(SPI2->SPI_DATA)};
+                                  .DMA_Request      = DMA_Request_TWI_QSPI1_TX,
+                                  .DMA_DstAddress   = (uint32_t)&(QSPI1->QSPI_DATA)};
     DMA_Init(DMA0, &dma_struct);
     DMA_ITConfig(DMA0, DMA_IT_INTEN, ENABLE);
     DMA_ITConfig(DMA0, DMA_IT_TCIE, ENABLE);
@@ -166,12 +167,12 @@ __attribute__((interrupt("IRQ"))) void UART1_3_5_IRQHandler(void) {
     rt_interrupt_leave();
 }
 
-// __attribute__((interrupt("IRQ"))) void DMA0_IRQHandler(void) {
-//     rt_interrupt_enter();
-//     DMA_ClearFlag(DMA0, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
-//     ep15301t_dma_irq();
-//     rt_interrupt_leave();
-// }
+__attribute__((interrupt("IRQ"))) void DMA0_IRQHandler(void) {
+    rt_interrupt_enter();
+    DMA_ClearFlag(DMA0, DMA_FLAG_GIF | DMA_FLAG_TCIF | DMA_FLAG_HTIF | DMA_FLAG_TEIF);
+    lcd_dma_irq();
+    rt_interrupt_leave();
+}
 
 __attribute__((interrupt("IRQ"))) void DMA1_IRQHandler(void) {
     rt_interrupt_enter();

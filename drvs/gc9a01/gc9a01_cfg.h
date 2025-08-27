@@ -14,7 +14,7 @@
 /****************************** 功能配置 ******************************/
 
 /* 启用LVGL */
-// #define USE_LVGL
+#define USE_LVGL
 #ifdef USE_LVGL
 #    define LVGL_DISP &port_disp_drv
 #    define LVGL_DONE(disp) lv_disp_flush_ready(disp)
@@ -24,7 +24,7 @@
 #define USE_DMA
 
 /* 启用测试 */
-#define USE_TEST
+// #define USE_TEST
 
 /* 启用日志 */
 #define INC_LOG <log.h>

@@ -28,7 +28,7 @@ extern "C" {
 
 #        define MY_DISP_HOR_RES 240
 #        define MY_DISP_VER_RES 240
-#        define MY_DISP_FLS_LIN 4
+#        define MY_DISP_FLS_LIN 8
 
 /**********************
  *      TYPEDEFS

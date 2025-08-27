@@ -10,8 +10,8 @@
  *      INCLUDES
  *********************/
 #    include <stdbool.h>
-#    include <lv_port_disp.h>
-#    include <st7789v.h>
+#    include "lv_port_disp.h"
+#    include <gc9a01/gc9a01_if.h>
 
 /*********************
  *      DEFINES
@@ -61,7 +61,7 @@ void lv_port_disp_init(void) {
     /*-------------------------
      * Initialize your display
      * -----------------------*/
-    disp_init();
+    lcd_init();
 
     /*-----------------------------
      * Create a buffer for drawing
@@ -148,11 +148,6 @@ void lv_port_disp_init(void) {
  *   STATIC FUNCTIONS
  **********************/
 
-/*Initialize your display and the required peripherals.*/
-static void disp_init(void) {
-    /*You code here*/
-}
-
 volatile bool disp_flush_enabled = true;
 
 /* Enable updating the screen (the flushing process) when disp_flush() is called by LVGL
@@ -173,7 +168,8 @@ void disp_disable_update(void) {
 static void
 disp_flush(lv_disp_drv_t * port_disp_drv, const lv_area_t * area, lv_color_t * color_p) {
     if (disp_flush_enabled) {
-        st7789v_async_fill((const st7789v_area_t *)area, color_p, sizeof(lv_color_t));
+        lcd_fill((lcd_area_t *)area, (uint8_t *)color_p);
+        // lv_disp_flush_ready(port_disp_drv);
     }
 }
 

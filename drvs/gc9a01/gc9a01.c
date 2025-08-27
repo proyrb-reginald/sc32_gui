@@ -3,6 +3,9 @@
 #include <sc32_conf.h>
 #include INC_LOG
 #include INC_RTOS
+#ifdef USE_LVGL
+#    include <lvgl.h>
+#endif
 
 #define LCD_X_RANGE 240
 #define LCD_Y_RANGE 240
@@ -142,7 +145,7 @@ int lcd_init(void) {
     lcd_write_8_data(0x08);
 
     lcd_write_reg(0x3A);
-    lcd_write_8_data(0x05);
+    lcd_write_8_data(0x55);
 
     lcd_write_reg(0x90);
     lcd_write_8_data(0x08);
@@ -326,16 +329,24 @@ int lcd_init(void) {
 }
 
 void lcd_fill(const lcd_area_t * area, const uint8_t * buf) {
-    lcd_set_win(area->start_p_x, area->start_p_y, area->end_p_x - 1, area->end_p_y - 1);
+    lcd_set_win(area->start_p_x, area->start_p_y, area->end_p_x, area->end_p_y);
     lcd_write_reg(0x2c);
     const uint32_t total =
-        (area->end_p_y - area->start_p_y) * (area->end_p_x - area->start_p_x) * 2;
+        (area->end_p_y - area->start_p_y + 1) * (area->end_p_x - area->start_p_x + 1) * 2;
     CHIP_GPIO_GRP->PIN &= (~CHIP_GPIO_PIN);
+#ifdef USE_LVGL
+    DMA_SetSrcAddress(DMA_DEV, (uint32_t)buf);
+    DMA_SetCurrDataCounter(DMA_DEV, total);
+    DMA_Cmd(DMA_DEV, ENABLE);
+    QSPI_DMACmd(QSPI_DEV, QSPI_DMAReq_TX, ENABLE);
+    DMA_SoftwareTrigger(DMA_DEV);
+#else
     for (uint32_t i = 0; i < total; i++) {
         QSPI_DEV->QSPI_DATA = buf[i];
         while (QSPI_DEV->QSPI_STS & QSPI_Flag_BUSY) {}
     }
     CHIP_GPIO_GRP->PIN |= CHIP_GPIO_PIN;
+#endif
 }
 
 #ifdef USE_TEST
@@ -384,7 +395,7 @@ __attribute__((noreturn)) void lcd_test(void * thread_args) {
 
 #ifdef USE_DMA
 __attribute__((always_inline)) void lcd_dma_irq(void) {
-    GPIO_WriteBit(CHIP_GPIO_GRP, CHIP_GPIO_PIN, 1);
+    CHIP_GPIO_GRP->PIN |= CHIP_GPIO_PIN;
     QSPI_DMACmd(QSPI_DEV, QSPI_DMAReq_TX, DISABLE);
     DMA_Cmd(DMA_DEV, DISABLE);
 

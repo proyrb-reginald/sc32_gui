@@ -3,6 +3,21 @@
 #include INC_LOG
 #include <fs_if.h>
 #include <drvs_if.h>
+#include <lvgl.h>
+#include <ui.h>
+
+__attribute__((noreturn)) void gui_test(void * thread_args) {
+    lv_init();
+    lv_port_disp_init();
+    ui_init();
+
+    PRTF_OS_LOG(NEWS_LOG, "gui start!\n");
+
+    while (1) {
+        lv_timer_handler();
+        rt_thread_delay(3);
+    }
+}
 
 int main(void) {
     // {
@@ -40,7 +55,7 @@ int main(void) {
          * @warning
          * @note
          */
-        rt_thread_t tid = rt_thread_create("gui", lcd_test, RT_NULL, 1024, 10, 10);
+        rt_thread_t tid = rt_thread_create("gui", gui_test, RT_NULL, 3 * 1024, 10, 10);
         if (tid != RT_NULL) {
             rt_thread_startup(tid);
         } else {
