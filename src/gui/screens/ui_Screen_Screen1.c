@@ -5,41 +5,38 @@
 
 #include "../ui.h"
 
-lv_obj_t * ui_Screen_Screen1 = NULL;
+lv_obj_t * ui_Screen_Screen1       = NULL;
 lv_obj_t * ui_Screen1_Image_Image1 = NULL;
-lv_obj_t * ui_Screen1_Arc_Arc1 = NULL;
+lv_obj_t * ui_Screen1_Arc_Arc1     = NULL;
 // event funtions
 
 // build funtions
 
-void ui_Screen_Screen1_screen_init(void)
-{
+void ui_Screen_Screen1_screen_init(void) {
     ui_Screen_Screen1 = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_Screen_Screen1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_clear_flag(ui_Screen_Screen1, LV_OBJ_FLAG_SCROLLABLE);  /// Flags
 
     ui_Screen1_Image_Image1 = lv_img_create(ui_Screen_Screen1);
     lv_img_set_src(ui_Screen1_Image_Image1, &ui_img_cycle_png);
     lv_obj_set_width(ui_Screen1_Image_Image1, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Screen1_Image_Image1, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_height(ui_Screen1_Image_Image1, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_align(ui_Screen1_Image_Image1, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_Screen1_Image_Image1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(ui_Screen1_Image_Image1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_add_flag(ui_Screen1_Image_Image1, LV_OBJ_FLAG_ADV_HITTEST);   /// Flags
+    lv_obj_clear_flag(ui_Screen1_Image_Image1, LV_OBJ_FLAG_SCROLLABLE);  /// Flags
 
     ui_Screen1_Arc_Arc1 = lv_arc_create(ui_Screen_Screen1);
     lv_obj_set_width(ui_Screen1_Arc_Arc1, lv_pct(70));
     lv_obj_set_height(ui_Screen1_Arc_Arc1, lv_pct(70));
     lv_obj_set_align(ui_Screen1_Arc_Arc1, LV_ALIGN_CENTER);
-    lv_arc_set_value(ui_Screen1_Arc_Arc1, 50);
-
+    lv_arc_set_value(ui_Screen1_Arc_Arc1, 0);
 }
 
-void ui_Screen_Screen1_screen_destroy(void)
-{
-    if(ui_Screen_Screen1) lv_obj_del(ui_Screen_Screen1);
+void ui_Screen_Screen1_screen_destroy(void) {
+    if (ui_Screen_Screen1)
+        lv_obj_del(ui_Screen_Screen1);
 
     // NULL screen variables
-    ui_Screen_Screen1 = NULL;
+    ui_Screen_Screen1       = NULL;
     ui_Screen1_Image_Image1 = NULL;
-    ui_Screen1_Arc_Arc1 = NULL;
-
+    ui_Screen1_Arc_Arc1     = NULL;
 }

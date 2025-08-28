@@ -3,6 +3,11 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 
+<video width="100%" controls>
+  <source src="docs/res/demo.mp4" type="video/mp4">
+  您的浏览器不支持 HTML5 视频。
+</video>
+
 ## 一、简介
 
 SC32 GUI 是一个专为 SC32F1 系列单片机设计的集成开发框架，集成了图形界面、文件系统和实时操作系统，旨在帮助开发者快速构建嵌入式图形界面应用程序。
