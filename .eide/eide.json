@@ -25,7 +25,8 @@
         "drvs/w25q64",
         "drvs/sd",
         "mid/uip",
-        "drvs/ep15301t"
+        "drvs/ep15301t",
+        "mid/littlefs"
       ],
       "toolchain": "AC6",
       "compileConfig": {
