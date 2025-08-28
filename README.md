@@ -145,4 +145,5 @@ sc32_gui/
 
 ## 十、联系方式
 
+更具体的使用指南请参考[wiki](https://github.com/proyrb-reginald/sc32_gui/wiki)页面
 如有问题，请联系：proyrb@yeah.net
