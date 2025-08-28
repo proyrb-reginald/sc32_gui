@@ -15,7 +15,7 @@ __attribute__((noreturn)) void gui_test(void * thread_args) {
 
     while (1) {
         lv_timer_handler();
-        rt_thread_delay(3);
+        rt_thread_delay(2);
     }
 }
 
@@ -55,7 +55,7 @@ int main(void) {
          * @warning
          * @note
          */
-        rt_thread_t tid = rt_thread_create("gui", gui_test, RT_NULL, 3 * 1024, 10, 10);
+        rt_thread_t tid = rt_thread_create("gui", gui_test, RT_NULL, 10 * 256, 10, 10);
         if (tid != RT_NULL) {
             rt_thread_startup(tid);
         } else {
