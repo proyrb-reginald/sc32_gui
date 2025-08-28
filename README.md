@@ -18,7 +18,7 @@ SC32 GUI 是一个专为 SC32F1 系列单片机设计的集成开发框架，集
 
 ### 2.1 硬件支持
 
-目前主要支持赛元微电子的 SC32F1 系列 Cortex-M0+ 内核单片机。
+目前通过测试已支持赛元微电子（SOC）的 SC32F1 系列 Cortex-M0+ 内核单片机。
 
 ### 2.2 驱动支持
 
@@ -37,7 +37,7 @@ SC32 GUI 是一个专为 SC32F1 系列单片机设计的集成开发框架，集
 | RT-Thread Nano | V4.1.1 | ☑️ | 实时操作系统内核 |
 | FatFS | R0.16 | ☑️ | 嵌入式文件系统 |
 | LVGL | V8.4 | ☑️ | 轻量级嵌入式图形库 |
-| LittleFS | latest | ☑️ | 日志结构文件系统 |
+| LittleFS | V2.11.1 | ☑️ | 日志结构文件系统 |
 
 ### 2.4 开发特性
 
@@ -53,15 +53,15 @@ SC32 GUI 是一个专为 SC32F1 系列单片机设计的集成开发框架，集
 ```
 +-----------------------------------------------------+
 |                    Application Layer                |
-|  GUI Applications  |  File System  |  User Tasks    |
+|   GUI Applications  |  File System  |  User Tasks   |
 +-----------------------------------------------------+
 |                 RT-Thread Nano OS                   |
 +-----------------------------------------------------+
 |        Driver Interface Abstraction Layer           |
-|  Display  |  Storage  |  Touch  |  Communication   |
+|   Display  |  Storage  |  Touch  |  Communication   |
 +-----------------------------------------------------+
 |           SC32F1 Hardware Abstraction Layer         |
-|     GPIO    |    SPI    |    I2C    |    UART       |
+|      GPIO    |    SPI    |    I2C    |    UART      |
 +-----------------------------------------------------+
 |                 SC32F1 MCU Hardware                 |
 +-----------------------------------------------------+
